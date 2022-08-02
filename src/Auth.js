@@ -1,10 +1,10 @@
 import React from "react";
 
 // Heroku
-// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+// const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 export const registerUser = async (username, password) => {
   const response = await fetch(`${urlEndpoint}/auth/register-user`, {
