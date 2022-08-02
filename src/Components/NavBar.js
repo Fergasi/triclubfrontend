@@ -13,52 +13,51 @@ const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
 
   return (
     <div>
-      <header>
-        <nav>
-          <div>
-            {!userToken && (
-              <>
-                <div>
-                  <Link id='navItem' to='/'>
-                    Home
-                  </Link>
-                </div>
-                <div>
-                  <Link id='navItem' to='/login'>
-                    Login
-                  </Link>
-                </div>
-                <div>
-                  <Link id='navItem' to='/registration'>
-                    Registration
-                  </Link>
-                </div>
-              </>
-            )}
-
-            {userToken && (
-              <div id='footer'>
-                <span>
-                  <strong id='loginMsg'></strong>
-                </span>
-                <br />
-                <button
-                  onClick={async () => {
-                    setIsAuthLoading(true);
-                    const logoutSuccess = await logoutUser();
-                    if (logoutSuccess) {
-                      setIsAuthLoading(false);
-                      navigate("/");
-                    }
-                  }}
-                >
-                  Logout
-                </button>
+      <nav>
+        <div>
+          {!userToken && (
+            <>
+              <div>
+                <Link id='navItem' to='/'>
+                  Home
+                </Link>
               </div>
-            )}
-          </div>
-        </nav>
-      </header>
+              <div>
+                <Link id='navItem' to='/login'>
+                  Login
+                </Link>
+              </div>
+              <div>
+                <Link id='navItem' to='/registration'>
+                  Registration
+                </Link>
+              </div>
+            </>
+          )}
+
+          {userToken && (
+            <div id='footer'>
+              <span>
+                <strong id='loginMsg'></strong>
+              </span>
+              <br />
+              <button
+                onClick={async () => {
+                  setIsAuthLoading(true);
+                  const logoutSuccess = await logoutUser();
+                  if (logoutSuccess) {
+                    setIsAuthLoading(false);
+                    navigate("/");
+                  }
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+      </nav>
+
       <Outlet />
       <br />
     </div>

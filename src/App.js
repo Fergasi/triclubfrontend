@@ -19,38 +19,39 @@ function App() {
 
   return (
     <div className='App'>
-      <header className='App-header'></header>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <NavBar
-              isAuthLoading={isAuthLoading}
-              setIsAuthLoading={setIsAuthLoading}
+      <header className='App-header'>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <NavBar
+                isAuthLoading={isAuthLoading}
+                setIsAuthLoading={setIsAuthLoading}
+              />
+            }
+          >
+            <Route index element={<UserHomePage />} />
+            <Route
+              path='login'
+              element={
+                <LoginPage
+                  isAuthLoading={isAuthLoading}
+                  setIsAuthLoading={setIsAuthLoading}
+                />
+              }
             />
-          }
-        >
-          <Route index element={<UserHomePage />} />
-          <Route
-            path='login'
-            element={
-              <LoginPage
-                isAuthLoading={isAuthLoading}
-                setIsAuthLoading={setIsAuthLoading}
-              />
-            }
-          />
-          <Route
-            path='registration'
-            element={
-              <RegistrationPage
-                isAuthLoading={isAuthLoading}
-                setIsAuthLoading={setIsAuthLoading}
-              />
-            }
-          />
-        </Route>
-      </Routes>
+            <Route
+              path='registration'
+              element={
+                <RegistrationPage
+                  isAuthLoading={isAuthLoading}
+                  setIsAuthLoading={setIsAuthLoading}
+                />
+              }
+            />
+          </Route>
+        </Routes>
+      </header>
     </div>
   );
 }

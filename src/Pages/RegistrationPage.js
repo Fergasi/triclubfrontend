@@ -56,3 +56,5 @@ const RegistrationPage = ({ setIsAuthLoading }) => {
     </div>
   );
 };
+
+export default RegistrationPage;
