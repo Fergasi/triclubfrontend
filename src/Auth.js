@@ -11,6 +11,7 @@ export const registerUser = async (username, password) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://triclubfrontend.herokuapp.com",
     },
     body: JSON.stringify({
       username,
