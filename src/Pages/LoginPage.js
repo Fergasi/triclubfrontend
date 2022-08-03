@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../Auth";
+import Button from "react-bootstrap/Button";
 
 const LoginPage = ({ setIsAuthLoading }) => {
   const [password, setPassword] = useState("");
@@ -36,7 +37,7 @@ const LoginPage = ({ setIsAuthLoading }) => {
       ></input>
       <br />
       <br />
-      <button
+      <Button
         id='login'
         type='submit'
         onClick={async () => {
@@ -51,7 +52,7 @@ const LoginPage = ({ setIsAuthLoading }) => {
         }}
       >
         Login
-      </button>
+      </Button>
     </div>
   );
 };
