@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../Auth";
-import Button from "react-bootstrap/Button";
+import { Button, Form } from "react-bootstrap";
 
 const LoginPage = ({ setIsAuthLoading }) => {
   const [password, setPassword] = useState("");
@@ -10,36 +10,38 @@ const LoginPage = ({ setIsAuthLoading }) => {
 
   return (
     <div>
-      <br />
-      <br />
-      <br />
-      <h3>Login</h3>
-      <br />
-      <label>Username: </label>
-      <input
-        type='text'
-        value={username}
-        onChange={(event) => {
-          const newUsername = event.target.value;
-          setUsername(newUsername);
-        }}
-      ></input>
-      <br />
-      <br />
-      <label>Password: </label>
-      <input
-        type='password'
-        value={password}
-        onChange={(event) => {
-          const newPassword = event.target.value;
-          setPassword(newPassword);
-        }}
-      ></input>
-      <br />
-      <br />
+      <Form>
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type='email'
+            placeholder='Enter email'
+            value={username}
+            onChange={(event) => {
+              const newUsername = event.target.value;
+              setUsername(newUsername);
+            }}
+          />
+          <Form.Text className='text-muted'></Form.Text>
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={(event) => {
+              const newPassword = event.target.value;
+              setPassword(newPassword);
+              console.log(newPassword);
+            }}
+          />
+        </Form.Group>
+      </Form>
       <Button
-        id='login'
+        variant='primary'
         type='submit'
+        id='login'
         onClick={async () => {
           setIsAuthLoading(true);
           const isUserLoggedIn = await loginUser(username, password);
@@ -51,8 +53,13 @@ const LoginPage = ({ setIsAuthLoading }) => {
           }
         }}
       >
-        Login
+        Log in
       </Button>
+      <br />
+      <br />
+      <div className='smallMessage'>
+        Dont have an account yet <Link to='/sign-up'>Sign Up</Link>
+      </div>
     </div>
   );
 };

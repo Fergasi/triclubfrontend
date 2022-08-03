@@ -6,8 +6,8 @@ import React from "react";
 //LOCAL
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
-export const registerUser = async (username, password) => {
-  const response = await fetch(`${urlEndpoint}/auth/register-user`, {
+export const signUpUser = async (username, password) => {
+  const response = await fetch(`${urlEndpoint}/auth/sign-up-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
