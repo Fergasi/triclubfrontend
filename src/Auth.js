@@ -18,8 +18,8 @@ export const becomeCoach = async (coachObj) => {
   return responseJSON;
 };
 
-export const registerUser = async (username, password) => {
-  const response = await fetch(`${urlEndpoint}/auth/register-user`, {
+export const signUpUser = async (username, password) => {
+  const response = await fetch(`${urlEndpoint}/auth/sign-up-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
