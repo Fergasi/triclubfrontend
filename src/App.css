@@ -35,10 +35,6 @@
   margin-right: 3%;
 }
 
-#responsive-navbar-nav {
-  font-size: smaller;
-}
-
 #root > div > header > form {
   padding: 5%;
   margin: 5%;
@@ -54,4 +50,34 @@
 
 #root > div > header > div > form > div:nth-child(1) > small {
   font-size: small;
+}
+
+#responsive-navbar-nav > div > div.nav-logout > button {
+  font-size: smaller;
+  height: 30px;
+  justify-content: center;
+}
+
+.navbar-nav {
+  flex: 1;
+}
+
+.nav-logout {
+  flex: 1;
+  padding: 3px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  flex: 6;
+}
+
+@media only screen and (max-width: 576px) {
+  .nav-links {
+    flex-direction: column;
+  }
+  .nav-logout {
+    margin-top: 15px;
+  }
 }

@@ -42,9 +42,9 @@ const LoginPage = ({ setIsAuthLoading }) => {
         </Form.Group>
       </Form>
       <Button
-        variant="primary"
-        type="submit"
-        id="login"
+        variant='secondary'
+        type='submit'
+        id='login'
         onClick={async () => {
           setIsAuthLoading(true);
           const isUserLoggedIn = await loginUser(username, password);

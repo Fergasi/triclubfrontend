@@ -1,5 +1,3 @@
-import React from "react";
-
 // Heroku
 // const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 

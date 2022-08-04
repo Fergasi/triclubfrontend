@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Button } from "react-bootstrap";
 import programImg from "../assets/kids1.jpeg";
 
 const UserHomePage = () => {
@@ -9,19 +9,22 @@ const UserHomePage = () => {
       <br />
       <br />
 
-      <Row xs={1} md={3} className='g-4' id='programGrid'>
-        {Array.from({ length: 9 }).map((_, idx) => (
-          <Col>
+      <Row xs={1} md={2} className='g-4' id='programGrid'>
+        {Array.from({ length: 10 }).map((_, idx) => (
+          <Col key={idx}>
             <Card bg='dark'>
               <Card.Img variant='top' src={programImg} alt='' />
               <Card.Body>
-                <Card.Title>Card title</Card.Title>
+                <Card.Title>Swim Training</Card.Title>
                 <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  Time: Tuesday 15th August, 5pm
+                  <br />
+                  Place: Longmount Public Pool
+                  <br />
+                  Type: Swim
                 </Card.Text>
               </Card.Body>
+              <Button variant='dark'>More Details</Button>
             </Card>
           </Col>
         ))}
