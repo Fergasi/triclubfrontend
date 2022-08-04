@@ -5,7 +5,7 @@ import NavBar from "./Components/NavBar";
 import UserHomePage from "./Pages/UserHomePage";
 import AdminHomePage from "./Pages/AdminHomePage";
 import LoginPage from "./Pages/LoginPage";
-import RegistrationPage from "./Pages/RegistrationPage";
+import SignUpPage from "./Pages/SignUpPage";
 import CoachRegistrationPage from "./Pages/CoachRegistrationPage";
 import { useState } from "react";
 
@@ -42,9 +42,9 @@ function App() {
               }
             />
             <Route
-              path='registration'
+              path='sign-up'
               element={
-                <RegistrationPage
+                <SignUpPage
                   isAuthLoading={isAuthLoading}
                   setIsAuthLoading={setIsAuthLoading}
                 />

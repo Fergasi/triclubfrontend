@@ -37,10 +37,10 @@ const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
               <Nav>
-                <Nav.Link href='/'>Home</Nav.Link>{" "}
-                <Nav.Link href='/login'>Login</Nav.Link>{" "}
-                <Nav.Link href='/registration'>Registration</Nav.Link>{" "}
+                <Nav.Link href='/'>Programs</Nav.Link>{" "}
                 <Nav.Link href='/coach-registration'>Become a Coach</Nav.Link>{" "}
+                <Nav.Link href='/login'>Login</Nav.Link>{" "}
+                <Nav.Link href='/sign-up'>Sign Up</Nav.Link>{" "}
               </Nav>
             </Navbar.Collapse>
           </>

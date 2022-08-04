@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../Auth";
+import { signUpUser, loginUser } from "../Auth";
 import { Button, Form } from "react-bootstrap";
 
-const LoginPage = ({ setIsAuthLoading }) => {
+const SignUpPage = ({ setIsAuthLoading }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const LoginPage = ({ setIsAuthLoading }) => {
   return (
     <div>
       <Form>
-        <h2>Log In</h2>
+        <h2>Create Account</h2>
         <br />
         <br />
         <Form.Group className='mb-3' controlId='formBasicEmail'>
@@ -25,8 +25,8 @@ const LoginPage = ({ setIsAuthLoading }) => {
               setUsername(newUsername);
             }}
           />
-          <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
+
         <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -36,35 +36,36 @@ const LoginPage = ({ setIsAuthLoading }) => {
             onChange={(event) => {
               const newPassword = event.target.value;
               setPassword(newPassword);
-              console.log(newPassword);
             }}
           />
         </Form.Group>
       </Form>
+
       <Button
         variant='primary'
         type='submit'
-        id='login'
+        id='signup'
         onClick={async () => {
           setIsAuthLoading(true);
-          const isUserLoggedIn = await loginUser(username, password);
-          if (isUserLoggedIn) {
-            setIsAuthLoading(false);
-            navigate("/");
-          } else {
-            alert("Username or password are incorrect");
+          const isUserRegistered = await signUpUser(username, password);
+          if (isUserRegistered) {
+            const isUserLoggedIn = await loginUser(username, password);
+            if (isUserLoggedIn) {
+              setIsAuthLoading(false);
+              navigate("/");
+            }
           }
         }}
       >
-        Log in
+        Sign Up
       </Button>
       <br />
       <br />
       <div className='smallMessage'>
-        Dont have an account yet <Link to='/sign-up'>Sign Up</Link>
+        Already have an account <Link to='/login'>Log In</Link>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
