@@ -17,20 +17,20 @@ const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
   return (
     <>
       <Navbar
-        collaspeonselect='true'
-        expand='sm'
-        bg='dark'
-        variant='dark'
-        fixed='top'
+        collaspeonselect="true"
+        expand="sm"
+        bg="dark"
+        variant="dark"
+        fixed="top"
       >
         <Navbar.Brand>
           TriClub{" "}
           <img
             src={TriClubLogo}
-            alt=''
-            width='40'
-            height='40'
-            className='d-inline-block align-middle'
+            alt=""
+            width="40"
+            height="40"
+            className="d-inline-block align-middle"
           />{" "}
         </Navbar.Brand>
 

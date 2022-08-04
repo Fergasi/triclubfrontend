@@ -17,7 +17,7 @@ export const becomeCoach = async (coachObj) => {
 };
 
 export const signUpUser = async (username, password) => {
-  const response = await fetch(`${urlEndpoint}/auth/sign-up-user`, {
+  const response = await fetch(`${urlEndpoint}/auth/register-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const loginUser = async (username, password) => {
     );
   }
 
-  return responseJSON.success;
+  return responseJSON;
 };
 
 export const logoutUser = () => {
@@ -64,4 +64,4 @@ export const getUserToken = () => {
   );
 };
 
-// export default Auth
+// export default Auth;
