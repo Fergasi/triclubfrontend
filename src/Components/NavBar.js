@@ -16,39 +16,39 @@ const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
   return (
     <>
       <Navbar
-        collaspeonselect='true'
-        expand='sm'
-        bg='dark'
-        variant='dark'
-        fixed='top'
+        collaspeonselect="true"
+        expand="sm"
+        bg="dark"
+        variant="dark"
+        fixed="top"
       >
         <Navbar.Brand>
           TriClub{" "}
           <img
             src={TriClubLogo}
-            alt=''
-            width='40'
-            height='40'
-            className='d-inline-block align-middle'
+            alt=""
+            width="40"
+            height="40"
+            className="d-inline-block align-middle"
           />{" "}
         </Navbar.Brand>
         {!userToken && (
           <>
-            <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-            <Navbar.Collapse id='responsive-navbar-nav'>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
               <Nav>
-                <Nav.Link href='/'>Programs</Nav.Link>{" "}
-                <Nav.Link href='/coach-registration'>Become a Coach</Nav.Link>{" "}
-                <Nav.Link href='/login'>Login</Nav.Link>{" "}
-                <Nav.Link href='/sign-up'>Sign Up</Nav.Link>{" "}
+                <Nav.Link href="/">Programs</Nav.Link>{" "}
+                <Nav.Link href="/coach-registration">Become a Coach</Nav.Link>{" "}
+                <Nav.Link href="/login">Login</Nav.Link>{" "}
+                <Nav.Link href="/sign-up">Sign Up</Nav.Link>{" "}
               </Nav>
             </Navbar.Collapse>
           </>
         )}
         {userToken && (
-          <div id='footer'>
+          <div id="footer">
             <span>
-              <strong id='loginMsg'></strong>
+              <strong id="loginMsg"></strong>
             </span>
             <br />
             <Button
