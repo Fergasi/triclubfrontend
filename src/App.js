@@ -19,11 +19,11 @@ function App() {
   const [isAuthLoading, setIsAuthLoading] = useState(false);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <header className="App-header">
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={
               <NavBar
                 isAuthLoading={isAuthLoading}
@@ -33,7 +33,7 @@ function App() {
           >
             <Route index element={<UserHomePage />} />
             <Route
-              path='login'
+              path="login"
               element={
                 <LoginPage
                   isAuthLoading={isAuthLoading}
@@ -42,7 +42,7 @@ function App() {
               }
             />
             <Route
-              path='registration'
+              path="registration"
               element={
                 <RegistrationPage
                   isAuthLoading={isAuthLoading}
@@ -51,7 +51,7 @@ function App() {
               }
             />
             <Route
-              path='coach-registration'
+              path="coach-registration"
               element={
                 <CoachRegistrationPage
                   isAuthLoading={isAuthLoading}

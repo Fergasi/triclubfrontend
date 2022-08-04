@@ -6,12 +6,23 @@ import React from "react";
 //LOCAL
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
+export const becomeCoach = async (coachObj) => {
+  const response = await fetch(`${urlEndpoint}/auth/become-coach`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(coachObj),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
 export const registerUser = async (username, password) => {
   const response = await fetch(`${urlEndpoint}/auth/register-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //   "Access-Control-Allow-Origin": "https://triclubfrontend.herokuapp.com",
     },
     body: JSON.stringify({
       username,

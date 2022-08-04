@@ -54,3 +54,12 @@
 #responsive-navbar-nav {
   font-size: smaller;
 }
+
+#root > div > header > form {
+  padding: 5%;
+  margin: 5%;
+}
+
+#formGridCheckbox > div {
+  display: table;
+}
