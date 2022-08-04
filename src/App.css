@@ -46,6 +46,7 @@
 
 #formGridCheckbox > div {
   display: table;
+}
 
 .smallMessage {
   font-size: medium;
@@ -53,5 +54,4 @@
 
 #root > div > header > div > form > div:nth-child(1) > small {
   font-size: small;
-
 }
