@@ -42,7 +42,7 @@ const SignUpPage = ({ setIsAuthLoading }) => {
       </Form>
 
       <Button
-        variant='primary'
+        variant='secondary'
         type='submit'
         id='signup'
         onClick={async () => {

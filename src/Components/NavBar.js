@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { getUserToken, logoutUser } from "../Auth";
 import { Navbar, Nav, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import TriClubLogo from "../assets/TriClub.png";
 
 const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
@@ -32,39 +33,47 @@ const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
             className='d-inline-block align-middle'
           />{" "}
         </Navbar.Brand>
-        {!userToken && (
-          <>
-            <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-            <Navbar.Collapse id='responsive-navbar-nav'>
-              <Nav>
-                <Nav.Link href='/'>Programs</Nav.Link>{" "}
-                <Nav.Link href='/coach-registration'>Become a Coach</Nav.Link>{" "}
-                <Nav.Link href='/login'>Login</Nav.Link>{" "}
-                <Nav.Link href='/sign-up'>Sign Up</Nav.Link>{" "}
-              </Nav>
-            </Navbar.Collapse>
-          </>
-        )}
-        {userToken && (
-          <div id='footer'>
-            <span>
-              <strong id='loginMsg'></strong>
-            </span>
-            <br />
-            <Button
-              onClick={async () => {
-                setIsAuthLoading(true);
-                const logoutSuccess = await logoutUser();
-                if (logoutSuccess) {
-                  setIsAuthLoading(false);
-                  navigate("/");
-                }
-              }}
-            >
-              Logout
-            </Button>
-          </div>
-        )}
+
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav>
+            <div className='nav-links'>
+              <LinkContainer to='/'>
+                <Nav.Link>Programs</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/coach-registration'>
+                <Nav.Link>Become a Coach</Nav.Link>
+              </LinkContainer>
+              {!userToken && (
+                <>
+                  <LinkContainer to='/login'>
+                    <Nav.Link>Login</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/sign-up'>
+                    <Nav.Link>Sign Up</Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+            </div>
+            {userToken && (
+              <div className='nav-logout'>
+                <Button
+                  variant='secondary'
+                  onClick={async () => {
+                    setIsAuthLoading(true);
+                    const logoutSuccess = await logoutUser();
+                    if (logoutSuccess) {
+                      setIsAuthLoading(false);
+                      navigate("/");
+                    }
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
 
       <Outlet />

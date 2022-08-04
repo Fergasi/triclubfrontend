@@ -42,7 +42,7 @@ const LoginPage = ({ setIsAuthLoading }) => {
         </Form.Group>
       </Form>
       <Button
-        variant='primary'
+        variant='secondary'
         type='submit'
         id='login'
         onClick={async () => {
