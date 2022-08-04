@@ -16,14 +16,14 @@ export const becomeCoach = async (coachObj) => {
   return responseJSON;
 };
 
-export const signUpUser = async (username, password) => {
-  const response = await fetch(`${urlEndpoint}/auth/register-user`, {
+export const signUpUser = async (email, password) => {
+  const response = await fetch(`${urlEndpoint}/auth/sign-up-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username,
+      email,
       password,
     }),
   });
@@ -31,37 +31,33 @@ export const signUpUser = async (username, password) => {
   return responseJSON.success;
 };
 
-export const loginUser = async (username, password) => {
+export const loginUser = async (email, password) => {
   const response = await fetch(`${urlEndpoint}/auth/login-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username,
+      email,
       password,
     }),
   });
   const responseJSON = await response.json();
   if (responseJSON.success) {
-    localStorage.setItem(
-      process.env.REACT_APP_TOKEN_HEADER_KEY,
-      JSON.stringify(responseJSON.token)
-    );
+    localStorage.setItem("token", JSON.stringify(responseJSON.token));
+    localStorage.setItem("userType", responseJSON.userType);
   }
 
   return responseJSON;
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem(process.env.REACT_APP_TOKEN_HEADER_KEY);
+  localStorage.removeItem("token");
   return true;
 };
 
 export const getUserToken = () => {
-  return JSON.parse(
-    localStorage.getItem(process.env.REACT_APP_TOKEN_HEADER_KEY)
-  );
+  return JSON.parse(localStorage.getItem("token"));
 };
 
 // export default Auth;

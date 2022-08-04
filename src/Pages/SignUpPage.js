@@ -5,7 +5,7 @@ import { Button, Form } from "react-bootstrap";
 
 const SignUpPage = ({ setIsAuthLoading }) => {
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -19,10 +19,9 @@ const SignUpPage = ({ setIsAuthLoading }) => {
           <Form.Control
             type='email'
             placeholder='Enter email'
-            value={username}
+            value={email}
             onChange={(event) => {
-              const newUsername = event.target.value;
-              setUsername(newUsername);
+              setEmail(event.target.value);
             }}
           />
         </Form.Group>
@@ -34,8 +33,7 @@ const SignUpPage = ({ setIsAuthLoading }) => {
             placeholder='Password'
             value={password}
             onChange={(event) => {
-              const newPassword = event.target.value;
-              setPassword(newPassword);
+              setPassword(event.target.value);
             }}
           />
         </Form.Group>
@@ -47,9 +45,9 @@ const SignUpPage = ({ setIsAuthLoading }) => {
         id='signup'
         onClick={async () => {
           setIsAuthLoading(true);
-          const isUserRegistered = await signUpUser(username, password);
+          const isUserRegistered = await signUpUser(email, password);
           if (isUserRegistered) {
-            const isUserLoggedIn = await loginUser(username, password);
+            const isUserLoggedIn = await loginUser(email, password);
             if (isUserLoggedIn) {
               setIsAuthLoading(false);
               navigate("/");
