@@ -11,6 +11,9 @@ const LoginPage = ({ setIsAuthLoading }) => {
   return (
     <div>
       <Form>
+        <h2>Log In</h2>
+        <br />
+        <br />
         <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
           <Form.Control
