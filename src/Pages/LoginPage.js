@@ -14,24 +14,24 @@ const LoginPage = ({ setIsAuthLoading }) => {
         <h2>Log In</h2>
         <br />
         <br />
-        <Form.Group className='mb-3' controlId='formBasicEmail'>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Enter email'
+            type="email"
+            placeholder="Enter email"
             value={username}
             onChange={(event) => {
               const newUsername = event.target.value;
               setUsername(newUsername);
             }}
           />
-          <Form.Text className='text-muted'></Form.Text>
+          <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formBasicPassword'>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type='password'
-            placeholder='Password'
+            type="password"
+            placeholder="Password"
             value={password}
             onChange={(event) => {
               const newPassword = event.target.value;
@@ -42,9 +42,9 @@ const LoginPage = ({ setIsAuthLoading }) => {
         </Form.Group>
       </Form>
       <Button
-        variant='primary'
-        type='submit'
-        id='login'
+        variant="primary"
+        type="submit"
+        id="login"
         onClick={async () => {
           setIsAuthLoading(true);
           const isUserLoggedIn = await loginUser(username, password);
@@ -60,8 +60,8 @@ const LoginPage = ({ setIsAuthLoading }) => {
       </Button>
       <br />
       <br />
-      <div className='smallMessage'>
-        Dont have an account yet <Link to='/sign-up'>Sign Up</Link>
+      <div className="smallMessage">
+        Dont have an account yet <Link to="/sign-up">Sign Up</Link>
       </div>
     </div>
   );
