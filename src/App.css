@@ -39,10 +39,19 @@
   font-size: smaller;
 }
 
+#root > div > header > form {
+  padding: 5%;
+  margin: 5%;
+}
+
+#formGridCheckbox > div {
+  display: table;
+
 .smallMessage {
   font-size: medium;
 }
 
 #root > div > header > div > form > div:nth-child(1) > small {
   font-size: small;
+
 }
