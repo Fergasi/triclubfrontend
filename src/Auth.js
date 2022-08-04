@@ -52,7 +52,7 @@ export const loginUser = async (username, password) => {
     );
   }
 
-  return responseJSON.success;
+  return responseJSON;
 };
 
 export const logoutUser = () => {

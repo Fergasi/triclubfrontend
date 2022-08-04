@@ -48,8 +48,9 @@ const LoginPage = ({ setIsAuthLoading }) => {
         onClick={async () => {
           setIsAuthLoading(true);
           const isUserLoggedIn = await loginUser(username, password);
-          if (isUserLoggedIn) {
+          if (isUserLoggedIn.success) {
             setIsAuthLoading(false);
+            console.log(isUserLoggedIn);
             navigate("/");
           } else {
             alert("Username or password are incorrect");
