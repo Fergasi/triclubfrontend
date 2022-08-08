@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signUpUser, loginUser } from "../Auth";
 import { Button, Form } from "react-bootstrap";
+import validateUser from "../Utils/Validation";
 
 const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [missingEmailMssg, setMissingEmailMssg] = useState("");
-  const [missingPassword, setMissingPasswordMssg] = useState("");
-  const [userValid, setUserValid] = useState(false);
+  const [emailMssg, setEmailMssg] = useState("");
+  const [passwordMssg, setPasswordMssg] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -47,23 +47,26 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
         type="submit"
         id="signup"
         onClick={async () => {
-          setUserValid(true);
-          setMissingEmailMssg("");
-          setMissingPasswordMssg("");
-          console.log(email);
-          if (!email.includes("@")) {
-            setMissingEmailMssg("Valid email required.");
-            setUserValid(false);
+          const validateUserObj = validateUser({
+            email: email,
+            password: password,
+          });
+
+          if (validateUserObj.isValid === false) {
+            setEmailMssg(validateUserObj.emailMssg);
+            setPasswordMssg(validateUserObj.passwordMssg);
           }
-          if (password === "") {
-            setMissingPasswordMssg("Please include a password.");
-            console.log("does not include block");
-            setUserValid(false);
-          }
-          if (userValid) {
+
+          if (validateUserObj.isValid === true) {
+            setEmailMssg("");
+            setPasswordMssg("");
             setIsAuthLoading(true);
             const isUserRegistered = await signUpUser(email, password);
-            if (isUserRegistered) {
+            if (!isUserRegistered.success) {
+              setEmailMssg(isUserRegistered.message);
+              // *** FORGOT PASSWORD ***
+            }
+            if (isUserRegistered.success) {
               const isUserLoggedIn = await loginUser(email, password);
               if (isUserLoggedIn) {
                 setIsAuthLoading(false);
@@ -86,9 +89,7 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
         Already have an account <Link to="/login">Log In</Link>
       </div>
       <div className="mediumMessage">
-        {missingEmailMssg}
-        <br />
-        {missingPassword}
+        {emailMssg} <br /> {passwordMssg}
       </div>
     </div>
   );

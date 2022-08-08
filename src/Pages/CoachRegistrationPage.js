@@ -7,7 +7,7 @@ import { stateAbbArr } from "../assets/stateAbbArr";
 import { useNavigate } from "react-router-dom";
 import { becomeCoach, getUserToken } from "../Auth";
 import { Card } from "react-bootstrap";
-import coachImg from "../assets/CoachImg.png";
+import coachImg from "../assets/stockCoach.webp";
 
 const CoachRegistrationPage = ({
   setIsAuthLoading,

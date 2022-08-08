@@ -53,7 +53,8 @@
 }
 
 .mediumMessage {
-  font-size: larger;
+  font-size: medium;
+  font-weight: bold;
 }
 
 #root > div > header > div > form > div:nth-child(1) > small {

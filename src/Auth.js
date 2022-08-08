@@ -28,7 +28,7 @@ export const signUpUser = async (email, password) => {
     }),
   });
   const responseJSON = await response.json();
-  return responseJSON.success;
+  return responseJSON;
 };
 
 export const loginUser = async (email, password) => {
@@ -53,6 +53,8 @@ export const loginUser = async (email, password) => {
 
 export const logoutUser = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("userType");
+
   return true;
 };
 

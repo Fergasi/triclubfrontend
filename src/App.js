@@ -22,6 +22,7 @@ function App() {
               <NavBar
                 isAuthLoading={isAuthLoading}
                 setIsAuthLoading={setIsAuthLoading}
+                setFromBecomeCoach={setFromBecomeCoach}
               />
             }
           >

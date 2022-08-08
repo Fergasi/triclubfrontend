@@ -5,7 +5,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import TriClubLogo from "../assets/TriClub.png";
 
-const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
+const NavBar = ({ isAuthLoading, setIsAuthLoading, setFromBecomeCoach }) => {
   const [userToken, setUserToken] = useState("");
   const navigate = useNavigate();
 
@@ -34,36 +34,37 @@ const NavBar = ({ isAuthLoading, setIsAuthLoading }) => {
           />{" "}
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
-            <div className='nav-links'>
-              <LinkContainer to='/'>
+            <div className="nav-links">
+              <LinkContainer to="/">
                 <Nav.Link>Programs</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/coach-registration'>
+              <LinkContainer to="/coach-registration">
                 <Nav.Link>Become a Coach</Nav.Link>
               </LinkContainer>
               {!userToken && (
                 <>
-                  <LinkContainer to='/login'>
+                  <LinkContainer to="/login">
                     <Nav.Link>Login</Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to='/sign-up'>
+                  <LinkContainer to="/sign-up">
                     <Nav.Link>Sign Up</Nav.Link>
                   </LinkContainer>
                 </>
               )}
             </div>
             {userToken && (
-              <div className='nav-logout'>
+              <div className="nav-logout">
                 <Button
-                  variant='secondary'
+                  variant="secondary"
                   onClick={async () => {
                     setIsAuthLoading(true);
                     const logoutSuccess = await logoutUser();
                     if (logoutSuccess) {
                       setIsAuthLoading(false);
+                      setFromBecomeCoach(false);
                       navigate("/");
                     }
                   }}
