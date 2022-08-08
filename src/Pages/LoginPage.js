@@ -3,9 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../Auth";
 import { Button, Form } from "react-bootstrap";
 
-const LoginPage = ({ setIsAuthLoading }) => {
+const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -19,10 +19,9 @@ const LoginPage = ({ setIsAuthLoading }) => {
           <Form.Control
             type="email"
             placeholder="Enter email"
-            value={username}
+            value={email}
             onChange={(event) => {
-              const newUsername = event.target.value;
-              setUsername(newUsername);
+              setEmail(event.target.value);
             }}
           />
           <Form.Text className="text-muted"></Form.Text>
@@ -34,26 +33,31 @@ const LoginPage = ({ setIsAuthLoading }) => {
             placeholder="Password"
             value={password}
             onChange={(event) => {
-              const newPassword = event.target.value;
-              setPassword(newPassword);
-              console.log(newPassword);
+              setPassword(event.target.value);
+              console.log(event.target.value);
             }}
           />
         </Form.Group>
       </Form>
       <Button
-        variant='secondary'
-        type='submit'
-        id='login'
+        variant="secondary"
+        type="submit"
+        id="login"
         onClick={async () => {
           setIsAuthLoading(true);
-          const isUserLoggedIn = await loginUser(username, password);
+          const isUserLoggedIn = await loginUser(email, password);
           if (isUserLoggedIn.success) {
             setIsAuthLoading(false);
             console.log(isUserLoggedIn);
-            navigate("/");
+            if (fromBecomeCoach) {
+              console.log("in from coach block");
+              navigate("/coach-registration");
+            }
+            if (!fromBecomeCoach) {
+              navigate("/");
+            }
           } else {
-            alert("Username or password are incorrect");
+            alert("Email or password are incorrect");
           }
         }}
       >
