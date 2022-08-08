@@ -50,7 +50,6 @@ const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
             setIsAuthLoading(false);
             console.log(isUserLoggedIn);
             if (fromBecomeCoach) {
-              console.log("in from coach block");
               navigate("/coach-registration");
             }
             if (!fromBecomeCoach) {

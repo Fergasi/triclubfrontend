@@ -6,6 +6,9 @@ import { Button, Form } from "react-bootstrap";
 const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [missingEmailMssg, setMissingEmailMssg] = useState("");
+  const [missingPassword, setMissingPasswordMssg] = useState("");
+  const [userValid, setUserValid] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -44,18 +47,32 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
         type="submit"
         id="signup"
         onClick={async () => {
-          setIsAuthLoading(true);
-          const isUserRegistered = await signUpUser(email, password);
-          if (isUserRegistered) {
-            const isUserLoggedIn = await loginUser(email, password);
-            if (isUserLoggedIn) {
-              setIsAuthLoading(false);
-              if (fromBecomeCoach) {
-                console.log("in from coach block");
-                navigate("/coach-registration");
-              }
-              if (!fromBecomeCoach) {
-                navigate("/");
+          setUserValid(true);
+          setMissingEmailMssg("");
+          setMissingPasswordMssg("");
+          console.log(email);
+          if (!email.includes("@")) {
+            setMissingEmailMssg("Valid email required.");
+            setUserValid(false);
+          }
+          if (password === "") {
+            setMissingPasswordMssg("Please include a password.");
+            console.log("does not include block");
+            setUserValid(false);
+          }
+          if (userValid) {
+            setIsAuthLoading(true);
+            const isUserRegistered = await signUpUser(email, password);
+            if (isUserRegistered) {
+              const isUserLoggedIn = await loginUser(email, password);
+              if (isUserLoggedIn) {
+                setIsAuthLoading(false);
+                if (fromBecomeCoach) {
+                  navigate("/coach-registration");
+                }
+                if (!fromBecomeCoach) {
+                  navigate("/");
+                }
               }
             }
           }
@@ -67,6 +84,11 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
       <br />
       <div className="smallMessage">
         Already have an account <Link to="/login">Log In</Link>
+      </div>
+      <div className="mediumMessage">
+        {missingEmailMssg}
+        <br />
+        {missingPassword}
       </div>
     </div>
   );

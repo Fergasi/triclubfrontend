@@ -82,7 +82,6 @@ const CoachRegistrationPage = ({
         <>
           <Form>
             <h2>Coach Application</h2>
-            {/* <br /> */}
             <Row className="mb-3">
               <Form.Group as={Col}>
                 <Form.Label>First Name</Form.Label>
