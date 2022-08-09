@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+#coachCard {
+  margin-top: 5%;
+}
+
 .navbar-brand {
   padding-left: 3%;
   text-align: center;
@@ -36,8 +40,8 @@
 }
 
 #root > div > header > form {
-  padding: 5%;
-  margin: 5%;
+  padding-top: 3%;
+  margin-top: 3%;
 }
 
 #formGridCheckbox > div {
@@ -46,6 +50,11 @@
 
 .smallMessage {
   font-size: medium;
+}
+
+.mediumMessage {
+  font-size: medium;
+  font-weight: bold;
 }
 
 #root > div > header > div > form > div:nth-child(1) > small {
@@ -79,5 +88,16 @@
   }
   .nav-logout {
     margin-top: 15px;
+  }
+
+  #coachCard {
+    margin-top: 18%;
+  }
+
+  #root > div > header > form {
+    padding-top: 15%;
+    margin-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }

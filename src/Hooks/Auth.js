@@ -205,4 +205,43 @@ export const getLocalUserToken = () => {
   return JSON.parse(localStorage.getItem("token"));
 };
 
+export const forgotPassword = async (email) => {
+  const response = await fetch(`${urlEndpoint}/auth/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+    }),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
+export const resetPassword = async (email, password) => {
+  const response = await fetch(`${urlEndpoint}/auth/reset-password`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
+// export const getResetPasswordToken = () => {
+//   const response = await fetch(`${urlEndpoint}/auth/get-reset-password-data`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body:
+//   })
+// }
+
 // export default Auth;

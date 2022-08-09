@@ -18,11 +18,11 @@ const SignUpPage = () => {
         <h2>Create Account</h2>
         <br />
         <br />
-        <Form.Group className='mb-3' controlId='formBasicEmail'>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Enter email'
+            type="email"
+            placeholder="Enter email"
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
@@ -30,11 +30,11 @@ const SignUpPage = () => {
           />
         </Form.Group>
 
-        <Form.Group className='mb-3' controlId='formBasicPassword'>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type='password'
-            placeholder='Password'
+            type="password"
+            placeholder="Password"
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
@@ -44,9 +44,9 @@ const SignUpPage = () => {
       </Form>
 
       <Button
-        variant='secondary'
-        type='submit'
-        id='signup'
+        variant="secondary"
+        type="submit"
+        id="signup"
         onClick={async () => {
           const validateUserObj = validateUser({
             email: email,
@@ -85,11 +85,14 @@ const SignUpPage = () => {
       </Button>
       <br />
       <br />
-      <div className='smallMessage'>
-        Already have an account <Link to='/login'>Log In</Link>
+      <div className="smallMessage">
+        Already have an account? <Link to="/login"> Log In</Link>
+      </div>
+      <div className="mediumMessage">
+        {emailMssg} <br /> {passwordMssg}
       </div>
       <br />
-      <div className='mediumMessage'>
+      <div className="mediumMessage">
         {emailMssg} <br /> {passwordMssg}
       </div>
     </div>

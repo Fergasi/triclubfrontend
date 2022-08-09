@@ -4,7 +4,10 @@ import NavBar from "./Components/NavBar";
 import UserHomePage from "./Pages/UserHomePage";
 import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
+import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import CoachRegistrationPage from "./Pages/CoachRegistrationPage";
+import { useState } from "react";
+import ResetPasswordPage from "./Pages/ResetPasswordPage";
 import AdminDashboard from "./Pages/AdminDashboard";
 import CoachDashboard from "./Pages/CoachDashboard";
 import { useAuth } from "./Hooks/Auth";
@@ -54,21 +57,29 @@ const CoachLayout = () => {
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <header className="App-header">
         <Routes>
-          <Route path='/' element={<NavBar />}>
+          <Route path="/" element={<NavBar />}>
             <Route index element={<UserHomePage />} />
-            <Route path='login' element={<LoginPage />} />
-            <Route path='sign-up' element={<SignUpPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="sign-up" element={<SignUpPage />} />
             <Route
-              path='coach-registration'
+              path="coach-registration"
               element={<CoachRegistrationPage />}
             />
-            <Route path='admin' element={<AdminLayout />}>
+            <Route
+              path="forgot-password"
+              element={<ForgotPasswordPage></ForgotPasswordPage>}
+            />
+            <Route
+              path="reset-password/*"
+              element={<ResetPasswordPage></ResetPasswordPage>}
+            />
+            <Route path="admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
             </Route>
-            <Route path='coach' element={<CoachLayout />}>
+            <Route path="coach" element={<CoachLayout />}>
               <Route index element={<CoachDashboard />} />
             </Route>
           </Route>
