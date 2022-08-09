@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../Auth";
+import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
+import validateUser from "../Utils/Validation";
 
-const LoginPage = ({ setIsAuthLoading }) => {
+const LoginPage = () => {
+  const { fromBecomeCoach, loginUser } = useAuth();
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailMssg, setEmailMssg] = useState("");
+  const [passwordMssg, setPasswordMssg] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -14,29 +18,27 @@ const LoginPage = ({ setIsAuthLoading }) => {
         <h2>Log In</h2>
         <br />
         <br />
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={username}
+            type='email'
+            placeholder='Enter email'
+            value={email}
             onChange={(event) => {
-              const newUsername = event.target.value;
-              setUsername(newUsername);
+              setEmail(event.target.value);
             }}
           />
-          <Form.Text className="text-muted"></Form.Text>
+          <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type="password"
-            placeholder="Password"
+            type='password'
+            placeholder='Password'
             value={password}
             onChange={(event) => {
-              const newPassword = event.target.value;
-              setPassword(newPassword);
-              console.log(newPassword);
+              setPassword(event.target.value);
+              console.log(password);
             }}
           />
         </Form.Group>
@@ -46,14 +48,32 @@ const LoginPage = ({ setIsAuthLoading }) => {
         type='submit'
         id='login'
         onClick={async () => {
-          setIsAuthLoading(true);
-          const isUserLoggedIn = await loginUser(username, password);
-          if (isUserLoggedIn.success) {
-            setIsAuthLoading(false);
-            console.log(isUserLoggedIn);
-            navigate("/");
-          } else {
-            alert("Username or password are incorrect");
+          const validateUserObj = validateUser({
+            email: email,
+            password: password,
+          });
+
+          if (validateUserObj.isValid === false) {
+            setEmailMssg(validateUserObj.emailMssg);
+            setPasswordMssg(validateUserObj.passwordMssg);
+          }
+
+          if (validateUserObj.isValid === true) {
+            setEmailMssg("");
+            setPasswordMssg("");
+            const isUserLoggedIn = await loginUser(email, password);
+            if (!isUserLoggedIn.success) {
+              setEmailMssg(isUserLoggedIn.message);
+            }
+            if (isUserLoggedIn.success) {
+              console.log(isUserLoggedIn);
+              if (fromBecomeCoach) {
+                navigate("/coach-registration");
+              }
+              if (!fromBecomeCoach) {
+                navigate("/");
+              }
+            }
           }
         }}
       >
@@ -61,8 +81,12 @@ const LoginPage = ({ setIsAuthLoading }) => {
       </Button>
       <br />
       <br />
-      <div className="smallMessage">
-        Dont have an account yet <Link to="/sign-up">Sign Up</Link>
+      <div className='smallMessage'>
+        Dont have an account yet <Link to='/sign-up'>Sign Up</Link>
+      </div>
+      <br />
+      <div className='mediumMessage'>
+        {emailMssg} <br /> {passwordMssg}
       </div>
     </div>
   );
