@@ -5,8 +5,10 @@ import UserHomePage from "./Pages/UserHomePage";
 // import AdminHomePage from "./Pages/AdminHomePage";
 import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
+import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import CoachRegistrationPage from "./Pages/CoachRegistrationPage";
 import { useState } from "react";
+import ResetPasswordPage from "./Pages/ResetPasswordPage";
 
 function App() {
   const [isAuthLoading, setIsAuthLoading] = useState(false);
@@ -58,6 +60,16 @@ function App() {
                   setFromBecomeCoach={setFromBecomeCoach}
                 />
               }
+            />
+
+            <Route
+              path="forgot-password"
+              element={<ForgotPasswordPage></ForgotPasswordPage>}
+            />
+
+            <Route
+              path="reset-password/*"
+              element={<ResetPasswordPage></ResetPasswordPage>}
             />
           </Route>
         </Routes>

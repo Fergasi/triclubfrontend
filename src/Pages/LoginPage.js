@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../Auth";
 import { Button, Form } from "react-bootstrap";
-import validateUser from "../Utils/Validation";
+import { validateUser } from "../Utils/Validation";
 
 const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
   const [password, setPassword] = useState("");
@@ -83,7 +83,11 @@ const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
       <br />
       <br />
       <div className="smallMessage">
-        Dont have an account yet <Link to="/sign-up">Sign Up</Link>
+        Forgot your password?{" "}
+        <Link to="/forgot-password"> Forgot Password</Link>
+      </div>
+      <div className="smallMessage">
+        Don't have an account yet? <Link to="/sign-up"> Sign Up</Link>
       </div>
       <div className="mediumMessage">
         {emailMssg} <br /> {passwordMssg}

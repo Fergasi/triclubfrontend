@@ -1,5 +1,5 @@
 // Heroku
-// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;\
 
 //LOCAL
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
@@ -51,6 +51,35 @@ export const loginUser = async (email, password) => {
   return responseJSON;
 };
 
+export const forgotPassword = async (email) => {
+  const response = await fetch(`${urlEndpoint}/auth/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+    }),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
+export const resetPassword = async (email, password) => {
+  const response = await fetch(`${urlEndpoint}/auth/reset-password`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
 export const logoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("userType");
@@ -66,4 +95,13 @@ export const getUserType = () => {
   return localStorage.getItem("userType");
 };
 
+// export const getResetPasswordToken = () => {
+//   const response = await fetch(`${urlEndpoint}/auth/get-reset-password-data`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body:
+//   })
+// }
 // export default Auth;
