@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { signUpUser, loginUser } from "../Auth";
+import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
+import validateUser from "../Utils/Validation";
 
-const SignUpPage = ({ setIsAuthLoading }) => {
+const SignUpPage = () => {
+  const { fromBecomeCoach, loginUser, signUpUser } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [emailMssg, setEmailMssg] = useState("");
+  const [passwordMssg, setPasswordMssg] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -44,13 +48,35 @@ const SignUpPage = ({ setIsAuthLoading }) => {
         type='submit'
         id='signup'
         onClick={async () => {
-          setIsAuthLoading(true);
-          const isUserRegistered = await signUpUser(email, password);
-          if (isUserRegistered) {
-            const isUserLoggedIn = await loginUser(email, password);
-            if (isUserLoggedIn) {
-              setIsAuthLoading(false);
-              navigate("/");
+          const validateUserObj = validateUser({
+            email: email,
+            password: password,
+          });
+
+          if (validateUserObj.isValid === false) {
+            setEmailMssg(validateUserObj.emailMssg);
+            setPasswordMssg(validateUserObj.passwordMssg);
+          }
+
+          if (validateUserObj.isValid === true) {
+            setEmailMssg("");
+            setPasswordMssg("");
+            const isUserRegistered = await signUpUser(email, password);
+
+            if (!isUserRegistered.success) {
+              setEmailMssg(isUserRegistered.message);
+              // *** FORGOT PASSWORD ***
+            }
+            if (isUserRegistered.success) {
+              const isUserLoggedIn = await loginUser(email, password);
+              if (isUserLoggedIn) {
+                if (fromBecomeCoach) {
+                  navigate("/coach-registration");
+                }
+                if (!fromBecomeCoach) {
+                  navigate("/");
+                }
+              }
             }
           }
         }}
@@ -61,6 +87,10 @@ const SignUpPage = ({ setIsAuthLoading }) => {
       <br />
       <div className='smallMessage'>
         Already have an account <Link to='/login'>Log In</Link>
+      </div>
+      <br />
+      <div className='mediumMessage'>
+        {emailMssg} <br /> {passwordMssg}
       </div>
     </div>
   );
