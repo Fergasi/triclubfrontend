@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { signUpUser, loginUser } from "../Auth";
+import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
-import { validateUser } from "../Utils/Validation";
+import validateUser from "../Utils/Validation";
 
-const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
+const SignUpPage = () => {
+  const { fromBecomeCoach, loginUser, signUpUser } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [emailMssg, setEmailMssg] = useState("");
@@ -60,8 +61,8 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
           if (validateUserObj.isValid === true) {
             setEmailMssg("");
             setPasswordMssg("");
-            setIsAuthLoading(true);
             const isUserRegistered = await signUpUser(email, password);
+
             if (!isUserRegistered.success) {
               setEmailMssg(isUserRegistered.message);
               // *** FORGOT PASSWORD ***
@@ -69,7 +70,6 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
             if (isUserRegistered.success) {
               const isUserLoggedIn = await loginUser(email, password);
               if (isUserLoggedIn) {
-                setIsAuthLoading(false);
                 if (fromBecomeCoach) {
                   navigate("/coach-registration");
                 }
@@ -88,6 +88,10 @@ const SignUpPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
       <div className="smallMessage">
         Already have an account? <Link to="/login"> Log In</Link>
       </div>
+      <div className="mediumMessage">
+        {emailMssg} <br /> {passwordMssg}
+      </div>
+      <br />
       <div className="mediumMessage">
         {emailMssg} <br /> {passwordMssg}
       </div>

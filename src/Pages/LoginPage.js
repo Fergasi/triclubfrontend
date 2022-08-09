@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../Auth";
+import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
 import { validateUser } from "../Utils/Validation";
 
-const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
+const LoginPage = () => {
+  const { fromBecomeCoach, loginUser } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [emailMssg, setEmailMssg] = useState("");
@@ -37,7 +38,6 @@ const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
-              console.log(event.target.value);
             }}
           />
         </Form.Group>
@@ -60,13 +60,11 @@ const LoginPage = ({ setIsAuthLoading, fromBecomeCoach }) => {
           if (validateUserObj.isValid === true) {
             setEmailMssg("");
             setPasswordMssg("");
-            setIsAuthLoading(true);
             const isUserLoggedIn = await loginUser(email, password);
             if (!isUserLoggedIn.success) {
               setEmailMssg(isUserLoggedIn.message);
             }
             if (isUserLoggedIn.success) {
-              setIsAuthLoading(false);
               console.log(isUserLoggedIn);
               if (fromBecomeCoach) {
                 navigate("/coach-registration");

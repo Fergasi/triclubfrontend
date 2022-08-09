@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import React, { useState } from "react";
+import { Card, Button, Col, Form, Row } from "react-bootstrap";
 import { stateAbbArr } from "../assets/stateAbbArr";
 import { useNavigate } from "react-router-dom";
-import { becomeCoach, getUserToken } from "../Auth";
-import { Card } from "react-bootstrap";
+import { useAuth } from "../Hooks/Auth";
 import coachImg from "../assets/stockCoach.webp";
 
-const CoachRegistrationPage = ({
-  setIsAuthLoading,
-  isAuthLoading,
-  setFromBecomeCoach,
-}) => {
+const CoachRegistrationPage = () => {
+  const { becomeCoach, userToken, setFromBecomeCoach } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -46,12 +39,8 @@ const CoachRegistrationPage = ({
     },
     about: about,
   };
-  const [userToken, setUserToken] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    const userToken = getUserToken();
-    setUserToken(userToken);
-  }, [isAuthLoading]);
+
   return (
     <>
       {!userToken && (
@@ -81,7 +70,11 @@ const CoachRegistrationPage = ({
       {userToken && (
         <>
           <Form>
+            <br />
+            <br />
             <h2>Coach Application</h2>
+            <br />
+            <br />
             <Row className="mb-3">
               <Form.Group as={Col}>
                 <Form.Label>First Name</Form.Label>
@@ -94,7 +87,6 @@ const CoachRegistrationPage = ({
                   }}
                 />
               </Form.Group>
-
               <Form.Group as={Col}>
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
@@ -107,32 +99,6 @@ const CoachRegistrationPage = ({
                 />
               </Form.Group>
             </Row>
-            {/* SHOULD ALREADY BE LOGGED IN -- NO NEED FOR EMAIL AND PASSWORD */}
-            {/* <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </Form.Group>
-            </Row> */}
             <Form.Group className="mb-3" controlId="formGridTelephone">
               <Form.Label>Telephone Number</Form.Label>
               <Form.Control
@@ -174,7 +140,6 @@ const CoachRegistrationPage = ({
                   }}
                 />
               </Form.Group>
-
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>State</Form.Label>
                 <Form.Select
@@ -189,7 +154,6 @@ const CoachRegistrationPage = ({
                   })}
                 </Form.Select>
               </Form.Group>
-
               <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Zip</Form.Label>
                 <Form.Control
@@ -246,28 +210,24 @@ const CoachRegistrationPage = ({
                 />
               </Form.Group>
             </Row>
+            <br />
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={async () => {
+                const isPendingCoach = await becomeCoach(pendingCoach);
+                if (isPendingCoach.success) {
+                  console.log("server res");
+                  console.log(isPendingCoach);
+                }
+              }}
+            >
+              Submit
+            </Button>
           </Form>
-
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={async () => {
-              setIsAuthLoading(true);
-              const isPendingCoach = await becomeCoach(pendingCoach);
-              if (isPendingCoach.success) {
-                console.log("server res");
-                console.log(isPendingCoach);
-                setIsAuthLoading(false);
-                // navigate("/");
-              }
-            }}
-          >
-            Submit
-          </Button>
         </>
       )}
     </>
   );
 };
-
 export default CoachRegistrationPage;

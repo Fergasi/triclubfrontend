@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { validateEmail } from "../Utils/Validation";
-import { forgotPassword } from "../Auth";
+import { forgotPassword } from "../Hooks/Auth";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
