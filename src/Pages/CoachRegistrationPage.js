@@ -22,8 +22,6 @@ const CoachRegistrationPage = () => {
   const pendingCoach = {
     firstName: firstName,
     lastName: lastName,
-    email: email,
-    password: password,
     telephone: telephone,
     addressOne: addressOne,
     addressTwo: addressTwo,
