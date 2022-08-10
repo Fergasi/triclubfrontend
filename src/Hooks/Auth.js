@@ -11,20 +11,23 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
-  const [fromBecomeCoach, setFromBecomeCoach] = useState(false);
   const [isAdminLoginCheck, setIsAdminLoginCheck] = useState(false);
   const [isCoachLoginCheck, setIsCoachLoginCheck] = useState(false);
 
   //UseEffect to check and update UserToken
   useEffect(() => {
-    const userTokenn = getLocalUserToken();
-    setUserToken(userTokenn);
+    const tokenCheck = async () => {
+      const token = await getLocalUserToken();
+      setUserToken(token);
+    };
+    tokenCheck();
   }, [isAuthLoading]);
 
   //UseEffect to check and update isAdminLoginCheck
   useEffect(() => {
     const isAdminCheck = async () => {
-      await verifyAdmin();
+      const adminBool = await verifyAdmin();
+      setIsAdminLoginCheck(adminBool);
     };
     isAdminCheck();
   }, [userToken]);
@@ -32,7 +35,8 @@ export const AuthProvider = ({ children }) => {
   //UseEffect to check and update isCoachLoginCheck
   useEffect(() => {
     const isCoachCheck = async () => {
-      await verifyCoach();
+      const CoachBool = await verifyCoach();
+      setIsCoachLoginCheck(CoachBool);
     };
     isCoachCheck();
   }, [userToken]);
@@ -68,6 +72,8 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = async () => {
     setIsAuthLoading(true);
     await removeUserToken();
+    setIsAdminLoginCheck(false);
+    setIsCoachLoginCheck(false);
     setIsAuthLoading(false);
     return true;
   };
@@ -76,10 +82,10 @@ export const AuthProvider = ({ children }) => {
     setIsAuthLoading(true);
     const isAdminResult = await validateAdmin(userToken);
     if (isAdminResult.success) {
-      setIsAdminLoginCheck(isAdminResult.isAdmin);
+      setIsAuthLoading(false);
       return isAdminResult.isAdmin;
-    } else {
     }
+
     setIsAuthLoading(false);
     return false;
   };
@@ -88,10 +94,10 @@ export const AuthProvider = ({ children }) => {
     setIsAuthLoading(true);
     const isCoachResult = await validateCoach(userToken);
     if (isCoachResult.success) {
-      setIsCoachLoginCheck(isCoachResult.isCoach);
+      setIsAuthLoading(false);
       return isCoachResult.isCoach;
-    } else {
     }
+
     setIsAuthLoading(false);
     return false;
   };
@@ -104,10 +110,8 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       userToken,
-      fromBecomeCoach,
       isAdminLoginCheck,
       isCoachLoginCheck,
-      setFromBecomeCoach,
       becomeCoach,
       loginUser,
       signUpUser,
@@ -115,7 +119,7 @@ export const AuthProvider = ({ children }) => {
       verifyAdmin,
       verifyCoach,
     }),
-    [userToken]
+    [isAuthLoading]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -193,16 +197,16 @@ const validateCoach = async (userToken) => {
   return responseJSON;
 };
 
-export const setLocalUserToken = (token) => {
-  return localStorage.setItem("token", JSON.stringify(token));
+export const setLocalUserToken = async (token) => {
+  return await localStorage.setItem("token", JSON.stringify(token));
 };
 
-export const removeUserToken = () => {
-  return localStorage.removeItem("token");
+export const removeUserToken = async () => {
+  return await localStorage.removeItem("token");
 };
 
-export const getLocalUserToken = () => {
-  return JSON.parse(localStorage.getItem("token"));
+export const getLocalUserToken = async () => {
+  return await JSON.parse(localStorage.getItem("token"));
 };
 
 export const forgotPassword = async (email) => {

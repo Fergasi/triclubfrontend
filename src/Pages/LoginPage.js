@@ -4,8 +4,8 @@ import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
 import { validateUser } from "../Utils/Validation";
 
-const LoginPage = () => {
-  const { fromBecomeCoach, loginUser } = useAuth();
+const LoginPage = ({ fromBecomeCoach }) => {
+  const { loginUser } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [emailMssg, setEmailMssg] = useState("");
@@ -18,23 +18,23 @@ const LoginPage = () => {
         <h2>Log In</h2>
         <br />
         <br />
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            type="email"
-            placeholder="Enter email"
+            type='email'
+            placeholder='Enter email'
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
             }}
           />
-          <Form.Text className="text-muted"></Form.Text>
+          <Form.Text className='text-muted'></Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type="password"
-            placeholder="Password"
+            type='password'
+            placeholder='Password'
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
@@ -43,9 +43,9 @@ const LoginPage = () => {
         </Form.Group>
       </Form>
       <Button
-        variant="secondary"
-        type="submit"
-        id="login"
+        variant='secondary'
+        type='submit'
+        id='login'
         onClick={async () => {
           const validateUserObj = validateUser({
             email: email,
@@ -83,15 +83,15 @@ const LoginPage = () => {
       </Button>
       <br />
       <br />
-      <div className="smallMessage">
+      <div className='smallMessage'>
         Forgot your password?{" "}
-        <Link to="/forgot-password"> Forgot Password</Link>
+        <Link to='/forgot-password'> Forgot Password</Link>
       </div>
-      <div className="smallMessage">
-        Don't have an account yet? <Link to="/sign-up"> Sign Up</Link>
+      <div className='smallMessage'>
+        Don't have an account yet? <Link to='/sign-up'> Sign Up</Link>
       </div>
       <br />
-      <div className="mediumMessage">
+      <div className='mediumMessage'>
         {emailMssg} <br /> {passwordMssg}
       </div>
     </div>
