@@ -6,7 +6,6 @@ import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import CoachRegistrationPage from "./Pages/CoachRegistrationPage";
-import { useState } from "react";
 import ResetPasswordPage from "./Pages/ResetPasswordPage";
 import AdminDashboard from "./Pages/AdminDashboard";
 import CoachDashboard from "./Pages/CoachDashboard";
