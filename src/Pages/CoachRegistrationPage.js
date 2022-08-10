@@ -9,8 +9,6 @@ const CoachRegistrationPage = () => {
   const { becomeCoach, userToken, setFromBecomeCoach } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [telephone, setTelephone] = useState("");
   const [addressOne, setAddressOne] = useState("");
   const [addressTwo, setAddressTwo] = useState("");
