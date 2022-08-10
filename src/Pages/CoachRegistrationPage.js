@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Hooks/Auth";
 import coachImg from "../assets/stockCoach.webp";
 
-const CoachRegistrationPage = () => {
-  const { becomeCoach, userToken, setFromBecomeCoach } = useAuth();
+const CoachRegistrationPage = ({ setFromPageToPage }) => {
+  const { applyForCoach, userToken } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -54,7 +54,8 @@ const CoachRegistrationPage = () => {
             <Button
               variant="dark"
               onClick={() => {
-                setFromBecomeCoach(true);
+                console.log("setting setFromPageToPage func ");
+                setFromPageToPage("/coach-registration");
                 navigate("/sign-up");
               }}
             >
@@ -65,6 +66,7 @@ const CoachRegistrationPage = () => {
       )}
       {userToken && (
         <>
+          {setFromPageToPage("")}
           <Form>
             <br />
             <br />
@@ -211,7 +213,7 @@ const CoachRegistrationPage = () => {
               variant="primary"
               type="submit"
               onClick={async () => {
-                const isPendingCoach = await becomeCoach(pendingCoach);
+                const isPendingCoach = await applyForCoach(pendingCoach);
                 if (isPendingCoach.success) {
                   console.log("server res");
                   console.log(isPendingCoach);

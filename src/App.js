@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import UserHomePage from "./Pages/UserHomePage";
 import LoginPage from "./Pages/LoginPage";
@@ -54,27 +54,77 @@ const CoachLayout = () => {
   );
 };
 
+//Checks whether Reset Password Token is valid allowing access to Reset Password routes
+const ResetPasswordLayout = () => {
+  const [isResetPassTokValid, setIsResetPassTokValid] = useState(false);
+  const { verifyResetPassTok } = useAuth();
+
+  useEffect(() => {
+    const resetPassTokCheck = async () => {
+      // *** WRITE THE VERIFYRESETPASSTOK FUNC IN AUTH ***
+      console.log("pizza");
+      // console.log(params);
+      const resetPassTokObj = await verifyResetPassTok();
+      setIsResetPassTokValid(resetPassTokObj.success);
+    };
+    resetPassTokCheck();
+  }, []); // This useEffect will trigger once when the user tries to visit /reset-password
+
+  return (
+    <div>
+      {!isResetPassTokValid && (
+        <>
+          <h3>
+            Your Password Reset Token is either Invalid or Expired.
+            <br /> <br />
+            Please Try Again.
+          </h3>
+          <br />
+          <br />
+          <div className="smallMessage">
+            Forgot your password?{" "}
+            <Link to="/forgot-password"> Forgot Password</Link>
+          </div>
+        </>
+      )}
+      {isResetPassTokValid && <Outlet />}
+    </div>
+  );
+};
+
 function App() {
+  const [fromPageToPage, setFromPageToPage] = useState("");
+
   return (
     <div className="App">
       <header className="App-header">
         <Routes>
-          <Route path="/" element={<NavBar />}>
+          <Route
+            path="/"
+            element={<NavBar setFromPageToPage={setFromPageToPage} />}
+          >
             <Route index element={<UserHomePage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="sign-up" element={<SignUpPage />} />
+            <Route
+              path="login"
+              element={<LoginPage fromPageToPage={fromPageToPage} />}
+            />
+            <Route
+              path="sign-up"
+              element={<SignUpPage fromPageToPage={fromPageToPage} />}
+            />
             <Route
               path="coach-registration"
-              element={<CoachRegistrationPage />}
+              element={
+                <CoachRegistrationPage setFromPageToPage={setFromPageToPage} />
+              }
             />
             <Route
               path="forgot-password"
               element={<ForgotPasswordPage></ForgotPasswordPage>}
             />
-            <Route
-              path="reset-password/*"
-              element={<ResetPasswordPage></ResetPasswordPage>}
-            />
+            <Route path="reset-password/*" element={<ResetPasswordLayout />}>
+              <Route index element={<ResetPasswordPage />} />
+            </Route>
             <Route path="admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
             </Route>

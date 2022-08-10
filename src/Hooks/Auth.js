@@ -11,14 +11,16 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
-  const [fromBecomeCoach, setFromBecomeCoach] = useState(false);
   const [isAdminLoginCheck, setIsAdminLoginCheck] = useState(false);
   const [isCoachLoginCheck, setIsCoachLoginCheck] = useState(false);
 
   //UseEffect to check and update UserToken
   useEffect(() => {
-    const userTokenn = getLocalUserToken();
-    setUserToken(userTokenn);
+    const tokenCheck = async () => {
+      const token = await getLocalUserToken();
+      setUserToken(token);
+    };
+    tokenCheck();
   }, [isAuthLoading]);
 
   //UseEffect to check and update isAdminLoginCheck
@@ -57,11 +59,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   // call this function when you want to register the user
-  const becomeCoach = async (coachObj) => {
+  const applyForCoach = async (coachObj) => {
     setIsAuthLoading(true);
-    const becomeCoachResult = await validateBecomeCoach(coachObj);
+    const applyForCoachResult = await validateApplyForCoach(coachObj);
     setIsAuthLoading(false);
-    return becomeCoachResult;
+    return applyForCoachResult;
   };
 
   // call this function to sign out logged in user
@@ -96,6 +98,11 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
+  const verifyResetPassTok = async () => {
+    // setIsAuthLoading(true);
+    // const isResetPassTokResult = await validateResetPassTok();
+  };
+
   /*  
     https://reactjs.org/docs/hooks-reference.html#usememo
     Memoization is essentially caching. The variable value will only be recalculated if the variables in the watched array change.
@@ -104,11 +111,9 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       userToken,
-      fromBecomeCoach,
       isAdminLoginCheck,
       isCoachLoginCheck,
-      setFromBecomeCoach,
-      becomeCoach,
+      applyForCoach,
       loginUser,
       signUpUser,
       logoutUser,
@@ -125,7 +130,7 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-const validateBecomeCoach = async (coachObj) => {
+const validateApplyForCoach = async (coachObj) => {
   const response = await fetch(`${urlEndpoint}/auth/become-coach`, {
     method: "POST",
     headers: {
@@ -193,16 +198,16 @@ const validateCoach = async (userToken) => {
   return responseJSON;
 };
 
-export const setLocalUserToken = (token) => {
-  return localStorage.setItem("token", JSON.stringify(token));
+export const setLocalUserToken = async (token) => {
+  return await localStorage.setItem("token", JSON.stringify(token));
 };
 
-export const removeUserToken = () => {
-  return localStorage.removeItem("token");
+export const removeUserToken = async () => {
+  return await localStorage.removeItem("token");
 };
 
-export const getLocalUserToken = () => {
-  return JSON.parse(localStorage.getItem("token"));
+export const getLocalUserToken = async () => {
+  return await JSON.parse(localStorage.getItem("token"));
 };
 
 export const forgotPassword = async (email) => {
