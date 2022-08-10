@@ -164,7 +164,7 @@ const validateSignUpUser = async (email, password) => {
     }),
   });
   const responseJSON = await response.json();
-  return responseJSON.success;
+  return responseJSON;
 };
 
 const validateAdmin = async (userToken) => {
