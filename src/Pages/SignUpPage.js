@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
-import validateUser from "../Utils/Validation";
+import { validateUser } from "../Utils/Validation";
 
 const SignUpPage = () => {
   const { fromBecomeCoach, loginUser, signUpUser } = useAuth();
@@ -65,7 +65,6 @@ const SignUpPage = () => {
 
             if (!isUserRegistered.success) {
               setEmailMssg(isUserRegistered.message);
-              // *** FORGOT PASSWORD ***
             }
             if (isUserRegistered.success) {
               const isUserLoggedIn = await loginUser(email, password);
@@ -87,9 +86,6 @@ const SignUpPage = () => {
       <br />
       <div className="smallMessage">
         Already have an account? <Link to="/login"> Log In</Link>
-      </div>
-      <div className="mediumMessage">
-        {emailMssg} <br /> {passwordMssg}
       </div>
       <br />
       <div className="mediumMessage">

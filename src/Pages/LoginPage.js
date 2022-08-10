@@ -87,6 +87,7 @@ const LoginPage = () => {
       <div className="smallMessage">
         Don't have an account yet? <Link to="/sign-up"> Sign Up</Link>
       </div>
+      <br />
       <div className="mediumMessage">
         {emailMssg} <br /> {passwordMssg}
       </div>
