@@ -55,30 +55,45 @@ const CoachLayout = () => {
 };
 
 function App() {
+  const [fromBecomeCoach, setFromBecomeCoach] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <header className='App-header'>
         <Routes>
-          <Route path="/" element={<NavBar />}>
+          <Route
+            path='/'
+            element={<NavBar setFromBecomeCoach={setFromBecomeCoach} />}
+          >
             <Route index element={<UserHomePage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="sign-up" element={<SignUpPage />} />
             <Route
-              path="coach-registration"
-              element={<CoachRegistrationPage />}
+              path='login'
+              element={<LoginPage fromBecomeCoach={fromBecomeCoach} />}
             />
             <Route
-              path="forgot-password"
+              path='sign-up'
+              element={<SignUpPage fromBecomeCoach={fromBecomeCoach} />}
+            />
+            <Route
+              path='coach-registration'
+              element={
+                <CoachRegistrationPage
+                  setFromBecomeCoach={setFromBecomeCoach}
+                />
+              }
+            />
+            <Route
+              path='forgot-password'
               element={<ForgotPasswordPage></ForgotPasswordPage>}
             />
             <Route
-              path="reset-password/*"
+              path='reset-password/*'
               element={<ResetPasswordPage></ResetPasswordPage>}
             />
-            <Route path="admin" element={<AdminLayout />}>
+            <Route path='admin' element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
             </Route>
-            <Route path="coach" element={<CoachLayout />}>
+            <Route path='coach' element={<CoachLayout />}>
               <Route index element={<CoachDashboard />} />
             </Route>
           </Route>
