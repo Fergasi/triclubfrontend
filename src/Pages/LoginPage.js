@@ -55,6 +55,7 @@ const LoginPage = () => {
           if (validateUserObj.isValid === false) {
             setEmailMssg(validateUserObj.emailMssg);
             setPasswordMssg(validateUserObj.passwordMssg);
+            return;
           }
 
           if (validateUserObj.isValid === true) {
@@ -63,6 +64,8 @@ const LoginPage = () => {
             const isUserLoggedIn = await loginUser(email, password);
             if (!isUserLoggedIn.success) {
               setEmailMssg(isUserLoggedIn.message);
+              setPasswordMssg("Please try again.");
+              return;
             }
             if (isUserLoggedIn.success) {
               console.log(isUserLoggedIn);
