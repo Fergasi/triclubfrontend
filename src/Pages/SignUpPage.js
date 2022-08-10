@@ -4,7 +4,7 @@ import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
 import { validateUser } from "../Utils/Validation";
 
-const SignUpPage = ({ fromBecomeCoach }) => {
+const SignUpPage = ({ fromPageToPage }) => {
   const { loginUser, signUpUser } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +14,7 @@ const SignUpPage = ({ fromBecomeCoach }) => {
 
   return (
     <div>
+      {console.log("TOP from become coach ... ", fromPageToPage)}
       <Form>
         <h2>Create Account</h2>
         <br />
@@ -68,11 +69,12 @@ const SignUpPage = ({ fromBecomeCoach }) => {
             }
             if (isUserRegistered.success) {
               const isUserLoggedIn = await loginUser(email, password);
+              console.log("from page ... ", fromPageToPage);
               if (isUserLoggedIn) {
-                if (fromBecomeCoach) {
-                  navigate("/coach-registration");
+                if (fromPageToPage !== "") {
+                  navigate(fromPageToPage);
                 }
-                if (!fromBecomeCoach) {
+                if (fromPageToPage === "") {
                   navigate("/");
                 }
               }

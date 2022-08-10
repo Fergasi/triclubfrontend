@@ -61,11 +61,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   // call this function when you want to register the user
-  const becomeCoach = async (coachObj) => {
+  const applyForCoach = async (coachObj) => {
     setIsAuthLoading(true);
-    const becomeCoachResult = await validateBecomeCoach(coachObj);
+    const applyForCoachResult = await validateApplyForCoach(coachObj);
     setIsAuthLoading(false);
-    return becomeCoachResult;
+    return applyForCoachResult;
   };
 
   // call this function to sign out logged in user
@@ -102,6 +102,11 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
+  const verifyResetPassTok = async () => {
+    // setIsAuthLoading(true);
+    // const isResetPassTokResult = await validateResetPassTok();
+  };
+
   /*  
     https://reactjs.org/docs/hooks-reference.html#usememo
     Memoization is essentially caching. The variable value will only be recalculated if the variables in the watched array change.
@@ -112,7 +117,7 @@ export const AuthProvider = ({ children }) => {
       userToken,
       isAdminLoginCheck,
       isCoachLoginCheck,
-      becomeCoach,
+      applyForCoach,
       loginUser,
       signUpUser,
       logoutUser,
@@ -129,7 +134,7 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-const validateBecomeCoach = async (coachObj) => {
+const validateApplyForCoach = async (coachObj) => {
   const response = await fetch(`${urlEndpoint}/auth/become-coach`, {
     method: "POST",
     headers: {

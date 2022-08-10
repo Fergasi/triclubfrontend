@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import TriClubLogo from "../assets/TriClub.png";
 import { useAuth } from "../Hooks/Auth";
 
-const NavBar = ({ setFromBecomeCoach }) => {
+const NavBar = ({ setFromPageToPage }) => {
   const { userToken, logoutUser, isAdminLoginCheck, isCoachLoginCheck } =
     useAuth();
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const NavBar = ({ setFromBecomeCoach }) => {
                   onClick={async () => {
                     const logoutSuccess = await logoutUser();
                     if (logoutSuccess) {
-                      setFromBecomeCoach(false);
+                      setFromPageToPage("");
                       navigate("/");
                     }
                   }}

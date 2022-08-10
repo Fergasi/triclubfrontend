@@ -4,7 +4,7 @@ import { useAuth } from "../Hooks/Auth";
 import { Button, Form } from "react-bootstrap";
 import { validateUser } from "../Utils/Validation";
 
-const LoginPage = ({ fromBecomeCoach }) => {
+const LoginPage = ({ fromPageToPage }) => {
   const { loginUser } = useAuth();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +14,7 @@ const LoginPage = ({ fromBecomeCoach }) => {
 
   return (
     <div>
+      {console.log("TOP from become coach ... ", fromPageToPage)}
       <Form>
         <h2>Log In</h2>
         <br />
@@ -69,10 +70,11 @@ const LoginPage = ({ fromBecomeCoach }) => {
             }
             if (isUserLoggedIn.success) {
               console.log(isUserLoggedIn);
-              if (fromBecomeCoach) {
-                navigate("/coach-registration");
+              console.log("from page ... ", fromPageToPage);
+              if (fromPageToPage !== "") {
+                navigate(fromPageToPage);
               }
-              if (!fromBecomeCoach) {
+              if (fromPageToPage === "") {
                 navigate("/");
               }
             }
