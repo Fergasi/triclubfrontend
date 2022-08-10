@@ -26,7 +26,8 @@ export const AuthProvider = ({ children }) => {
   //UseEffect to check and update isAdminLoginCheck
   useEffect(() => {
     const isAdminCheck = async () => {
-      await verifyAdmin();
+      const adminBool = await verifyAdmin();
+      setIsAdminLoginCheck(adminBool);
     };
     isAdminCheck();
   }, [userToken]);
@@ -34,7 +35,8 @@ export const AuthProvider = ({ children }) => {
   //UseEffect to check and update isCoachLoginCheck
   useEffect(() => {
     const isCoachCheck = async () => {
-      await verifyCoach();
+      const CoachBool = await verifyCoach();
+      setIsCoachLoginCheck(CoachBool);
     };
     isCoachCheck();
   }, [userToken]);
@@ -70,6 +72,8 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = async () => {
     setIsAuthLoading(true);
     await removeUserToken();
+    setIsAdminLoginCheck(false);
+    setIsCoachLoginCheck(false);
     setIsAuthLoading(false);
     return true;
   };
@@ -78,10 +82,10 @@ export const AuthProvider = ({ children }) => {
     setIsAuthLoading(true);
     const isAdminResult = await validateAdmin(userToken);
     if (isAdminResult.success) {
-      setIsAdminLoginCheck(isAdminResult.isAdmin);
+      setIsAuthLoading(false);
       return isAdminResult.isAdmin;
-    } else {
     }
+
     setIsAuthLoading(false);
     return false;
   };
@@ -90,10 +94,10 @@ export const AuthProvider = ({ children }) => {
     setIsAuthLoading(true);
     const isCoachResult = await validateCoach(userToken);
     if (isCoachResult.success) {
-      setIsCoachLoginCheck(isCoachResult.isCoach);
+      setIsAuthLoading(false);
       return isCoachResult.isCoach;
-    } else {
     }
+
     setIsAuthLoading(false);
     return false;
   };
@@ -120,7 +124,7 @@ export const AuthProvider = ({ children }) => {
       verifyAdmin,
       verifyCoach,
     }),
-    [userToken]
+    [isAuthLoading]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

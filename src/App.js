@@ -96,8 +96,8 @@ function App() {
   const [fromPageToPage, setFromPageToPage] = useState("");
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <header className='App-header'>
         <Routes>
           <Route
             path="/"
@@ -119,7 +119,7 @@ function App() {
               }
             />
             <Route
-              path="forgot-password"
+              path='forgot-password'
               element={<ForgotPasswordPage></ForgotPasswordPage>}
             />
             <Route path="reset-password/*" element={<ResetPasswordLayout />}>
@@ -128,7 +128,7 @@ function App() {
             <Route path="admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
             </Route>
-            <Route path="coach" element={<CoachLayout />}>
+            <Route path='coach' element={<CoachLayout />}>
               <Route index element={<CoachDashboard />} />
             </Route>
           </Route>
