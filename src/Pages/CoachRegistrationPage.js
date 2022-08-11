@@ -69,7 +69,6 @@ const CoachRegistrationPage = ({ setFromPageToPage }) => {
           {setFromPageToPage("")}
           <Form>
             <br />
-            <br />
             <h2>Coach Application</h2>
             <br />
             <br />
