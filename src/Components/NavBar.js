@@ -9,9 +9,7 @@ const NavBar = ({ setFromPageToPage }) => {
   const { userToken, logoutUser, isAdminLoginCheck, isCoachLoginCheck } =
     useAuth();
   const navigate = useNavigate();
-  console.log("adminLoginCheck: " + isAdminLoginCheck);
-  console.log("coachLoginCheck: " + isCoachLoginCheck);
-  console.log("userToken: " + userToken);
+
   return (
     <>
       <Navbar collapseOnSelect expand='sm' bg='dark' variant='dark' fixed='top'>
