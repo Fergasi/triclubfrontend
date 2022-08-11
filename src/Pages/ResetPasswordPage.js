@@ -11,27 +11,25 @@ const ResetPasswordPage = () => {
   const navigate = useNavigate();
   return (
     <div>
-      {console.log("rpt, ", rpt)}
       <Form>
         <h2>Reset Password</h2>
         <br />
         <br />
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type="password"
-            placeholder="Password"
+            type='password'
+            placeholder='Password'
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
-              console.log(event.target.value);
             }}
           />
         </Form.Group>
       </Form>
       <Button
-        variant="secondary"
-        type="submit"
+        variant='secondary'
+        type='submit'
         onClick={async () => {
           const validatePasswordObj = validatePassword(password);
 
@@ -41,8 +39,6 @@ const ResetPasswordPage = () => {
           }
 
           if (validatePasswordObj.isValid === true) {
-            console.log("are we here?");
-            console.log("rpt, ", rpt);
             setPasswordMssg("");
             const isPasswordReset = await resetPassword(rpt, password);
             if (isPasswordReset.success) {
@@ -58,7 +54,7 @@ const ResetPasswordPage = () => {
       </Button>
       <br />
       <br />
-      <div className="mediumMessage">{passwordMssg}</div>
+      <div className='mediumMessage'>{passwordMssg}</div>
     </div>
   );
 };
