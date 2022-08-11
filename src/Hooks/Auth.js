@@ -1,10 +1,10 @@
 import { useState, useEffect, createContext, useContext, useMemo } from "react";
 
 // Heroku
-// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+// const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const AuthContext = createContext();
 
@@ -29,7 +29,9 @@ export const AuthProvider = ({ children }) => {
       const adminBool = await verifyAdmin();
       setIsAdminLoginCheck(adminBool);
     };
-    isAdminCheck();
+    if (userToken) {
+      isAdminCheck();
+    }
   }, [userToken]);
 
   //UseEffect to check and update isCoachLoginCheck
@@ -38,7 +40,9 @@ export const AuthProvider = ({ children }) => {
       const CoachBool = await verifyCoach();
       setIsCoachLoginCheck(CoachBool);
     };
-    isCoachCheck();
+    if (userToken) {
+      isCoachCheck();
+    }
   }, [userToken]);
 
   // call this function when you want to register the user
