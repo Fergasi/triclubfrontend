@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route, Outlet, Link, useSearchParams } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import UserHomePage from "./Pages/UserHomePage";
 import LoginPage from "./Pages/LoginPage";
@@ -58,13 +58,12 @@ const CoachLayout = () => {
 const ResetPasswordLayout = () => {
   const [isResetPassTokValid, setIsResetPassTokValid] = useState(false);
   const { verifyResetPassTok } = useAuth();
+  const [searchParams] = useSearchParams();
+  let rpt = searchParams.get("rpt");
 
   useEffect(() => {
     const resetPassTokCheck = async () => {
-      // *** WRITE THE VERIFYRESETPASSTOK FUNC IN AUTH ***
-      console.log("pizza");
-      // console.log(params);
-      const resetPassTokObj = await verifyResetPassTok();
+      const resetPassTokObj = await verifyResetPassTok(rpt);
       setIsResetPassTokValid(resetPassTokObj.success);
     };
     resetPassTokCheck();
@@ -87,7 +86,7 @@ const ResetPasswordLayout = () => {
           </div>
         </>
       )}
-      {isResetPassTokValid && <Outlet />}
+      {isResetPassTokValid && <Outlet context={rpt} />}
     </div>
   );
 };
@@ -96,8 +95,8 @@ function App() {
   const [fromPageToPage, setFromPageToPage] = useState("");
 
   return (
-    <div className='App'>
-      <header className='App-header'>
+    <div className="App">
+      <header className="App-header">
         <Routes>
           <Route
             path="/"
@@ -119,7 +118,7 @@ function App() {
               }
             />
             <Route
-              path='forgot-password'
+              path="forgot-password"
               element={<ForgotPasswordPage></ForgotPasswordPage>}
             />
             <Route path="reset-password/*" element={<ResetPasswordLayout />}>
@@ -128,7 +127,7 @@ function App() {
             <Route path="admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
             </Route>
-            <Route path='coach' element={<CoachLayout />}>
+            <Route path="coach" element={<CoachLayout />}>
               <Route index element={<CoachDashboard />} />
             </Route>
           </Route>

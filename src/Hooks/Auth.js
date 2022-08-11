@@ -102,9 +102,11 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
-  const verifyResetPassTok = async () => {
-    // setIsAuthLoading(true);
-    // const isResetPassTokResult = await validateResetPassTok();
+  const verifyResetPassTok = async (rpt) => {
+    setIsAuthLoading(true);
+    const isResetPassTokResult = await validateResetPassTok(rpt);
+    setIsAuthLoading(false);
+    return isResetPassTokResult;
   };
 
   /*  
@@ -123,6 +125,7 @@ export const AuthProvider = ({ children }) => {
       logoutUser,
       verifyAdmin,
       verifyCoach,
+      verifyResetPassTok,
     }),
     [isAuthLoading]
   );
@@ -202,6 +205,19 @@ const validateCoach = async (userToken) => {
   return responseJSON;
 };
 
+const validateResetPassTok = async (rpt) => {
+  const url = `${urlEndpoint}/auth/validate-reset-password-token`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      rpt: rpt,
+    },
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
 export const setLocalUserToken = async (token) => {
   return await localStorage.setItem("token", JSON.stringify(token));
 };
@@ -216,7 +232,7 @@ export const getLocalUserToken = async () => {
 
 export const forgotPassword = async (email) => {
   const response = await fetch(`${urlEndpoint}/auth/forgot-password`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -228,14 +244,14 @@ export const forgotPassword = async (email) => {
   return responseJSON;
 };
 
-export const resetPassword = async (email, password) => {
+export const resetPassword = async (rpt, password) => {
   const response = await fetch(`${urlEndpoint}/auth/reset-password`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email,
+      rpt,
       password,
     }),
   });

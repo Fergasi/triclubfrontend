@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useOutletContext } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { validatePassword } from "../Utils/Validation";
+import { resetPassword } from "../Hooks/Auth";
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
   const [passwordMssg, setPasswordMssg] = useState("");
+  const rpt = useOutletContext();
   const navigate = useNavigate();
   return (
     <div>
+      {console.log("rpt, ", rpt)}
       <Form>
         <h2>Reset Password</h2>
         <br />
@@ -34,10 +37,20 @@ const ResetPasswordPage = () => {
 
           if (validatePasswordObj.isValid === false) {
             setPasswordMssg(validatePasswordObj.passwordMssg);
+            return;
           }
 
           if (validatePasswordObj.isValid === true) {
+            console.log("are we here?");
+            console.log("rpt, ", rpt);
             setPasswordMssg("");
+            const isPasswordReset = await resetPassword(rpt, password);
+            if (isPasswordReset.success) {
+              navigate("/login");
+              return;
+            }
+            setPasswordMssg(isPasswordReset.message);
+            return;
           }
         }}
       >
