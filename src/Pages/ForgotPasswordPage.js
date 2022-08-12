@@ -49,6 +49,13 @@ const ForgotPasswordPage = () => {
       </Button>
       <br />
       <br />
+      <div className="smallMessage">
+        Already have an account? <Link to="/login"> Log In</Link>
+      </div>
+      <div className="smallMessage">
+        Don't have an account yet? <Link to="/sign-up"> Sign Up</Link>
+      </div>
+      <br />
       <div className="mediumMessage">{emailMssg}</div>
     </div>
   );

@@ -1,10 +1,10 @@
 import { useState, useEffect, createContext, useContext, useMemo } from "react";
 
 // Heroku
-const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-// const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const AuthContext = createContext();
 
@@ -65,9 +65,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   // call this function when you want to register the user
-  const applyForCoach = async (coachObj) => {
+  const applyForCoach = async (coachInfo, token) => {
     setIsAuthLoading(true);
-    const applyForCoachResult = await validateApplyForCoach(coachObj);
+    const applyForCoachResult = await validateApplyForCoach(coachInfo, token);
     setIsAuthLoading(false);
     return applyForCoachResult;
   };
@@ -141,13 +141,14 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-const validateApplyForCoach = async (coachObj) => {
+const validateApplyForCoach = async (coachInfo, token) => {
   const response = await fetch(`${urlEndpoint}/auth/become-coach`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      token: token,
     },
-    body: JSON.stringify(coachObj),
+    body: JSON.stringify(coachInfo),
   });
   const responseJSON = await response.json();
   return responseJSON;

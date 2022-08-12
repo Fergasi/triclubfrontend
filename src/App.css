@@ -22,7 +22,10 @@
 }
 
 #coachCard {
-  margin-top: 5%;
+  padding-top: 8%;
+  padding-bottom: 1%;
+  padding-right: 10%;
+  padding-left: 10%;
 }
 
 .navbar-brand {
@@ -55,6 +58,11 @@
 .mediumMessage {
   font-size: medium;
   font-weight: bold;
+}
+
+.coachSubmittedMssg {
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 #root > div > header > div > form > div:nth-child(1) > small {
@@ -91,7 +99,8 @@
   }
 
   #coachCard {
-    margin-top: 18%;
+    padding: 0px;
+    margin: 0px;
   }
 
   #root > div > header > form {
