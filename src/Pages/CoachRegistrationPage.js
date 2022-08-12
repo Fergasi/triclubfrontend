@@ -20,8 +20,11 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
   const [run, setRun] = useState(false);
   const [about, setAbout] = useState("");
   const [photo, setPhoto] = useState(coachImg);
+  const [formData, setFormData] = useState(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [coachMssg, setCoachMssg] = useState("");
   const fileInput = useRef(null);
-  const pendingCoach = {
+  const coachInfo = {
     firstName: firstName,
     lastName: lastName,
     telephone: telephone,
@@ -36,7 +39,7 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
       run: run,
     },
     about: about,
-    photo: photo,
+    photo: formData,
   };
   const navigate = useNavigate();
   useEffect(() => {
@@ -69,7 +72,7 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
           </Card>
         </>
       )}
-      {userToken && (
+      {userToken && !formSubmitted && (
         <>
           {setFromPageToPage("/")}
           <Form>
@@ -217,15 +220,13 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
             <Card.Img variant="top" src={photo} alt="" />
             <input
               type="file"
-              name="file"
-              id="fileInput"
               onChange={(e) => {
-                console.log(e.target.files[0]);
                 const file = e.target.files[0];
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = (e) => {
                   setPhoto(e.target.result);
+                  setFormData({ file: e.target.result });
                 };
               }}
               style={{ display: "none" }}
@@ -233,11 +234,8 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
             />
             <Button
               variant="dark"
-              // onClick={handleSubmission}
               onClick={() => {
                 fileInput.current.click();
-                // setPhoto(e.target.files);
-                // console.log(e.target.files);
               }}
             >
               Upload Coach Profile Photo
@@ -248,13 +246,31 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
             variant="primary"
             type="submit"
             onClick={async () => {
-              // const isPendingCoach = await applyForCoach(pendingCoach);
-              console.log(pendingCoach);
+              const isPendingCoach = await applyForCoach(coachInfo, userToken);
+              if (!isPendingCoach.success) {
+                setCoachMssg(isPendingCoach.message);
+              }
+              if (isPendingCoach.success) {
+                setFormSubmitted(true);
+                setCoachMssg(isPendingCoach.message);
+              }
             }}
           >
             Submit
           </Button>
+          <br />
+          <br />
+          <div className="mediumMessage">
+            {coachMssg} <br />
+          </div>
         </>
+      )}
+      {formSubmitted && (
+        <div className="coachSubmittedMssg">
+          <div className="mediumMessage">
+            {coachMssg} <br />
+          </div>
+        </div>
       )}
     </>
   );

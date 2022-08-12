@@ -31,9 +31,11 @@ const NavBar = ({ setFromPageToPage }) => {
               <LinkContainer to="/">
                 <Nav.Link>Programs</Nav.Link>
               </LinkContainer>
+
               <LinkContainer to="/coach-registration">
                 <Nav.Link>Become a Coach</Nav.Link>
               </LinkContainer>
+
               {!userToken && (
                 <>
                   <LinkContainer to="/login">
