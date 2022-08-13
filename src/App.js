@@ -80,9 +80,9 @@ const ResetPasswordLayout = () => {
           </h3>
           <br />
           <br />
-          <div className="smallMessage">
+          <div className='smallMessage'>
             Forgot your password?{" "}
-            <Link to="/forgot-password"> Forgot Password</Link>
+            <Link to='/forgot-password'> Forgot Password</Link>
           </div>
         </>
       )}
@@ -95,24 +95,24 @@ function App() {
   const [fromPageToPage, setFromPageToPage] = useState("/");
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <header className='App-header'>
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={<NavBar setFromPageToPage={setFromPageToPage} />}
           >
             <Route index element={<UserHomePage />} />
             <Route
-              path="login"
+              path='login'
               element={<LoginPage fromPageToPage={fromPageToPage} />}
             />
             <Route
-              path="sign-up"
+              path='sign-up'
               element={<SignUpPage fromPageToPage={fromPageToPage} />}
             />
             <Route
-              path="coach-registration"
+              path='coach-registration'
               element={
                 <CoachRegistrationPage
                   setFromPageToPage={setFromPageToPage}
@@ -120,17 +120,14 @@ function App() {
                 />
               }
             />
-            <Route
-              path="forgot-password"
-              element={<ForgotPasswordPage></ForgotPasswordPage>}
-            />
-            <Route path="reset-password/*" element={<ResetPasswordLayout />}>
+            <Route path='forgot-password' element={<ForgotPasswordPage />} />
+            <Route path='reset-password/*' element={<ResetPasswordLayout />}>
               <Route index element={<ResetPasswordPage />} />
             </Route>
-            <Route path="admin" element={<AdminLayout />}>
+            <Route path='admin' element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
             </Route>
-            <Route path="coach" element={<CoachLayout />}>
+            <Route path='coach' element={<CoachLayout />}>
               <Route index element={<CoachDashboard />} />
             </Route>
           </Route>

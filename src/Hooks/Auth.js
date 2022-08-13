@@ -13,6 +13,12 @@ export const AuthProvider = ({ children }) => {
   const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [isAdminLoginCheck, setIsAdminLoginCheck] = useState(false);
   const [isCoachLoginCheck, setIsCoachLoginCheck] = useState(false);
+  console.log(
+    "userToken: " + userToken,
+    " isAuthLoading: " + isAuthLoading,
+    " isAdminLoginCheck: " + isAdminLoginCheck,
+    " isCoachLoginCheck: " + isCoachLoginCheck
+  );
 
   //UseEffect to check and update UserToken
   useEffect(() => {
@@ -37,8 +43,8 @@ export const AuthProvider = ({ children }) => {
   //UseEffect to check and update isCoachLoginCheck
   useEffect(() => {
     const isCoachCheck = async () => {
-      const CoachBool = await verifyCoach();
-      setIsCoachLoginCheck(CoachBool);
+      const coachBool = await verifyCoach();
+      setIsCoachLoginCheck(coachBool);
     };
     if (userToken) {
       isCoachCheck();
@@ -88,9 +94,9 @@ export const AuthProvider = ({ children }) => {
     if (isAdminResult.success) {
       setIsAuthLoading(false);
       return isAdminResult.isAdmin;
+    } else {
+      setIsAuthLoading(false);
     }
-
-    setIsAuthLoading(false);
     return false;
   };
 
@@ -100,9 +106,9 @@ export const AuthProvider = ({ children }) => {
     if (isCoachResult.success) {
       setIsAuthLoading(false);
       return isCoachResult.isCoach;
+    } else {
+      setIsAuthLoading(false);
     }
-
-    setIsAuthLoading(false);
     return false;
   };
 
@@ -130,8 +136,23 @@ export const AuthProvider = ({ children }) => {
       verifyAdmin,
       verifyCoach,
       verifyResetPassTok,
+      setIsCoachLoginCheck,
+      setIsAdminLoginCheck,
     }),
-    [isAuthLoading]
+    [
+      isAuthLoading,
+      isCoachLoginCheck,
+      isAdminLoginCheck,
+      userToken,
+      logoutUser,
+      signUpUser,
+      loginUser,
+      applyForCoach,
+      logoutUser,
+      verifyAdmin,
+      verifyCoach,
+      verifyResetPassTok,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
