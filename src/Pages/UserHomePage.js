@@ -9,10 +9,10 @@ const UserHomePage = () => {
       <br />
       <br />
 
-      <Row xs={1} md={2} className='g-4' id='programGrid'>
-        {Array.from({ length: 10 }).map((_, idx) => (
+      <Row xs={1} md={3} className='g-4' id='programGrid'>
+        {Array.from({ length: 12 }).map((_, idx) => (
           <Col key={idx}>
-            <Card bg='dark'>
+            <Card>
               <Card.Img variant='top' src={programImg} alt='' />
               <Card.Body>
                 <Card.Title>Swim Training</Card.Title>

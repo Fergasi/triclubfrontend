@@ -70,6 +70,7 @@
 }
 
 #responsive-navbar-nav > div > div.nav-logout > button {
+  flex-direction: column;
   font-size: smaller;
   height: 30px;
   justify-content: center;
@@ -90,6 +91,40 @@
   flex: 6;
 }
 
+.dropdown-menu.show {
+  background-color: #212529;
+  --bs-dropdown-link-active-bg: #212529;
+  --bs-dropdown-link-hover-bg: #414446;
+  --bs-dropdown-link-hover-color: white;
+  text-align: center;
+}
+
+a.dropdown-item {
+  color: white;
+}
+
+button.btn.btn-dark {
+  --bs-btn-hover-bg: #414446;
+  --bs-btn-hover-border-color: #414446;
+  --bs-btn-bg: rgba(180, 180, 41, 0.287);
+}
+
+#coachCard > button {
+  align-self: center;
+  width: 30vw;
+  margin-bottom: 15px;
+}
+
+#coachCard {
+  width: 80%;
+  margin-top: 6%;
+  padding-top: 3%;
+}
+
+div.card {
+  background-color: #292a2a;
+}
+
 @media only screen and (max-width: 576px) {
   .nav-links {
     flex-direction: column;
@@ -108,5 +143,9 @@
     margin-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
+  }
+
+  #coachCard {
+    width: 98%;
   }
 }
