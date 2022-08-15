@@ -125,6 +125,30 @@ div.card {
   background-color: #292a2a;
 }
 
+#programFormCardLayout {
+  display: flex;
+  flex-direction: row;
+  padding: 5%;
+  margin: 5%;
+}
+
+#programForm {
+  width: 60%;
+  padding-right: 2.5%;
+  margin-right: 2.5%;
+}
+
+#programCard {
+  width: 40%;
+  padding-left: 2.5%;
+  margin-left: 2.5%;
+}
+
+#practiceTimeLayout {
+  display: flex;
+  flex-direction: row;
+}
+
 @media only screen and (max-width: 576px) {
   .nav-links {
     flex-direction: column;

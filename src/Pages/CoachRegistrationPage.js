@@ -153,7 +153,9 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
                     setStateAbb(e.target.value);
                   }}
                 >
-                  <option>Choose...</option>
+                  <option selected disabled>
+                    Choose...
+                  </option>
                   {stateAbbArr.map((abb, index) => {
                     return <option key={index}>{abb}</option>;
                   })}
