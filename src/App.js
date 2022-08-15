@@ -10,47 +10,53 @@ import ResetPasswordPage from "./Pages/ResetPasswordPage";
 import CreateProgramPage from "./Pages/CreateProgramPage";
 import ManageProgramsPage from "./Pages/ManageProgramsPage";
 import ProgramSchedulePage from "./Pages/ProgramSchedulePage";
+import CoachApplicationsPage from "./Pages/CoachApplicationsPage";
+
 import { useAuth } from "./Hooks/Auth";
 import "./App.css";
 
 //Checks whether a user is an Admin before allowing access to Admin routes
 const AdminLayout = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const { verifyAdmin } = useAuth();
+  const { verifyAdmin, isAdminLoginCheck, setIsAdminLoginCheck } = useAuth();
 
   useEffect(() => {
     const isAdminCheck = async () => {
       const isAdmin = await verifyAdmin();
-      setIsAdmin(isAdmin);
+      setIsAdminLoginCheck(isAdmin);
     };
     isAdminCheck();
   }, []); // This useEffect will trigger once when the user tries to visit /admin
 
   return (
     <div>
-      {!isAdmin && <h3>You Must Be An Admin To View This Page. Sorry.</h3>}
-      {isAdmin && <Outlet />}
+      {isAdminLoginCheck ? (
+        <Outlet />
+      ) : (
+        <h3>You Must Be An Admin To View This Page. Sorry.</h3>
+      )}
     </div>
   );
 };
 
 //Checks whether a user is a Coach before allowing access to Coach routes
 const CoachLayout = () => {
-  const [isCoach, setIsCoach] = useState(false);
-  const { verifyCoach } = useAuth();
+  const { verifyCoach, isCoachLoginCheck, setIsCoachLoginCheck } = useAuth();
 
   useEffect(() => {
     const isCoachCheck = async () => {
       const isCoach = await verifyCoach();
-      setIsCoach(isCoach);
+      setIsCoachLoginCheck(isCoach);
     };
     isCoachCheck();
   }, []); // This useEffect will trigger once when the user tries to visit /admin
 
   return (
     <div>
-      {!isCoach && <h3>You Must Be A Coach To View This Page. Sorry.</h3>}
-      {isCoach && <Outlet />}
+      {isCoachLoginCheck ? (
+        <Outlet />
+      ) : (
+        <h3>You Must Be An Coach To View This Page. Sorry.</h3>
+      )}
     </div>
   );
 };
@@ -72,7 +78,9 @@ const ResetPasswordLayout = () => {
 
   return (
     <div>
-      {!isResetPassTokValid && (
+      {isResetPassTokValid ? (
+        <Outlet context={rpt} />
+      ) : (
         <>
           <h3>
             Your Password Reset Token is either Invalid or Expired.
@@ -87,7 +95,6 @@ const ResetPasswordLayout = () => {
           </div>
         </>
       )}
-      {isResetPassTokValid && <Outlet context={rpt} />}
     </div>
   );
 };
@@ -131,6 +138,10 @@ function App() {
               <Route
                 path='program-schedule'
                 element={<ProgramSchedulePage />}
+              />
+              <Route
+                path='coach-applications'
+                element={<CoachApplicationsPage />}
               />
             </Route>
             <Route path='coach' element={<CoachLayout />}>
