@@ -40,19 +40,25 @@ const NavBar = ({ setFromPageToPage }) => {
                   title='Admin Dashboard'
                   className='collapsible-nav-dropdown bg-dark'
                 >
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as='span'>
+                    <LinkContainer to='/admin/coach-applications'>
+                      <Nav.Link>Coach Applications</Nav.Link>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as='span'>
                     <LinkContainer to='/admin/create-program'>
                       <Nav.Link>Create Program</Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as='span'>
                     <LinkContainer to='/admin/manage-programs'>
                       <Nav.Link>Manage Programs</Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as='span'>
                     <LinkContainer to='/admin/program-schedule'>
                       <Nav.Link>Schedule</Nav.Link>
                     </LinkContainer>
@@ -64,19 +70,19 @@ const NavBar = ({ setFromPageToPage }) => {
                   title='Coach Dashboard'
                   className='collapsible-nav-dropdown bg-dark'
                 >
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as='span'>
                     <LinkContainer to='/coach/create-program'>
                       <Nav.Link>Create Program</Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as='span'>
                     <LinkContainer to='/coach/manage-programs'>
                       <Nav.Link>Manage Programs</Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item>
+                  <NavDropdown.Item as='span'>
                     <LinkContainer to='/coach/program-schedule'>
                       <Nav.Link>Schedule</Nav.Link>
                     </LinkContainer>
