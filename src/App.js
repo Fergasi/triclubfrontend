@@ -7,8 +7,9 @@ import SignUpPage from "./Pages/SignUpPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import CoachRegistrationPage from "./Pages/CoachRegistrationPage";
 import ResetPasswordPage from "./Pages/ResetPasswordPage";
-import AdminDashboard from "./Pages/AdminDashboard";
-import CoachDashboard from "./Pages/CoachDashboard";
+import CreateProgramPage from "./Pages/CreateProgramPage";
+import ManageProgramsPage from "./Pages/ManageProgramsPage";
+import ProgramSchedulePage from "./Pages/ProgramSchedulePage";
 import { useAuth } from "./Hooks/Auth";
 import "./App.css";
 
@@ -125,10 +126,20 @@ function App() {
               <Route index element={<ResetPasswordPage />} />
             </Route>
             <Route path='admin' element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
+              <Route path='create-program' element={<CreateProgramPage />} />
+              <Route path='manage-programs' element={<ManageProgramsPage />} />
+              <Route
+                path='program-schedule'
+                element={<ProgramSchedulePage />}
+              />
             </Route>
             <Route path='coach' element={<CoachLayout />}>
-              <Route index element={<CoachDashboard />} />
+              <Route path='create-program' element={<CreateProgramPage />} />
+              <Route path='manage-programs' element={<ManageProgramsPage />} />
+              <Route
+                path='program-schedule'
+                element={<ProgramSchedulePage />}
+              />
             </Route>
           </Route>
         </Routes>
