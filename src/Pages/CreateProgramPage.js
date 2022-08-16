@@ -1,7 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Form, Col, Card, Button, Row } from "react-bootstrap";
 import programImg from "../assets/kids1.jpeg";
 import { daysOfWeekAbbArr } from "../assets/daysOfWeekAbbArr";
+import { DateRange } from "react-date-range";
+import { addDays } from "date-fns";
+import format from "date-fns/format";
+
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 const CreateProgramPage = () => {
   const [programName, setProgramName] = useState("");
@@ -9,6 +15,33 @@ const CreateProgramPage = () => {
   const [formData, setFormData] = useState(null);
   const [photoFileName, setPhotoFileName] = useState("");
   const [practiceDaysObj, setPracticeDaysObj] = useState({});
+  const [mondayButton, setMondayButton] = useState(false);
+  const [tuesdayButton, setTuesdayButton] = useState(false);
+  const [wednesdayButton, setWednesdayButton] = useState(false);
+  const [thursdayButton, setThursdayButton] = useState(false);
+  const [fridayButton, setFridayButton] = useState(false);
+  const [saturdayButton, setSaturdayButton] = useState(false);
+  const [sundayButton, setSundayButton] = useState(false);
+  const [startDate, setStartDate] = useState("Tue Aug 16");
+  const [startTime, setStartTime] = useState("6pm");
+  const [location, setLocation] = useState("Longmont Rec Center");
+  const [weeklyPracticeObj, setWeeklyPracticeObj] = useState({
+    mon: false,
+    tue: false,
+    wed: false,
+    thu: false,
+    fri: false,
+    sat: false,
+    sun: false,
+  });
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
   const fileInput = useRef(null);
   return (
     <>
@@ -68,123 +101,236 @@ const CreateProgramPage = () => {
               </Form.Group>
             </Row>
             <br />
-            <Form.Group controlId="dob">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                placeholder="Date of Birth"
-              />
-            </Form.Group>
-            <br />
+            <Row>
+              <Form.Group>
+                <Form.Label as={Col}>Program Dates</Form.Label>
+                <DateRange
+                  as={Col}
+                  editableDateInputs={true}
+                  minDate={new Date()}
+                  maxDate={addDays(new Date(), 900)}
+                  onChange={(item) => {
+                    setState([item.selection]);
+                    console.log(item.selection.startDate, " start date");
+                    console.log(item.selection.endDate, " end date");
 
-            <Form.Group controlId="dob">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                placeholder="Date of Birth"
-              />
-            </Form.Group>
+                    console.log("format ... ");
+                    console.log(
+                      format(item.selection.startDate, "eee") +
+                        " " +
+                        format(item.selection.startDate, "MMM") +
+                        " " +
+                        format(item.selection.startDate, "d")
+                    );
+                    setStartDate(
+                      format(item.selection.startDate, "eee") +
+                        " " +
+                        format(item.selection.startDate, "MMM") +
+                        " " +
+                        format(item.selection.startDate, "d")
+                    );
+                  }}
+                  showSelectionPreview={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={state}
+                  weekStartsOn={1}
+                  dateDisplayFormat="P"
+                />
+              </Form.Group>
+            </Row>
             <br />
-
-            <Row></Row>
             <Form.Label>Practice Days</Form.Label>
             <br />
-            {daysOfWeekAbbArr.map((day, index) => {
-              return (
-                <Button
-                  type="checkbox"
-                  variant="outline-primary"
-                  // onClick={() => {
-                  //   console.log(day);
-                  // }}
-                >
-                  {day}
-                </Button>
-                // <div class="btn-group-toggle" data-toggle="buttons">
-                //   <label class="btn btn-secondary active">
-                //     <input type="checkbox" checked autocomplete="off" /> Checked
-                //   </label>
-                // </div>
-              );
-            })}
-
+            <div id="practiceDaysArea">
+              <div
+                className={mondayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  mondayButton ? setMondayButton(false) : setMondayButton(true);
+                }}
+              >
+                Mon
+              </div>
+              <div
+                className={tuesdayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  tuesdayButton
+                    ? setTuesdayButton(false)
+                    : setTuesdayButton(true);
+                }}
+              >
+                Tue
+              </div>
+              <div
+                className={wednesdayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  wednesdayButton
+                    ? setWednesdayButton(false)
+                    : setWednesdayButton(true);
+                }}
+              >
+                Wed
+              </div>
+              <div
+                className={thursdayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  thursdayButton
+                    ? setThursdayButton(false)
+                    : setThursdayButton(true);
+                }}
+              >
+                Thu
+              </div>
+              <div
+                className={fridayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  fridayButton ? setFridayButton(false) : setFridayButton(true);
+                }}
+              >
+                Fri
+              </div>
+              <div
+                className={saturdayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  saturdayButton
+                    ? setSaturdayButton(false)
+                    : setSaturdayButton(true);
+                }}
+              >
+                Sat
+              </div>
+              <div
+                className={sundayButton ? "dayButtonSelected" : "dayButton"}
+                onClick={() => {
+                  sundayButton ? setSundayButton(false) : setSundayButton(true);
+                  console.log(sundayButton);
+                }}
+              >
+                Sun
+              </div>
+            </div>
             <br />
             <Row>
               <Form.Label>Weekly Practice Schedule</Form.Label>
-              <Form.Group>
-                {daysOfWeekAbbArr.map((day, index) => {
-                  return (
-                    <div>
-                      <div id="practiceTimeLayout">
-                        <Form.Check id={day} />
-                        <h4>{day}</h4>
 
-                        <Form.Select id="hours">
-                          <option selected disabled>
-                            00
+              <div
+                className={
+                  mondayButton
+                    ? "practiceDayMasterLayout"
+                    : "practiceDayMasterLayoutHidden"
+                }
+              >
+                <h3>Monday</h3>
+                <div className="practiceScheduleLayout">
+                  <div id="practiceClockTimeLayout">
+                    <div id="keepThisTight">
+                      <div className="timePickerLayout">
+                        <h5>Start Time:&nbsp;&nbsp;</h5>
+                        <select className="timeOption" defaultValue={"DEFAULT"}>
+                          <option disabled value="DEFAULT">
+                            HH
                           </option>
-                          {[...Array(12)].map((e, i) => {
-                            return <option>{i + 1}</option>;
+                          {[...Array(12)].map((hour, index) => {
+                            return (
+                              <option key={`hour-${index}`}>{index + 1}</option>
+                            );
                           })}
-                        </Form.Select>
-                        <h3>&nbsp;:&nbsp;</h3>
-                        <Form.Select id="minutes">
-                          <option selected disabled>
-                            00
+                        </select>
+                        <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
+                        <select className="timeOption" defaultValue={"DEFAULT"}>
+                          <option disabled value="DEFAULT">
+                            MM
                           </option>
-                          {[...Array(12)].map((e, i) => {
-                            return <option>{i + 1}</option>;
+                          {[...Array(60)].map((hour, index) => {
+                            return (
+                              <option key={`hour-${index}`}>
+                                {index < 10 ? `0${index}` : index}
+                              </option>
+                            );
                           })}
-                        </Form.Select>
-
-                        <Form.Select id="amPm">
+                        </select>
+                        <div>&nbsp;&nbsp;</div>
+                        <select className="timeOption">
                           <option>AM</option>
                           <option>PM</option>
-                        </Form.Select>
+                        </select>
                       </div>
-                      <div id="practiceLocationLayout">
-                        <Form.Group as={Col}>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter Practice Location"
-                            // value={firstName}
-                            // onChange={(e) => {
-                            //   setFirstName(e.target.value);
-                            // }}
-                          />
-                          <Form.Check
-                            inline
-                            type="checkbox"
-                            label="Swim"
-                            // onChange={(e) => {
-                            //   setSwim(swim ? false : true);
-                            // }}
-                          />
-                          <Form.Check
-                            inline
-                            type="checkbox"
-                            label="Bike"
-                            // onChange={(e) => {
-                            //   setSwim(swim ? false : true);
-                            // }}
-                          />
-                          <Form.Check
-                            inline
-                            type="checkbox"
-                            label="Run"
-                            // onChange={(e) => {
-                            //   setSwim(swim ? false : true);
-                            // }}
-                          />
-                        </Form.Group>
+                      <div className="timePickerLayout">
+                        <h5>End Time:&nbsp;&nbsp;</h5>
+                        <select className="timeOption" defaultValue={"DEFAULT"}>
+                          <option disabled value="DEFAULT">
+                            HH
+                          </option>
+                          {[...Array(12)].map((hour, index) => {
+                            return (
+                              <option key={`hour-${index}`}>{index + 1}</option>
+                            );
+                          })}
+                        </select>
+                        <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
+                        <select className="timeOption" defaultValue={"DEFAULT"}>
+                          <option disabled value="DEFAULT">
+                            MM
+                          </option>
+                          {[...Array(60)].map((hour, index) => {
+                            return (
+                              <option key={`hour-${index}`}>
+                                {index < 10 ? `0${index}` : index}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        <div>&nbsp;&nbsp;</div>
+                        <select className="timeOption">
+                          <option>AM</option>
+                          <option>PM</option>
+                        </select>
                       </div>
-                      <br />
                     </div>
-                  );
-                })}
-              </Form.Group>
+                  </div>
+                  <br />
+                  <div id="locationLayout">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
+                      value={programName === "" ? "" : programName}
+                      onChange={(e) => {
+                        setProgramName(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <br />
+                <Row>
+                  <Form.Label>Sport</Form.Label>
+                  <Form.Group as={Col}>
+                    <Form.Check
+                      inline
+                      type="checkbox"
+                      label="Swim"
+                      // onChange={(e) => {
+                      //   setSwim(swim ? false : true);
+                      // }}
+                    />
+                    <Form.Check
+                      inline
+                      type="checkbox"
+                      label="Bike"
+                      // onChange={(e) => {
+                      //   setSwim(swim ? false : true);
+                      // }}
+                    />
+                    <Form.Check
+                      inline
+                      type="checkbox"
+                      label="Run"
+                      // onChange={(e) => {
+                      //   setSwim(swim ? false : true);
+                      // }}
+                    />
+                  </Form.Group>
+                </Row>
+              </div>
             </Row>
           </Form>
         </div>
@@ -199,9 +345,9 @@ const CreateProgramPage = () => {
                   : programName}
               </Card.Title>
               <Card.Text>
-                Time: Tuesday 15th August, 5pm
+                Start: {startDate} at {startTime}
                 <br />
-                Place: Longmount Public Pool
+                Place: {location}
                 <br />
                 Type: Swim
               </Card.Text>
