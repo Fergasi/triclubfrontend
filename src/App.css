@@ -4,7 +4,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #000000c3;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -104,7 +104,7 @@ a.dropdown-item {
 }
 
 button.btn.btn-dark {
-  --bs-btn-hover-bg: #414446;
+  --bs-btn-hover-bg: #80a35b;
   --bs-btn-hover-border-color: #414446;
   --bs-btn-bg: rgba(180, 180, 41, 0.287);
 }
@@ -113,6 +113,12 @@ button.btn.btn-dark {
   align-self: center;
   width: 30vw;
   margin-bottom: 15px;
+}
+
+#listItems > button {
+  --bs-btn-hover-bg: #80a35b;
+  --bs-btn-hover-border-color: none;
+  --bs-btn-bg: rgba(76, 87, 23, 0.764);
 }
 
 #coachCard {
@@ -149,6 +155,138 @@ div.card {
   flex-direction: row;
 }
 
+/* #applicantList {
+} */
+
+#offCanvas {
+  width: 40vw;
+  display: flex;
+  margin-top: 67px;
+  height: 95vh;
+}
+
+.offcanvas-backdrop.show {
+  opacity: 0;
+}
+
+#listItems {
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  justify-content: space-between;
+}
+
+#listItems > a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.thumbnail-image {
+  width: 40px;
+  border-radius: 50%;
+}
+
+#responsive-navbar-nav > div > div.nav-logout.nav-item.dropdown > a::after {
+  display: none !important;
+}
+
+#responsive-navbar-nav > div > div.nav-logout.nav-item.dropdown > a {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+/* #profileDropdown.show {
+} */
+
+#responsive-navbar-nav
+  > div
+  > div.nav-logout.nav-item.show.dropdown
+  > div
+  > span:hover {
+  background-color: #212529;
+}
+
+#offcanvasHeaderFixed {
+  padding-bottom: 8px;
+}
+
+#OffcanvasHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#offcanvasHeaderName {
+  padding-left: 16px;
+}
+
+#OffcanvasImage {
+  padding-top: 20px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.coachProfContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.coachProficiency {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coachProfTitle {
+  margin-bottom: 3px;
+}
+
+.FcCheckmark {
+  font-size: xx-large;
+}
+
+.RiCloseFill {
+  font-size: xx-large;
+  color: crimson;
+}
+
+.offcanvasText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* text-align: justify; */
+}
+
+.offcanvasTextLineItem {
+  display: flex;
+  flex-direction: row;
+}
+
+.offcanvasTextLineItem > a {
+  padding-left: 5px;
+}
+
+#acceptDenyCoachAppl {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#coachAppAcceptButton {
+  background-color: #80a35b;
+  border-color: #80a35b;
+}
+
+#coachAppDeclineButton {
+  background-color: brown;
+  border-color: brown;
+}
+
 @media only screen and (max-width: 576px) {
   .nav-links {
     flex-direction: column;
@@ -171,5 +309,29 @@ div.card {
 
   #coachCard {
     width: 98%;
+  }
+
+  #listItems {
+    width: 90vw;
+  }
+
+  #offCanvas {
+    display: flex;
+    margin-top: 17%;
+    width: 95vw;
+    height: 92vh;
+  }
+}
+
+@media only screen and (min-width: 577px) {
+  #responsive-navbar-nav > div > div.nav-logout.nav-item.show.dropdown > div {
+    width: 250px;
+  }
+
+  #profilePic {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 15px;
   }
 }
