@@ -21,13 +21,55 @@ const CreateProgramPage = () => {
   const [startDate, setStartDate] = useState("Tue Aug 16");
   const [location, setLocation] = useState("Longmont Rec Center");
   const [weeklyPracticeObj, setWeeklyPracticeObj] = useState({
-    Mon: false,
-    Tue: false,
-    Wed: false,
-    Thu: false,
-    Fri: false,
-    Sat: false,
-    Sun: false,
+    Mon: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
+    Tue: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
+    Wed: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
+    Thu: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
+    Fri: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
+    Sat: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
+    Sun: {
+      show: false,
+      startTime: "",
+      endTime: "",
+      location: "",
+      sport: { swim: false, bike: false, run: false },
+    },
   });
   const [state, setState] = useState([
     {
@@ -114,13 +156,15 @@ const CreateProgramPage = () => {
                   <div
                     key={`dayButton-${day}`}
                     className={
-                      weeklyPracticeObj[day] ? "dayButtonSelected" : "dayButton"
+                      weeklyPracticeObj[day].show
+                        ? "dayButtonSelected"
+                        : "dayButton"
                     }
                     onClick={() => {
                       const newWeekPracObj = { ...weeklyPracticeObj };
-                      newWeekPracObj[day]
-                        ? (newWeekPracObj[day] = false)
-                        : (newWeekPracObj[day] = true);
+                      newWeekPracObj[day].show
+                        ? (newWeekPracObj[day].show = false)
+                        : (newWeekPracObj[day].show = true);
                       setWeeklyPracticeObj(newWeekPracObj);
                     }}
                   >
@@ -138,7 +182,7 @@ const CreateProgramPage = () => {
                   <div
                     key={`daySec${day}`}
                     className={
-                      weeklyPracticeObj[day]
+                      weeklyPracticeObj[day].show
                         ? "practiceDayMasterLayout"
                         : "practiceDayMasterLayoutHidden"
                     }
@@ -232,10 +276,17 @@ const CreateProgramPage = () => {
                         <Form.Label>Location</Form.Label>
                         <Form.Control
                           type="text"
-                          placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
-                          value={programName === "" ? "" : programName}
+                          placeholder='ex. "Longmont Rec Center"'
+                          value={
+                            weeklyPracticeObj[day].location === ""
+                              ? ""
+                              : weeklyPracticeObj[day].location
+                          }
                           onChange={(e) => {
-                            setProgramName(e.target.value);
+                            const newWeeklyPracObj = { ...weeklyPracticeObj };
+                            newWeeklyPracObj[day].location = e.target.value;
+                            setWeeklyPracticeObj(newWeeklyPracObj);
+                            console.log(weeklyPracticeObj);
                           }}
                         />
                       </div>

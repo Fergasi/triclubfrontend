@@ -41,7 +41,7 @@ export const ImgCropperComp = ({ setPhoto }) => {
           style={{ height: 400, width: "100%" }}
           zoomTo={0.5}
           cropBoxResizable={false}
-          dragMode={false}
+          dragMode="move"
           initialAspectRatio={550 / 350}
           preview=".img-preview"
           src={image}
