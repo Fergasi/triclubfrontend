@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Col, Card, Button, Row } from "react-bootstrap";
 import programImg from "../assets/kids1.jpeg";
 import { daysOfWeekAbbArr } from "../assets/daysOfWeekAbbArr";
 import { DateRange } from "react-date-range";
 import { addDays } from "date-fns";
 import format from "date-fns/format";
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
+import ImgCropperComp from "../Components/ImgCropperComp";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -61,35 +64,7 @@ const CreateProgramPage = () => {
             <Row>
               <Form.Group>
                 <Form.Label>Program Photo</Form.Label>
-                <input
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
-                    setPhotoFileName(file.name);
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = (e) => {
-                      setPhoto(e.target.result);
-                      setFormData({ file: e.target.result });
-                    };
-                  }}
-                  style={{ display: "none" }}
-                  ref={fileInput}
-                />
-                <Form.Control
-                  placeholder='ex. "Youth_Tri_Race_Start.png"'
-                  value={photoFileName}
-                  disabled
-                />
-                <br />
-                <Button
-                  variant="dark"
-                  onClick={() => {
-                    fileInput.current.click();
-                  }}
-                >
-                  Upload Program Photo
-                </Button>
+                <ImgCropperComp setPhoto={setPhoto}></ImgCropperComp>
               </Form.Group>
             </Row>
             <br />
