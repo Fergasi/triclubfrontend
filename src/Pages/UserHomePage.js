@@ -8,7 +8,6 @@ const UserHomePage = () => {
       <br />
       <br />
       <br />
-
       <Row xs={1} md={3} className='g-4' id='programGrid'>
         {Array.from({ length: 12 }).map((_, idx) => (
           <Col key={idx}>

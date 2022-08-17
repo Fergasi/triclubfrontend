@@ -1,8 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Button, NavDropdown, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import TriClubLogo from "../assets/TriClub.png";
 import { useAuth } from "../Hooks/Auth";
+import ppSample from "../assets/default-user-icon-13.jpeg";
 
 const NavBar = ({ setFromPageToPage }) => {
   const { userToken, logoutUser, isAdminLoginCheck, isCoachLoginCheck } =
@@ -103,20 +104,37 @@ const NavBar = ({ setFromPageToPage }) => {
             </div>
 
             {userToken && (
-              <div className='nav-logout'>
-                <Button
-                  variant='secondary'
-                  onClick={async () => {
-                    const logoutSuccess = await logoutUser();
-                    if (logoutSuccess) {
-                      setFromPageToPage("/");
-                      navigate("/");
-                    }
-                  }}
-                >
-                  Logout
-                </Button>
-              </div>
+              <NavDropdown
+                className='nav-logout'
+                id='profileDropdown'
+                title={
+                  <div id='profilePic'>
+                    <Image
+                      className='thumbnail-image'
+                      src={ppSample}
+                      alt='user pic'
+                      roundedCircle
+                    />
+                  </div>
+                }
+              >
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item as='span'>
+                  <Button
+                    variant='secondary'
+                    onClick={async () => {
+                      const logoutSuccess = await logoutUser();
+                      if (logoutSuccess) {
+                        setFromPageToPage("/");
+                        navigate("/");
+                      }
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
           </Nav>
         </Navbar.Collapse>
