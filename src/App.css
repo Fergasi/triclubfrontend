@@ -183,6 +183,14 @@ div.card {
   flex-direction: row;
 }
 
+#copyCloneLayout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 #cropperButtons {
   padding-top: 8px;
 }
@@ -373,6 +381,26 @@ div.card {
   flex-direction: column;
   width: 100%;
   align-items: center;
+}
+
+.copyCloneLvlThree {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#copyCloneLvlTwo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.copyCloneLvlOne {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-items: start;
 }
 
 .timePickerLayout {
