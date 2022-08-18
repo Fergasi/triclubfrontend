@@ -81,8 +81,7 @@
 }
 
 .nav-logout {
-  flex: 1;
-  padding: 3px;
+  padding-right: 30px;
 }
 
 .nav-links {
@@ -231,8 +230,9 @@ div.card {
   padding: 0;
 }
 
-/* #profileDropdown.show {
-} */
+#responsive-navbar-nav > div > div.nav-logout.nav-item.show.dropdown > div {
+  margin-top: 12px;
+}
 
 #responsive-navbar-nav
   > div
@@ -450,12 +450,38 @@ div.card {
   background-color: blue;
 } */
 
-@media only screen and (max-width: 829px) {
+/* #responsive-navbar-nav > div > div.nav-logout.nav-item.show.dropdown {
+  width: 150px;
+  position: absolute;
+  right: 0;
+  padding: 0;
+} */
+
+@media only screen and (max-width: 576px) {
   .nav-links {
     flex-direction: column;
+    width: 100vw;
   }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #profilePic {
+    padding-top: 5%;
+  }
+
+  #responsive-navbar-nav > div > div.nav-logout.nav-item.show.dropdown {
+    width: 100vw;
+  }
+
   .nav-logout {
-    margin-top: 15px;
+    width: 150px;
+    position: absolute;
+    right: 0;
+    padding: 0;
   }
 
   #coachCard {
@@ -503,7 +529,6 @@ div.card {
 
   #programCard {
     width: 100%;
-
     margin: 2.5%;
   }
 
@@ -513,8 +538,87 @@ div.card {
     padding: 5%;
   }
 
-  /* #programForm > form > div:nth-child(10) > div {
-  } */
+  #calendarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #programCardContainer > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 829px) {
+  .navbar-nav {
+    align-items: center;
+  }
+  .nav-links {
+    flex-direction: row;
+  }
+  .nav-logout {
+    width: 150px;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  #coachCard {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  #root > div > header > form {
+    padding-top: 15%;
+    margin-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #coachCard {
+    width: 98%;
+  }
+
+  #listItems {
+    width: 90vw;
+  }
+
+  #offCanvas {
+    display: flex;
+    margin-top: 17%;
+    width: 95vw;
+    height: 92vh;
+  }
+
+  #programFormCardLayout {
+    flex-direction: column;
+    margin-top: 50px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 15%;
+    align-items: center;
+    margin-bottom: 15vmax;
+  }
+
+  #programForm {
+    width: 100%;
+    padding: 2.5%;
+    margin: 2.5%;
+  }
+
+  #programCard {
+    width: 100%;
+    margin: 2.5%;
+  }
+
+  #programCardContainer {
+    width: 100%;
+    border-left: none;
+    padding: 5%;
+  }
 
   #calendarContainer {
     display: flex;
@@ -530,10 +634,6 @@ div.card {
 }
 
 @media only screen and (min-width: 830px) {
-  #responsive-navbar-nav > div > div.nav-logout.nav-item.show.dropdown > div {
-    width: 250px;
-  }
-
   #profilePic {
     display: flex;
     flex-direction: column;
@@ -546,6 +646,14 @@ div.card {
     position: fixed;
     margin-top: 40px;
   } */
+
+  .nav-logout {
+    width: 150px;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    align-items: center;
+  }
 
   #programCardContainer > div {
     margin: 2.5%;
