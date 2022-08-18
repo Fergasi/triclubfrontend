@@ -18,7 +18,7 @@
 }
 
 #programGrid {
-  width: 100%;
+  width: 95%;
 }
 
 #coachCard {
@@ -138,15 +138,16 @@ div.card {
   padding-right: 5%;
   margin-top: 5%;
   width: 100%;
+  margin-bottom: 75vmax;
 }
 
 /* #programCardContainer > h3 > div {
   margin-bottom: 10%;
 } */
 
-#root > div > header > div {
+/* #root > div > header > div {
   width: 90%;
-}
+} */
 
 #programForm > form {
   width: 80%;
@@ -199,6 +200,7 @@ div.card {
 } */
 
 #offCanvas {
+  background-color: beige;
   width: 40vw;
   display: flex;
   margin-top: 67px;
@@ -462,7 +464,7 @@ div.card {
   background-color: blue;
 } */
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 829px) {
   .nav-links {
     flex-direction: column;
   }
@@ -504,6 +506,7 @@ div.card {
     padding-right: 5%;
     margin-top: 15%;
     align-items: center;
+    margin-bottom: 15vmax;
   }
 
   #programForm {
@@ -540,7 +543,7 @@ div.card {
   }
 }
 
-@media only screen and (min-width: 577px) {
+@media only screen and (min-width: 830px) {
   #responsive-navbar-nav > div > div.nav-logout.nav-item.show.dropdown > div {
     width: 250px;
   }

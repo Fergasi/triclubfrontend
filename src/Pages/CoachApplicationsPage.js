@@ -5,7 +5,25 @@ import { FcCheckmark } from "react-icons/fc";
 import { RiCloseFill } from "react-icons/ri";
 import { acceptDenyPendingCoaches } from "../Hooks/Users.js";
 
-const CoachApplications = () => {
+function AlertDismissibleExample() {
+  const [showAlert, setShowAlert] = useState(true);
+
+  if (showAlert) {
+    return (
+      <Alert variant='success' onClose={() => setShowAlert(false)} dismissible>
+        <Alert.Heading>Please Note:</Alert.Heading>
+        <p>
+          Coach applicants will not be automatically informed of your decision.
+          Please make sure to notify applicants of your decision directly.
+          Accepted coaches will immediatley be granted Coach access priveledges,
+          while declined applicants will retain their standard user account.
+        </p>
+      </Alert>
+    );
+  }
+}
+
+const CoachApplications = ({ setShowAlert }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -92,21 +110,18 @@ const CoachApplications = () => {
                   <br />
                   <div className='offcanvasText'>
                     <h5>Contact</h5>
-
                     <div className='offcanvasTextLineItem'>
                       Phone Number:
                       <a href={`tel:${coach.coachInfo.telephone}`}>
                         {coach.coachInfo.telephone}
                       </a>
                     </div>
-
                     <div className='offcanvasTextLineItem'>
                       Email: <a href={`mailto:${coach.email}`}>{coach.email}</a>
                     </div>
                     <br />
                     <br />
                     <h5>Address</h5>
-
                     <div className='offcanvasText'>
                       <a>{coach.coachInfo.addressOne}</a>
                       <a>{coach.coachInfo.addressTwo}</a>
@@ -150,6 +165,7 @@ const CoachApplications = () => {
                     </div>
                     <br />
                     <br />
+                    <AlertDismissibleExample />
                   </div>
                 </Offcanvas.Body>
               </Offcanvas>
@@ -158,17 +174,11 @@ const CoachApplications = () => {
         </ListGroup>
       )}{" "}
       {pendingCoaches.length === 0 && (
-        <h4 className='smallMessage'>
+        <h5 className='smallMessage'>
           There are currently no new or pending coach applications
-        </h4>
+        </h5>
       )}
     </>
-
-    // <div class='btn-group-toggle' data-toggle='buttons'>
-    //   <label class='btn btn-secondary'>
-    //     <input type='checkbox' autocomplete='off' /> Checked
-    //   </label>
-    // </div>
   );
 };
 
