@@ -3,7 +3,7 @@ import { Form, Col, Card, Button, Row } from "react-bootstrap";
 import programImg from "../assets/kids1.jpeg";
 import { daysOfWeekAbbArr } from "../assets/daysOfWeekAbbArr";
 import { DateRange } from "react-date-range";
-import { addDays } from "date-fns";
+import { addDays, differenceInCalendarDays } from "date-fns";
 import format from "date-fns/format";
 import "cropperjs/dist/cropper.css";
 import ImgCropperComp from "../Components/ImgCropperComp";
@@ -12,6 +12,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 const CreateProgramPage = () => {
+  const [programDaysObj, setProgramDaysObj] = useState({});
   const [programName, setProgramName] = useState("");
   const [photo, setPhoto] = useState(programImg);
   const [startDate, setStartDate] = useState("Tue Aug 16");
@@ -103,6 +104,42 @@ const CreateProgramPage = () => {
     },
   ]);
 
+  const [programData, setProgramData] = useState({
+    programName: programName,
+    photo: photo,
+    startDate: startDate,
+    weeklyPracticeObj: weeklyPracticeObj,
+    programDaysObj: programDaysObj,
+  });
+
+  useEffect(() => {
+    const updateProgramDaysObj = () => {
+      const practiceDays = [];
+      const newProgramDayObj = {};
+      const pStartDate = state[0].startDate;
+      const pEndDate = state[0].endDate;
+      Object.keys(weeklyPracticeObj).forEach((key, index) => {
+        if (weeklyPracticeObj[key].show) {
+          practiceDays.push(key);
+        }
+      });
+      const programDaysNum =
+        differenceInCalendarDays(new Date(pEndDate), new Date(pStartDate)) + 1;
+      for (let i = 0; i < programDaysNum; i++) {
+        const pDay = addDays(new Date(pStartDate), i);
+        console.log("pDay " + pDay);
+        const fPDay = format(pDay, "eee");
+        console.log("fPDay " + fPDay);
+        if (practiceDays.includes(fPDay)) {
+          newProgramDayObj[pDay] = "";
+        }
+      }
+      setProgramDaysObj(newProgramDayObj);
+    };
+    updateProgramDaysObj();
+    setHideDay(false);
+  }, [hideDay, state]);
+
   useEffect(() => {
     const updateWeekPracObj = () => {
       Object.keys(weeklyPracticeObj).forEach((key, index) => {
@@ -179,6 +216,7 @@ const CreateProgramPage = () => {
                       " " +
                       format(item.selection.startDate, "d")
                   );
+                  console.log(state);
                 }}
                 showSelectionPreview={true}
                 moveRangeOnFirstSelection={false}
@@ -523,6 +561,30 @@ const CreateProgramPage = () => {
             </Card.Body>
             <Button variant="dark">More Details</Button>
           </Card>
+          <br />
+          <br />
+          <button
+            type="button"
+            className="btn btn-dark"
+            onClick={() => {
+              const newProgramData = { ...programData };
+              newProgramData.programName = programName;
+              newProgramData.photo = photo;
+              newProgramData.startDate = startDate;
+              const newWeeklyPracObj = {};
+              Object.keys(weeklyPracticeObj).forEach((key, index) => {
+                if (weeklyPracticeObj[key].show) {
+                  newWeeklyPracObj[key] = { ...weeklyPracticeObj[key] };
+                }
+              });
+              newProgramData.weeklyPracticeObj = newWeeklyPracObj;
+              newProgramData.programDaysObj = programDaysObj;
+              setProgramDaysObj(newProgramData);
+              console.log(newProgramData);
+            }}
+          >
+            Submit Program
+          </button>
         </div>
       </div>
     </div>
