@@ -44,12 +44,13 @@ export const ImgCropperComp = ({ setPhoto }) => {
           cropBoxResizable={false}
           dragMode={"none"}
           aspectRatio={550 / 350}
-          preview=".img-preview"
+          preview='.img-preview'
           src={image}
           viewMode={3}
           maxHeight={"550px"}
           maxWidth={"350px"}
           disabled={true}
+          restore={true}
           locked={true}
           background={false}
           responsive={true}
@@ -63,21 +64,21 @@ export const ImgCropperComp = ({ setPhoto }) => {
       </div>
 
       <input
-        type="file"
+        type='file'
         onChange={onChange}
         style={{ display: "none" }}
         ref={fileInput}
       />
-      <div id="cropperButtons">
+      <div id='cropperButtons'>
         <Button
-          variant="dark"
+          variant='dark'
           onClick={() => {
             fileInput.current.click();
           }}
         >
           Upload Program Photo
         </Button>
-        <Button variant="dark" onClick={getCropData}>
+        <Button variant='dark' onClick={getCropData}>
           Crop Photo
         </Button>
       </div>
