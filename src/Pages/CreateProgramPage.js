@@ -23,50 +23,78 @@ const CreateProgramPage = () => {
   const [weeklyPracticeObj, setWeeklyPracticeObj] = useState({
     Mon: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
     Tue: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
     Wed: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
     Thu: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
     Fri: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
     Sat: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
     Sun: {
       show: false,
-      startTime: "",
-      endTime: "",
+      startTimeHour: "",
+      startTimeMinute: "",
+      startTimeAmPm: "",
+      endTimeHour: "",
+      endTimeMinute: "",
+      endTimeAmPm: "",
       location: "",
       sport: { swim: false, bike: false, run: false },
     },
@@ -120,17 +148,6 @@ const CreateProgramPage = () => {
                   maxDate={addDays(new Date(), 900)}
                   onChange={(item) => {
                     setState([item.selection]);
-                    console.log(item.selection.startDate, " start date");
-                    console.log(item.selection.endDate, " end date");
-
-                    console.log("format ... ");
-                    console.log(
-                      format(item.selection.startDate, "eee") +
-                        " " +
-                        format(item.selection.startDate, "MMM") +
-                        " " +
-                        format(item.selection.startDate, "d")
-                    );
                     setStartDate(
                       format(item.selection.startDate, "eee") +
                         " " +
@@ -196,6 +213,14 @@ const CreateProgramPage = () => {
                             <select
                               className="timeOption"
                               defaultValue={"DEFAULT"}
+                              onChange={(e) => {
+                                const newWeekPracObj = {
+                                  ...weeklyPracticeObj,
+                                };
+                                newWeekPracObj[day].startTimeHour =
+                                  e.target.value;
+                                setWeeklyPracticeObj(newWeekPracObj);
+                              }}
                             >
                               <option disabled value="DEFAULT">
                                 HH
@@ -212,6 +237,14 @@ const CreateProgramPage = () => {
                             <select
                               className="timeOption"
                               defaultValue={"DEFAULT"}
+                              onChange={(e) => {
+                                const newWeekPracObj = {
+                                  ...weeklyPracticeObj,
+                                };
+                                newWeekPracObj[day].startTimeMinute =
+                                  e.target.value;
+                                setWeeklyPracticeObj(newWeekPracObj);
+                              }}
                             >
                               <option disabled value="DEFAULT">
                                 MM
@@ -225,7 +258,17 @@ const CreateProgramPage = () => {
                               })}
                             </select>
                             <div>&nbsp;&nbsp;</div>
-                            <select className="timeOption">
+                            <select
+                              className="timeOption"
+                              onChange={(e) => {
+                                const newWeekPracObj = {
+                                  ...weeklyPracticeObj,
+                                };
+                                newWeekPracObj[day].startTimeAmPm =
+                                  e.target.value;
+                                setWeeklyPracticeObj(newWeekPracObj);
+                              }}
+                            >
                               <option>AM</option>
                               <option>PM</option>
                             </select>
@@ -235,6 +278,14 @@ const CreateProgramPage = () => {
                             <select
                               className="timeOption"
                               defaultValue={"DEFAULT"}
+                              onChange={(e) => {
+                                const newWeekPracObj = {
+                                  ...weeklyPracticeObj,
+                                };
+                                newWeekPracObj[day].endTimeHour =
+                                  e.target.value;
+                                setWeeklyPracticeObj(newWeekPracObj);
+                              }}
                             >
                               <option disabled value="DEFAULT">
                                 HH
@@ -251,6 +302,14 @@ const CreateProgramPage = () => {
                             <select
                               className="timeOption"
                               defaultValue={"DEFAULT"}
+                              onChange={(e) => {
+                                const newWeekPracObj = {
+                                  ...weeklyPracticeObj,
+                                };
+                                newWeekPracObj[day].endTimeMinute =
+                                  e.target.value;
+                                setWeeklyPracticeObj(newWeekPracObj);
+                              }}
                             >
                               <option disabled value="DEFAULT">
                                 MM
@@ -264,7 +323,17 @@ const CreateProgramPage = () => {
                               })}
                             </select>
                             <div>&nbsp;&nbsp;</div>
-                            <select className="timeOption">
+                            <select
+                              className="timeOption"
+                              onChange={(e) => {
+                                const newWeekPracObj = {
+                                  ...weeklyPracticeObj,
+                                };
+                                newWeekPracObj[day].endTimeAmPm =
+                                  e.target.value;
+                                setWeeklyPracticeObj(newWeekPracObj);
+                              }}
+                            >
                               <option>AM</option>
                               <option>PM</option>
                             </select>
@@ -286,7 +355,6 @@ const CreateProgramPage = () => {
                             const newWeeklyPracObj = { ...weeklyPracticeObj };
                             newWeeklyPracObj[day].location = e.target.value;
                             setWeeklyPracticeObj(newWeeklyPracObj);
-                            console.log(weeklyPracticeObj);
                           }}
                         />
                       </div>
@@ -299,29 +367,58 @@ const CreateProgramPage = () => {
                           inline
                           type="checkbox"
                           label="Swim"
-                          // onChange={(e) => {
-                          //   setSwim(swim ? false : true);
-                          // }}
+                          onChange={(e) => {
+                            const newWeekPracObj = {
+                              ...weeklyPracticeObj,
+                            };
+                            newWeekPracObj[day].sport.swim
+                              ? (newWeekPracObj[day].sport.swim = false)
+                              : (newWeekPracObj[day].sport.swim = true);
+                            setWeeklyPracticeObj(newWeekPracObj);
+                          }}
                         />
                         <Form.Check
                           inline
                           type="checkbox"
                           label="Bike"
-                          // onChange={(e) => {
-                          //   setSwim(swim ? false : true);
-                          // }}
+                          onChange={(e) => {
+                            const newWeekPracObj = {
+                              ...weeklyPracticeObj,
+                            };
+                            newWeekPracObj[day].sport.bike
+                              ? (newWeekPracObj[day].sport.bike = false)
+                              : (newWeekPracObj[day].sport.bike = true);
+                            setWeeklyPracticeObj(newWeekPracObj);
+                          }}
                         />
                         <Form.Check
                           inline
                           type="checkbox"
                           label="Run"
-                          // onChange={(e) => {
-                          //   setSwim(swim ? false : true);
-                          // }}
+                          onChange={(e) => {
+                            const newWeekPracObj = {
+                              ...weeklyPracticeObj,
+                            };
+                            newWeekPracObj[day].sport.run
+                              ? (newWeekPracObj[day].sport.run = false)
+                              : (newWeekPracObj[day].sport.run = true);
+                            setWeeklyPracticeObj(newWeekPracObj);
+                          }}
                         />
                       </Form.Group>
                     </Row>
-                    <div>-------------------</div>
+                    <div className="copyCloneLvlOne">
+                      <div id="copyCloneLvlTwo">
+                        <div className="copyCloneLvlThree">
+                          <h6>Copy To: </h6>
+                          <select>
+                            <option>Tue</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr></hr>
                     <br />
                   </div>
                 );
