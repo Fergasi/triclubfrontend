@@ -109,20 +109,20 @@ const CreateProgramPage = () => {
 
   const fileInput = useRef(null);
   return (
-    <div id='programFormCardLayout'>
-      <div id='programForm'>
+    <div id="programFormCardLayout">
+      <div id="programForm">
         <Form>
           <br />
           <h2>Create New Program</h2>
           <br />
           <br />
-          <Row className='mb-3'>
+          <Row className="mb-3">
             <Form.Group>
               <Form.Label>
                 <h5>Program Name</h5>
               </Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
                 value={programName === "" ? "" : programName}
                 onChange={(e) => {
@@ -143,7 +143,7 @@ const CreateProgramPage = () => {
           <br />
           <br></br>
           <Row>
-            <Form.Group id='calendarContainer'>
+            <Form.Group id="calendarContainer">
               <Form.Label as={Col}>
                 <h5>Program Dates</h5>
               </Form.Label>
@@ -166,7 +166,7 @@ const CreateProgramPage = () => {
                 moveRangeOnFirstSelection={false}
                 ranges={state}
                 weekStartsOn={1}
-                dateDisplayFormat='P'
+                dateDisplayFormat="P"
               />
             </Form.Group>
           </Row>
@@ -176,13 +176,15 @@ const CreateProgramPage = () => {
             <h5>Practice Days</h5>
           </Form.Label>
 
-          <div id='practiceDaysArea'>
+          <div id="practiceDaysArea">
             {daysOfWeekAbbArr.map((day, i) => {
               return (
                 <div
                   key={`dayButton-${day}`}
                   className={
-                    weeklyPracticeObj[day] ? "dayButtonSelected" : "dayButton"
+                    weeklyPracticeObj[day].show
+                      ? "dayButtonSelected"
+                      : "dayButton"
                   }
                   onClick={() => {
                     const newWeekPracObj = { ...weeklyPracticeObj };
@@ -199,268 +201,240 @@ const CreateProgramPage = () => {
           </div>
           <br />
           <br />
+
           <Row>
             <Form.Label>
               <h5>Weekly Practice Schedule</h5>
             </Form.Label>
-            <div id="practiceDaysArea">
-              {daysOfWeekAbbArr.map((day, i) => {
-                return (
-                  <div
-                    key={`dayButton-${day}`}
-                    className={
-                      weeklyPracticeObj[day].show
-                        ? "dayButtonSelected"
-                        : "dayButton"
-                    }
-                    onClick={() => {
-                      const newWeekPracObj = { ...weeklyPracticeObj };
-                      newWeekPracObj[day].show
-                        ? (newWeekPracObj[day].show = false)
-                        : (newWeekPracObj[day].show = true);
-                      setWeeklyPracticeObj(newWeekPracObj);
-                    }}
-                  >
-                    {day}
-                  </div>
-                );
-              })}
-            </div>
             <br />
+            <hr />
             <br />
-            <Row>
-              <Form.Label><h5>Weekly Practice Schedule</h5></Form.Label>
-              <br />
-              <hr /> 
-              <br />
-              {daysOfWeekAbbArr.map((day) => {
-                return (
-                  <div
-                    key={`daySec${day}`}
-                    className={
-                      weeklyPracticeObj[day].show
-                        ? "practiceDayMasterLayout"
-                        : "practiceDayMasterLayoutHidden"
-                    }
-                  >
-                    <h3>{day}</h3>
-                    <br />
-                    <div className="practiceScheduleLayout">
-                      <div id="practiceClockTimeLayout">
-                        <div id="keepThisTight">
-                          <div className="timePickerLayout">
-                            <h5>Start Time:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                              onChange={(e) => {
-                                const newWeekPracObj = {
-                                  ...weeklyPracticeObj,
-                                };
-                                newWeekPracObj[day].startTimeHour =
-                                  e.target.value;
-                                setWeeklyPracticeObj(newWeekPracObj);
-                              }}
-                            >
-                              <option disabled value="DEFAULT">
-                                HH
-                              </option>
-                              {[...Array(12)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index + 1}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                              onChange={(e) => {
-                                const newWeekPracObj = {
-                                  ...weeklyPracticeObj,
-                                };
-                                newWeekPracObj[day].startTimeMinute =
-                                  e.target.value;
-                                setWeeklyPracticeObj(newWeekPracObj);
-                              }}
-                            >
-                              <option disabled value="DEFAULT">
-                                MM
-                              </option>
-                              {[...Array(60)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index < 10 ? `0${index}` : index}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <div>&nbsp;&nbsp;</div>
-                            <select
-                              className="timeOption"
-                              onChange={(e) => {
-                                const newWeekPracObj = {
-                                  ...weeklyPracticeObj,
-                                };
-                                newWeekPracObj[day].startTimeAmPm =
-                                  e.target.value;
-                                setWeeklyPracticeObj(newWeekPracObj);
-                              }}
-                            >
-                              <option>AM</option>
-                              <option>PM</option>
-                            </select>
-                          </div>
-                          <div className="timePickerLayout">
-                            <h5>End Time:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                              onChange={(e) => {
-                                const newWeekPracObj = {
-                                  ...weeklyPracticeObj,
-                                };
-                                newWeekPracObj[day].endTimeHour =
-                                  e.target.value;
-                                setWeeklyPracticeObj(newWeekPracObj);
-                              }}
-                            >
-                              <option disabled value="DEFAULT">
-                                HH
-                              </option>
-                              {[...Array(12)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index + 1}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                              onChange={(e) => {
-                                const newWeekPracObj = {
-                                  ...weeklyPracticeObj,
-                                };
-                                newWeekPracObj[day].endTimeMinute =
-                                  e.target.value;
-                                setWeeklyPracticeObj(newWeekPracObj);
-                              }}
-                            >
-                              <option disabled value="DEFAULT">
-                                MM
-                              </option>
-                              {[...Array(60)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index < 10 ? `0${index}` : index}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <div>&nbsp;&nbsp;</div>
-                            <select
-                              className="timeOption"
-                              onChange={(e) => {
-                                const newWeekPracObj = {
-                                  ...weeklyPracticeObj,
-                                };
-                                newWeekPracObj[day].endTimeAmPm =
-                                  e.target.value;
-                                setWeeklyPracticeObj(newWeekPracObj);
-                              }}
-                            >
-                              <option>AM</option>
-                              <option>PM</option>
-                            </select>
-                          </div>
+            {daysOfWeekAbbArr.map((day) => {
+              return (
+                <div
+                  key={`daySec${day}`}
+                  className={
+                    weeklyPracticeObj[day].show
+                      ? "practiceDayMasterLayout"
+                      : "practiceDayMasterLayoutHidden"
+                  }
+                >
+                  <h3>{day}</h3>
+                  <br />
+                  <div className="practiceScheduleLayout">
+                    <div id="practiceClockTimeLayout">
+                      <div id="keepThisTight">
+                        <div className="timePickerLayout">
+                          <h5>Start Time:&nbsp;&nbsp;</h5>
+                          <select
+                            className="timeOption"
+                            defaultValue={"DEFAULT"}
+                            onChange={(e) => {
+                              const newWeekPracObj = {
+                                ...weeklyPracticeObj,
+                              };
+                              newWeekPracObj[day].startTimeHour =
+                                e.target.value;
+                              setWeeklyPracticeObj(newWeekPracObj);
+                            }}
+                          >
+                            <option disabled value="DEFAULT">
+                              HH
+                            </option>
+                            {[...Array(12)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index + 1}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
+                          <select
+                            className="timeOption"
+                            defaultValue={"DEFAULT"}
+                            onChange={(e) => {
+                              const newWeekPracObj = {
+                                ...weeklyPracticeObj,
+                              };
+                              newWeekPracObj[day].startTimeMinute =
+                                e.target.value;
+                              setWeeklyPracticeObj(newWeekPracObj);
+                            }}
+                          >
+                            <option disabled value="DEFAULT">
+                              MM
+                            </option>
+                            {[...Array(60)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index < 10 ? `0${index}` : index}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <div>&nbsp;&nbsp;</div>
+                          <select
+                            className="timeOption"
+                            onChange={(e) => {
+                              const newWeekPracObj = {
+                                ...weeklyPracticeObj,
+                              };
+                              newWeekPracObj[day].startTimeAmPm =
+                                e.target.value;
+                              setWeeklyPracticeObj(newWeekPracObj);
+                            }}
+                          >
+                            <option>AM</option>
+                            <option>PM</option>
+                          </select>
                         </div>
-                      </div>
-                      <br />
-                      <div id="locationLayout">
-                        <Form.Label>Location</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder='ex. "Longmont Rec Center"'
-                          value={
-                            weeklyPracticeObj[day].location === ""
-                              ? ""
-                              : weeklyPracticeObj[day].location
-                          }
-                          onChange={(e) => {
-                            const newWeeklyPracObj = { ...weeklyPracticeObj };
-                            newWeeklyPracObj[day].location = e.target.value;
-                            setWeeklyPracticeObj(newWeeklyPracObj);
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <br />
-                    <Row>
-                      <Form.Label>Sport</Form.Label>
-                      <Form.Group as={Col}>
-                        <Form.Check
-                          inline
-                          type="checkbox"
-                          label="Swim"
-                          onChange={(e) => {
-                            const newWeekPracObj = {
-                              ...weeklyPracticeObj,
-                            };
-                            newWeekPracObj[day].sport.swim
-                              ? (newWeekPracObj[day].sport.swim = false)
-                              : (newWeekPracObj[day].sport.swim = true);
-                            setWeeklyPracticeObj(newWeekPracObj);
-                          }}
-                        />
-                        <Form.Check
-                          inline
-                          type="checkbox"
-                          label="Bike"
-                          onChange={(e) => {
-                            const newWeekPracObj = {
-                              ...weeklyPracticeObj,
-                            };
-                            newWeekPracObj[day].sport.bike
-                              ? (newWeekPracObj[day].sport.bike = false)
-                              : (newWeekPracObj[day].sport.bike = true);
-                            setWeeklyPracticeObj(newWeekPracObj);
-                          }}
-                        />
-                        <Form.Check
-                          inline
-                          type="checkbox"
-                          label="Run"
-                          onChange={(e) => {
-                            const newWeekPracObj = {
-                              ...weeklyPracticeObj,
-                            };
-                            newWeekPracObj[day].sport.run
-                              ? (newWeekPracObj[day].sport.run = false)
-                              : (newWeekPracObj[day].sport.run = true);
-                            setWeeklyPracticeObj(newWeekPracObj);
-                          }}
-                        />
-                      </Form.Group>
-                    </Row>
-                    <br />
-                    <div className="copyCloneLvlOne">
-                      <div id="copyCloneLvlTwo">
-                        <div className="copyCloneLvlThree">
-                          <h6>Copy To: </h6>
-                          <select>
-                            <option>Tue</option>
+                        <div className="timePickerLayout">
+                          <h5>End Time:&nbsp;&nbsp;</h5>
+                          <select
+                            className="timeOption"
+                            defaultValue={"DEFAULT"}
+                            onChange={(e) => {
+                              const newWeekPracObj = {
+                                ...weeklyPracticeObj,
+                              };
+                              newWeekPracObj[day].endTimeHour = e.target.value;
+                              setWeeklyPracticeObj(newWeekPracObj);
+                            }}
+                          >
+                            <option disabled value="DEFAULT">
+                              HH
+                            </option>
+                            {[...Array(12)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index + 1}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
+                          <select
+                            className="timeOption"
+                            defaultValue={"DEFAULT"}
+                            onChange={(e) => {
+                              const newWeekPracObj = {
+                                ...weeklyPracticeObj,
+                              };
+                              newWeekPracObj[day].endTimeMinute =
+                                e.target.value;
+                              setWeeklyPracticeObj(newWeekPracObj);
+                            }}
+                          >
+                            <option disabled value="DEFAULT">
+                              MM
+                            </option>
+                            {[...Array(60)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index < 10 ? `0${index}` : index}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <div>&nbsp;&nbsp;</div>
+                          <select
+                            className="timeOption"
+                            onChange={(e) => {
+                              const newWeekPracObj = {
+                                ...weeklyPracticeObj,
+                              };
+                              newWeekPracObj[day].endTimeAmPm = e.target.value;
+                              setWeeklyPracticeObj(newWeekPracObj);
+                            }}
+                          >
+                            <option>AM</option>
+                            <option>PM</option>
                           </select>
                         </div>
                       </div>
                     </div>
                     <br />
-                    <hr />
-                    <br />
+                    <div id="locationLayout">
+                      <Form.Label>Location</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder='ex. "Longmont Rec Center"'
+                        value={
+                          weeklyPracticeObj[day].location === ""
+                            ? ""
+                            : weeklyPracticeObj[day].location
+                        }
+                        onChange={(e) => {
+                          const newWeeklyPracObj = { ...weeklyPracticeObj };
+                          newWeeklyPracObj[day].location = e.target.value;
+                          setWeeklyPracticeObj(newWeeklyPracObj);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <br />
+                  <Row>
+                    <Form.Label>Sport</Form.Label>
+                    <Form.Group as={Col}>
+                      <Form.Check
+                        inline
+                        type="checkbox"
+                        label="Swim"
+                        onChange={(e) => {
+                          const newWeekPracObj = {
+                            ...weeklyPracticeObj,
+                          };
+                          newWeekPracObj[day].sport.swim
+                            ? (newWeekPracObj[day].sport.swim = false)
+                            : (newWeekPracObj[day].sport.swim = true);
+                          setWeeklyPracticeObj(newWeekPracObj);
+                        }}
+                      />
+                      <Form.Check
+                        inline
+                        type="checkbox"
+                        label="Bike"
+                        onChange={(e) => {
+                          const newWeekPracObj = {
+                            ...weeklyPracticeObj,
+                          };
+                          newWeekPracObj[day].sport.bike
+                            ? (newWeekPracObj[day].sport.bike = false)
+                            : (newWeekPracObj[day].sport.bike = true);
+                          setWeeklyPracticeObj(newWeekPracObj);
+                        }}
+                      />
+                      <Form.Check
+                        inline
+                        type="checkbox"
+                        label="Run"
+                        onChange={(e) => {
+                          const newWeekPracObj = {
+                            ...weeklyPracticeObj,
+                          };
+                          newWeekPracObj[day].sport.run
+                            ? (newWeekPracObj[day].sport.run = false)
+                            : (newWeekPracObj[day].sport.run = true);
+                          setWeeklyPracticeObj(newWeekPracObj);
+                        }}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <br />
+                  <div className="copyCloneLvlOne">
+                    <div id="copyCloneLvlTwo">
+                      <div className="copyCloneLvlThree">
+                        <h6>Copy To: </h6>
+                        <select>
+                          <option>Tue</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <hr />
+                  <br />
                 </div>
               );
             })}
@@ -468,13 +442,13 @@ const CreateProgramPage = () => {
         </Form>
       </div>
 
-      <div id='programCardContainer'>
+      <div id="programCardContainer">
         <div>
           <div>
             <h3>Preview</h3>
           </div>
-          <Card id='programCard'>
-            <Card.Img variant='top' src={photo} alt='' />
+          <Card id="programCard">
+            <Card.Img variant="top" src={photo} alt="" />
             <Card.Body>
               <Card.Title>
                 {programName === ""
@@ -487,7 +461,7 @@ const CreateProgramPage = () => {
                 Place: {location}
               </Card.Text>
             </Card.Body>
-            <Button variant='dark'>More Details</Button>
+            <Button variant="dark">More Details</Button>
           </Card>
         </div>
       </div>
