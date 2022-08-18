@@ -38,16 +38,18 @@ export const ImgCropperComp = ({ setPhoto }) => {
     <div>
       <div style={{ width: "100%" }}>
         <Cropper
-          style={{ height: 400, width: "100%" }}
+          style={{ height: "100%" }}
           zoomTo={0.5}
           cropBoxResizable={false}
-          dragMode="move"
-          initialAspectRatio={550 / 350}
-          preview=".img-preview"
+          dragMode={"none"}
+          aspectRatio={550 / 350}
+          preview='.img-preview'
           src={image}
-          viewMode={1}
-          minCropBoxHeight={10}
-          minCropBoxWidth={10}
+          viewMode={3}
+          maxHeight={"550px"}
+          maxWidth={"350px"}
+          disabled={true}
+          locked={true}
           background={false}
           responsive={true}
           autoCropArea={1}
@@ -60,22 +62,24 @@ export const ImgCropperComp = ({ setPhoto }) => {
       </div>
 
       <input
-        type="file"
+        type='file'
         onChange={onChange}
         style={{ display: "none" }}
         ref={fileInput}
       />
-      <Button
-        variant="dark"
-        onClick={() => {
-          fileInput.current.click();
-        }}
-      >
-        Upload Program Photo
-      </Button>
-      <Button variant="dark" onClick={getCropData}>
-        Crop Photo
-      </Button>
+      <div id='cropperButtons'>
+        <Button
+          variant='dark'
+          onClick={() => {
+            fileInput.current.click();
+          }}
+        >
+          Upload Program Photo
+        </Button>
+        <Button variant='dark' onClick={getCropData}>
+          Crop Photo
+        </Button>
+      </div>
     </div>
   );
 };
