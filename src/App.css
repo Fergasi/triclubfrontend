@@ -42,7 +42,7 @@
   margin-right: 3%;
 }
 
-#root > div > header > form {
+#root > div > header > nav > button #root > div > header > form {
   padding-top: 3%;
   margin-top: 3%;
 }
@@ -134,25 +134,57 @@ div.card {
 #programFormCardLayout {
   display: flex;
   flex-direction: row;
-  padding: 5%;
-  margin: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 5%;
+  width: 100%;
+}
+
+/* #programCardContainer > h3 > div {
+  margin-bottom: 10%;
+} */
+
+#root > div > header > div {
+  width: 90%;
+}
+
+#programForm > form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: justify;
 }
 
 #programForm {
-  width: 60%;
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
   padding-right: 2.5%;
   margin-right: 2.5%;
+  padding-top: 55px;
+  align-items: center;
 }
 
 #programCard {
-  width: 40%;
-  padding-left: 2.5%;
-  margin-left: 2.5%;
+  margin: 2.5%;
+  height: fit-content;
+}
+
+#programCardContainer {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  border-left: 1px solid rgba(121, 117, 117, 0.424);
+  padding-top: 75px;
 }
 
 #practiceTimeLayout {
   display: flex;
   flex-direction: row;
+}
+
+#cropperButtons {
+  padding-top: 8px;
 }
 
 /* #applicantList {
@@ -290,9 +322,12 @@ div.card {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .dayButton {
+  background-color: slategray;
+  box-shadow: 5px;
   display: flex;
   width: fit-content;
   margin: 2%;
@@ -310,10 +345,10 @@ div.card {
   margin: 2%;
   padding: 2%;
   border-radius: 10%;
-  border: slategray 2px solid;
+  border: rgb(54, 100, 69) 2px solid;
   justify-content: center;
   font-size: 100%;
-  background-color: slategray;
+  background-color: #2e362eb6;
   user-select: none;
 }
 
@@ -357,6 +392,15 @@ div.card {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.rdrCalendarWrapper {
+  border-radius: 5%;
+  overflow: hidden;
+}
+
+.rdrDateDisplayWrapper {
+  border-top: none;
 }
 
 /* #calButtonLayout {
@@ -424,6 +468,48 @@ div.card {
     width: 95vw;
     height: 92vh;
   }
+
+  #programFormCardLayout {
+    flex-direction: column;
+    margin-top: 50px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 15%;
+    align-items: center;
+  }
+
+  #programForm {
+    width: 100%;
+    padding: 2.5%;
+    margin: 2.5%;
+  }
+
+  #programCard {
+    width: 100%;
+
+    margin: 2.5%;
+  }
+
+  #programCardContainer {
+    width: 100%;
+    border-left: none;
+    padding: 5%;
+  }
+
+  /* #programForm > form > div:nth-child(10) > div {
+  } */
+
+  #calendarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #programCardContainer > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media only screen and (min-width: 577px) {
@@ -436,5 +522,17 @@ div.card {
     flex-direction: column;
     align-items: flex-end;
     padding-right: 15px;
+  }
+
+  /* #programCard {
+    margin: 2.5%;
+    position: fixed;
+    margin-top: 40px;
+  } */
+
+  #programCardContainer > div {
+    margin: 2.5%;
+    position: fixed;
+    margin-top: 40px;
   }
 }
