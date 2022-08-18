@@ -39,249 +39,269 @@ const CreateProgramPage = () => {
 
   const fileInput = useRef(null);
   return (
-    <>
-      <div id="programFormCardLayout">
-        <div id="programForm">
-          <Form>
-            <br />
-            <h2>Create New Program</h2>
-            <br />
-            <br />
-            <Row className="mb-3">
-              <Form.Group>
-                <Form.Label>Program Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
-                  value={programName === "" ? "" : programName}
-                  onChange={(e) => {
-                    setProgramName(e.target.value);
-                  }}
-                />
-              </Form.Group>
-            </Row>
-            <br />
-            <Row>
-              <Form.Group>
-                <Form.Label>Program Photo</Form.Label>
-                <ImgCropperComp setPhoto={setPhoto}></ImgCropperComp>
-              </Form.Group>
-            </Row>
-            <br />
-            <Row>
-              <Form.Group>
-                <Form.Label as={Col}>Program Dates</Form.Label>
-                <DateRange
-                  as={Col}
-                  editableDateInputs={true}
-                  minDate={new Date()}
-                  maxDate={addDays(new Date(), 900)}
-                  onChange={(item) => {
-                    setState([item.selection]);
-                    console.log(item.selection.startDate, " start date");
-                    console.log(item.selection.endDate, " end date");
+    <div id='programFormCardLayout'>
+      <div id='programForm'>
+        <Form>
+          <br />
+          <h2>Create New Program</h2>
+          <br />
+          <br />
+          <Row className='mb-3'>
+            <Form.Group>
+              <Form.Label>
+                <h5>Program Name</h5>
+              </Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
+                value={programName === "" ? "" : programName}
+                onChange={(e) => {
+                  setProgramName(e.target.value);
+                }}
+              />
+            </Form.Group>
+          </Row>
+          <br />
+          <Row>
+            <Form.Group>
+              <Form.Label>
+                <h5>Program Photo</h5>
+              </Form.Label>
+              <ImgCropperComp setPhoto={setPhoto}></ImgCropperComp>
+            </Form.Group>
+          </Row>
+          <br />
+          <br></br>
+          <Row>
+            <Form.Group id='calendarContainer'>
+              <Form.Label as={Col}>
+                <h5>Program Dates</h5>
+              </Form.Label>
+              <DateRange
+                as={Col}
+                editableDateInputs={true}
+                minDate={new Date()}
+                maxDate={addDays(new Date(), 900)}
+                onChange={(item) => {
+                  setState([item.selection]);
+                  console.log(item.selection.startDate, " start date");
+                  console.log(item.selection.endDate, " end date");
 
-                    console.log("format ... ");
-                    console.log(
-                      format(item.selection.startDate, "eee") +
-                        " " +
-                        format(item.selection.startDate, "MMM") +
-                        " " +
-                        format(item.selection.startDate, "d")
-                    );
-                    setStartDate(
-                      format(item.selection.startDate, "eee") +
-                        " " +
-                        format(item.selection.startDate, "MMM") +
-                        " " +
-                        format(item.selection.startDate, "d")
-                    );
-                  }}
-                  showSelectionPreview={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={state}
-                  weekStartsOn={1}
-                  dateDisplayFormat="P"
-                />
-              </Form.Group>
-            </Row>
-            <br />
-            <Form.Label>Practice Days</Form.Label>
-            <br />
-            <div id="practiceDaysArea">
-              {daysOfWeekAbbArr.map((day, i) => {
-                return (
-                  <div
-                    key={`dayButton-${day}`}
-                    className={
-                      weeklyPracticeObj[day] ? "dayButtonSelected" : "dayButton"
-                    }
-                    onClick={() => {
-                      const newWeekPracObj = { ...weeklyPracticeObj };
-                      newWeekPracObj[day]
-                        ? (newWeekPracObj[day] = false)
-                        : (newWeekPracObj[day] = true);
-                      setWeeklyPracticeObj(newWeekPracObj);
-                    }}
-                  >
-                    {day}
-                  </div>
-                );
-              })}
-            </div>
-            <br />
-            <Row>
-              <Form.Label>Weekly Practice Schedule</Form.Label>
+                  console.log("format ... ");
+                  console.log(
+                    format(item.selection.startDate, "eee") +
+                      " " +
+                      format(item.selection.startDate, "MMM") +
+                      " " +
+                      format(item.selection.startDate, "d")
+                  );
+                  setStartDate(
+                    format(item.selection.startDate, "eee") +
+                      " " +
+                      format(item.selection.startDate, "MMM") +
+                      " " +
+                      format(item.selection.startDate, "d")
+                  );
+                }}
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                ranges={state}
+                weekStartsOn={1}
+                dateDisplayFormat='P'
+              />
+            </Form.Group>
+          </Row>
+          <br />
+          <br />
+          <Form.Label>
+            <h5>Practice Days</h5>
+          </Form.Label>
 
-              {daysOfWeekAbbArr.map((day) => {
-                return (
-                  <div
-                    key={`daySec${day}`}
-                    className={
-                      weeklyPracticeObj[day]
-                        ? "practiceDayMasterLayout"
-                        : "practiceDayMasterLayoutHidden"
-                    }
-                  >
-                    <h3>{day}</h3>
-                    <div className="practiceScheduleLayout">
-                      <div id="practiceClockTimeLayout">
-                        <div id="keepThisTight">
-                          <div className="timePickerLayout">
-                            <h5>Start Time:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                            >
-                              <option disabled value="DEFAULT">
-                                HH
-                              </option>
-                              {[...Array(12)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index + 1}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                            >
-                              <option disabled value="DEFAULT">
-                                MM
-                              </option>
-                              {[...Array(60)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index < 10 ? `0${index}` : index}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <div>&nbsp;&nbsp;</div>
-                            <select className="timeOption">
-                              <option>AM</option>
-                              <option>PM</option>
-                            </select>
-                          </div>
-                          <div className="timePickerLayout">
-                            <h5>End Time:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                            >
-                              <option disabled value="DEFAULT">
-                                HH
-                              </option>
-                              {[...Array(12)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index + 1}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
-                            <select
-                              className="timeOption"
-                              defaultValue={"DEFAULT"}
-                            >
-                              <option disabled value="DEFAULT">
-                                MM
-                              </option>
-                              {[...Array(60)].map((hour, index) => {
-                                return (
-                                  <option key={`hour-${index}`}>
-                                    {index < 10 ? `0${index}` : index}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <div>&nbsp;&nbsp;</div>
-                            <select className="timeOption">
-                              <option>AM</option>
-                              <option>PM</option>
-                            </select>
-                          </div>
+          <div id='practiceDaysArea'>
+            {daysOfWeekAbbArr.map((day, i) => {
+              return (
+                <div
+                  key={`dayButton-${day}`}
+                  className={
+                    weeklyPracticeObj[day] ? "dayButtonSelected" : "dayButton"
+                  }
+                  onClick={() => {
+                    const newWeekPracObj = { ...weeklyPracticeObj };
+                    newWeekPracObj[day]
+                      ? (newWeekPracObj[day] = false)
+                      : (newWeekPracObj[day] = true);
+                    setWeeklyPracticeObj(newWeekPracObj);
+                  }}
+                >
+                  {day}
+                </div>
+              );
+            })}
+          </div>
+          <br />
+          <br />
+          <Row>
+            <Form.Label>
+              <h5>Weekly Practice Schedule</h5>
+            </Form.Label>
+            <br />
+            <hr />
+            <br />
+            {daysOfWeekAbbArr.map((day) => {
+              return (
+                <div
+                  key={`daySec${day}`}
+                  className={
+                    weeklyPracticeObj[day]
+                      ? "practiceDayMasterLayout"
+                      : "practiceDayMasterLayoutHidden"
+                  }
+                >
+                  <h3>{day}</h3>
+                  <br />
+                  <div className='practiceScheduleLayout'>
+                    <div id='practiceClockTimeLayout'>
+                      <div id='keepThisTight'>
+                        <div className='timePickerLayout'>
+                          <h5>Start Time:&nbsp;&nbsp;</h5>
+                          <select
+                            className='timeOption'
+                            defaultValue={"DEFAULT"}
+                          >
+                            <option disabled value='DEFAULT'>
+                              HH
+                            </option>
+                            {[...Array(12)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index + 1}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
+                          <select
+                            className='timeOption'
+                            defaultValue={"DEFAULT"}
+                          >
+                            <option disabled value='DEFAULT'>
+                              MM
+                            </option>
+                            {[...Array(60)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index < 10 ? `0${index}` : index}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <div>&nbsp;&nbsp;</div>
+                          <select className='timeOption'>
+                            <option>AM</option>
+                            <option>PM</option>
+                          </select>
                         </div>
-                      </div>
-                      <br />
-                      <div id="locationLayout">
-                        <Form.Label>Location</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
-                          value={programName === "" ? "" : programName}
-                          onChange={(e) => {
-                            setProgramName(e.target.value);
-                          }}
-                        />
+                        <div className='timePickerLayout'>
+                          <h5>End Time:&nbsp;&nbsp;</h5>
+                          <select
+                            className='timeOption'
+                            defaultValue={"DEFAULT"}
+                          >
+                            <option disabled value='DEFAULT'>
+                              HH
+                            </option>
+                            {[...Array(12)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index + 1}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <h5>&nbsp;&nbsp;:&nbsp;&nbsp;</h5>
+                          <select
+                            className='timeOption'
+                            defaultValue={"DEFAULT"}
+                          >
+                            <option disabled value='DEFAULT'>
+                              MM
+                            </option>
+                            {[...Array(60)].map((hour, index) => {
+                              return (
+                                <option key={`hour-${index}`}>
+                                  {index < 10 ? `0${index}` : index}
+                                </option>
+                              );
+                            })}
+                          </select>
+                          <div>&nbsp;&nbsp;</div>
+                          <select className='timeOption'>
+                            <option>AM</option>
+                            <option>PM</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <br />
-                    <Row>
-                      <Form.Label>Sport</Form.Label>
-                      <Form.Group as={Col}>
-                        <Form.Check
-                          inline
-                          type="checkbox"
-                          label="Swim"
-                          // onChange={(e) => {
-                          //   setSwim(swim ? false : true);
-                          // }}
-                        />
-                        <Form.Check
-                          inline
-                          type="checkbox"
-                          label="Bike"
-                          // onChange={(e) => {
-                          //   setSwim(swim ? false : true);
-                          // }}
-                        />
-                        <Form.Check
-                          inline
-                          type="checkbox"
-                          label="Run"
-                          // onChange={(e) => {
-                          //   setSwim(swim ? false : true);
-                          // }}
-                        />
-                      </Form.Group>
-                    </Row>
-                    <div>-------------------</div>
-                    <br />
+                    <div id='locationLayout'>
+                      <Form.Label>Location</Form.Label>
+                      <Form.Control
+                        type='text'
+                        placeholder='ex. "Middle School Fall Swim Training for Triathletes"'
+                        value={programName === "" ? "" : programName}
+                        onChange={(e) => {
+                          setProgramName(e.target.value);
+                        }}
+                      />
+                    </div>
                   </div>
-                );
-              })}
-            </Row>
-          </Form>
-        </div>
+                  <br />
+                  <Row>
+                    <Form.Label>Sport</Form.Label>
+                    <Form.Group as={Col}>
+                      <Form.Check
+                        inline
+                        type='checkbox'
+                        label='Swim'
+                        // onChange={(e) => {
+                        //   setSwim(swim ? false : true);
+                        // }}
+                      />
+                      <Form.Check
+                        inline
+                        type='checkbox'
+                        label='Bike'
+                        // onChange={(e) => {
+                        //   setSwim(swim ? false : true);
+                        // }}
+                      />
+                      <Form.Check
+                        inline
+                        type='checkbox'
+                        label='Run'
+                        // onChange={(e) => {
+                        //   setSwim(swim ? false : true);
+                        // }}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <br />
+                  <hr />
+                  <br />
+                </div>
+              );
+            })}
+          </Row>
+        </Form>
+      </div>
 
-        <div id="programCard">
-          <Card>
-            <Card.Img variant="top" src={photo} alt="" />
+      <div id='programCardContainer'>
+        <div>
+          <div>
+            <h3>Preview</h3>
+          </div>
+          <Card id='programCard'>
+            <Card.Img variant='top' src={photo} alt='' />
             <Card.Body>
               <Card.Title>
                 {programName === ""
@@ -294,11 +314,11 @@ const CreateProgramPage = () => {
                 Place: {location}
               </Card.Text>
             </Card.Body>
-            <Button variant="dark">More Details</Button>
+            <Button variant='dark'>More Details</Button>
           </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
