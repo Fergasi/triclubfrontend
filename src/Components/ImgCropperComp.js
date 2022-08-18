@@ -38,6 +38,7 @@ export const ImgCropperComp = ({ setPhoto }) => {
     <div>
       <div style={{ width: "100%" }}>
         <Cropper
+          restore={true}
           style={{ height: "100%" }}
           zoomTo={0}
           cropBoxResizable={false}
