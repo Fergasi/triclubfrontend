@@ -184,14 +184,6 @@ div.card {
   flex-direction: row;
 }
 
-#copyCloneLayout {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 #cropperButtons {
   padding-top: 8px;
 }
@@ -374,7 +366,6 @@ div.card {
 .practiceScheduleLayout {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
   align-items: flex-end;
 }
 
@@ -385,30 +376,25 @@ div.card {
   align-items: center;
 }
 
-.copyCloneLvlThree {
+.copyCloneSelector {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  width: fit-content;
+  align-items: baseline;
 }
 
-#copyCloneLvlTwo {
+.copyCloneLayoutArea {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
-  align-items: center;
-}
-
-.copyCloneLvlOne {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: flex-start; */
-  align-items: start;
+  justify-content: space-around;
 }
 
 .timePickerLayout {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: baseline;
 }
 
 .timeOption {
