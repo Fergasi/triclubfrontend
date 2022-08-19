@@ -50,7 +50,6 @@ export const ImgCropperComp = ({ setPhoto }) => {
           maxHeight={"550px"}
           maxWidth={"350px"}
           disabled={true}
-          restore={true}
           locked={true}
           background={false}
           responsive={true}
