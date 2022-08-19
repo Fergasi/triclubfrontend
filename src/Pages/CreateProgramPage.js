@@ -579,12 +579,12 @@ const CreateProgramPage = () => {
           </Card>
           <br />
           <br />
-          <div id="isActiveLayout">
+          <div id='isActiveLayout'>
             <Form.Check
-              type="switch"
-              className="custom-control-input"
-              id="custom-switch"
-              label="Set Program to Active"
+              type='switch'
+              className='custom-control-input'
+              id='custom-switch'
+              label='Set Program to Active'
               onChange={(e) => {
                 let newActive = isActive;
                 newActive ? (newActive = false) : (newActive = true);
