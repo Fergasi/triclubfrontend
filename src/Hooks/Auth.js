@@ -164,7 +164,7 @@ export const useAuth = () => {
 
 const validateApplyForCoach = async (coachInfo, token) => {
   const response = await fetch(`${urlEndpoint}/auth/become-coach`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       token: token,
