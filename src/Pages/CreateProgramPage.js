@@ -16,6 +16,8 @@ const CreateProgramPage = () => {
   const [programName, setProgramName] = useState("");
   const [photo, setPhoto] = useState(programImg);
   const [startDate, setStartDate] = useState("Tue Aug 16");
+  const [endDate, setEndDate] = useState("Wed Aug 17");
+  const [isActive, setIsActive] = useState(false);
   const [hideDay, setHideDay] = useState(false);
   const [weeklyPracticeObj, setWeeklyPracticeObj] = useState({
     Mon: {
@@ -108,6 +110,8 @@ const CreateProgramPage = () => {
     programName: programName,
     photo: photo,
     startDate: startDate,
+    endDate: endDate,
+    isActive: isActive,
     weeklyPracticeObj: weeklyPracticeObj,
     programDaysObj: programDaysObj,
   });
@@ -131,7 +135,7 @@ const CreateProgramPage = () => {
         const fPDay = format(pDay, "eee");
         console.log("fPDay " + fPDay);
         if (practiceDays.includes(fPDay)) {
-          newProgramDayObj[pDay] = "";
+          newProgramDayObj[pDay] = {};
         }
       }
       setProgramDaysObj(newProgramDayObj);
@@ -215,6 +219,13 @@ const CreateProgramPage = () => {
                       format(item.selection.startDate, "MMM") +
                       " " +
                       format(item.selection.startDate, "d")
+                  );
+                  setEndDate(
+                    format(item.selection.endDate, "eee") +
+                      " " +
+                      format(item.selection.endDate, "MMM") +
+                      " " +
+                      format(item.selection.endDate, "d")
                   );
                   console.log(state);
                 }}
@@ -557,11 +568,30 @@ const CreateProgramPage = () => {
                   ? "Middle School Fall Swim Training for Triathletes"
                   : programName}
               </Card.Title>
-              <Card.Text>Start: {startDate}</Card.Text>
+              {/* <br /> */}
+              <Row>
+                <Card.Text as={Col}>Start: {startDate}</Card.Text>
+                <Card.Text as={Col}>End: {endDate}</Card.Text>
+              </Row>
             </Card.Body>
             <Button variant="dark">More Details</Button>
           </Card>
           <br />
+          <br />
+          <div id="isActiveLayout">
+            <Form.Check
+              type="switch"
+              className="custom-control-input"
+              id="custom-switch"
+              label="Set Program to Active"
+              onChange={(e) => {
+                let newActive = isActive;
+                newActive ? (newActive = false) : (newActive = true);
+                setIsActive(newActive);
+                console.log(newActive);
+              }}
+            />
+          </div>
           <br />
           <button
             type="button"
@@ -571,6 +601,8 @@ const CreateProgramPage = () => {
               newProgramData.programName = programName;
               newProgramData.photo = photo;
               newProgramData.startDate = startDate;
+              newProgramData.endDate = endDate;
+              newProgramData.isActive = isActive;
               const newWeeklyPracObj = {};
               Object.keys(weeklyPracticeObj).forEach((key, index) => {
                 if (weeklyPracticeObj[key].show) {

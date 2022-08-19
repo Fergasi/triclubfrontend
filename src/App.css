@@ -419,6 +419,18 @@ div.card {
   border-top: none;
 }
 
+.custom-control-input {
+  transform: scale(1.2);
+}
+
+#isActiveLayout {
+  /* margin-left: 15%;
+  margin-right: 15%; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 /* #calButtonLayout {
   display: flex;
   flex-direction: row;
