@@ -1,8 +1,10 @@
 import React from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import programImg from "../assets/kids1.jpeg";
+import { getActivePrograms } from "../Hooks/Programs.js";
 
 const UserHomePage = () => {
+  const activePrograms = getActivePrograms();
   return (
     <>
       <br />
