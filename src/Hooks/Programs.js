@@ -17,6 +17,33 @@ export const getActivePrograms = async () => {
   return responseJSON;
 };
 
+//Function to get Programs to display on ManageProgramsPage
+export const getAllPrograms = async () => {
+  const url = `${urlEndpoint}/programs/get-all-programs`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
+//Function to get Programs to display on ManageProgramsPage
+export const deleteProgram = async (uid) => {
+  const url = `${urlEndpoint}/programs/delete-program`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      uid: uid,
+    },
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
 export const submitProgram = async (programData) => {
   const response = await fetch(`${urlEndpoint}/programs/submit-program`, {
     method: "POST",
