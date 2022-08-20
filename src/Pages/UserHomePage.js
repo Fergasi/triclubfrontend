@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import programImg from "../assets/kids1.jpeg";
 import { getActivePrograms } from "../Hooks/Programs.js";
 
 const UserHomePage = () => {
-  const [programs, setPrograms] = useState([]);
-
-  useEffect(() => {
-    const getDaPrograms = async () => {
-      const activePrograms = await getActivePrograms();
-      setPrograms(activePrograms.programs);
-    };
-    getDaPrograms();
-  }, []);
-
+  const activePrograms = getActivePrograms();
   return (
     <>
       <br />
       <br />
       <br />
       <Row xs={1} md={3} className='g-4' id='programGrid'>
-        {programs.map((item, idx) => (
+        {Array.from({ length: 12 }).map((_, idx) => (
           <Col key={idx}>
             <Card>
-              <Card.Img variant='top' src={item.photo} alt='' />
+              <Card.Img variant='top' src={programImg} alt='' />
               <Card.Body>
-                <Card.Title>{item.programName}</Card.Title>
-
+                <Card.Title>Swim Training</Card.Title>
                 <Card.Text>
-                  Start: {item.startDate} <br />
-                  End: {item.endDate}
+                  Time: Tuesday 15th August, 5pm
+                  <br />
+                  Place: Longmount Public Pool
+                  <br />
+                  Type: Swim
                 </Card.Text>
               </Card.Body>
               <Button variant='dark'>More Details</Button>
