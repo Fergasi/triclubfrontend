@@ -29,21 +29,8 @@ export const ImgCropperComp = ({ setPhoto }) => {
 
   const getCropData = () => {
     if (typeof cropper !== "undefined") {
-      // setCropData(cropper.getCroppedCanvas().toDataURL());
-      // setPhoto(cropper.getCroppedCanvas().toDataURL());
-
-      cropper.getCroppedCanvas({ width: 550, height: 350 }).toBlob((blob) => {
-        // const formData = new FormData();
-        // formData.append("croppedImage", blob);
-        // console.log(formData);
-
-        var binaryData = [];
-        binaryData.push(blob);
-        const blobUrl = URL.createObjectURL(
-          new Blob(binaryData, { type: "application/zip" })
-        );
-        setPhoto(blobUrl);
-      });
+      setCropData(cropper.getCroppedCanvas().toDataURL());
+      setPhoto(cropper.getCroppedCanvas().toDataURL());
     }
   };
   const fileInput = useRef(null);
@@ -57,7 +44,7 @@ export const ImgCropperComp = ({ setPhoto }) => {
           cropBoxResizable={false}
           dragMode={"none"}
           aspectRatio={550 / 350}
-          preview='.img-preview'
+          preview=".img-preview"
           src={image}
           viewMode={3}
           maxHeight={"550px"}
@@ -76,21 +63,21 @@ export const ImgCropperComp = ({ setPhoto }) => {
       </div>
 
       <input
-        type='file'
+        type="file"
         onChange={onChange}
         style={{ display: "none" }}
         ref={fileInput}
       />
-      <div id='cropperButtons'>
+      <div id="cropperButtons">
         <Button
-          variant='dark'
+          variant="dark"
           onClick={() => {
             fileInput.current.click();
           }}
         >
           Upload Program Photo
         </Button>
-        <Button variant='dark' onClick={getCropData}>
+        <Button variant="dark" onClick={getCropData}>
           Crop Photo
         </Button>
       </div>
