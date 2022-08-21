@@ -1,8 +1,16 @@
+// import { useState, useEffect, createContext, useContext, useMemo } from "react";
+
 // Heroku
 // const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+
+// const ProgramContext = createContext();
+
+// export const ProgramProvider = ({ childer }) => {
+//   const [programObj, setProgramObj] = useState({});
+// };
 
 //Function to get Programs to display on UserHomePage
 export const getActivePrograms = async () => {

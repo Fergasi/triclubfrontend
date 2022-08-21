@@ -626,8 +626,6 @@ const CreateProgramPage = () => {
                 return;
               }
               if (programSubmitted.success) {
-                // DO SOMETHING
-                console.log("success");
                 setProgramMssg("success");
                 navigate("/");
                 return;
