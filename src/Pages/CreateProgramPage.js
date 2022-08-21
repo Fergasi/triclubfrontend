@@ -10,11 +10,14 @@ import "cropperjs/dist/cropper.css";
 import ImgCropperComp from "../Components/ImgCropperComp";
 import { submitProgram } from "../Hooks/Programs";
 
+import { validateProgramPage } from "../Utils/Validation";
+
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 const CreateProgramPage = () => {
   const navigate = useNavigate();
+  const [programMssg, setProgramMssg] = useState("");
   const [programDaysObj, setProgramDaysObj] = useState({});
   const [programName, setProgramName] = useState("");
   const [photo, setPhoto] = useState(programImg);
@@ -134,9 +137,7 @@ const CreateProgramPage = () => {
         differenceInCalendarDays(new Date(pEndDate), new Date(pStartDate)) + 1;
       for (let i = 0; i < programDaysNum; i++) {
         const pDay = addDays(new Date(pStartDate), i);
-        console.log("pDay " + pDay);
         const fPDay = format(pDay, "eee");
-        console.log("fPDay " + fPDay);
         if (practiceDays.includes(fPDay)) {
           newProgramDayObj[pDay] = {};
         }
@@ -230,7 +231,6 @@ const CreateProgramPage = () => {
                       " " +
                       format(item.selection.endDate, "d")
                   );
-                  console.log(state);
                 }}
                 showSelectionPreview={true}
                 moveRangeOnFirstSelection={false}
@@ -592,7 +592,6 @@ const CreateProgramPage = () => {
                 let newActive = isActive;
                 newActive ? (newActive = false) : (newActive = true);
                 setIsActive(newActive);
-                console.log(newActive);
               }}
             />
           </div>
@@ -616,18 +615,32 @@ const CreateProgramPage = () => {
               newProgramData.weeklyPracticeObj = newWeeklyPracObj;
               newProgramData.programDaysObj = programDaysObj;
               console.log(newProgramData);
+              const programValidation = validateProgramPage(newProgramData);
+              if (!programValidation.isValid) {
+                setProgramMssg(programValidation.mssg);
+                return;
+              }
               const programSubmitted = await submitProgram(newProgramData);
               if (!programSubmitted.success) {
-                // DO SOMETHING
+                setProgramMssg(programSubmitted.message);
+                return;
               }
               if (programSubmitted.success) {
                 // DO SOMETHING
+                console.log("success");
+                setProgramMssg("success");
                 navigate("/");
+                return;
               }
             }}
           >
             Submit Program
           </button>
+          <br />
+          <br />
+          <div className="mediumMessage">
+            {programMssg} <br />
+          </div>
         </div>
       </div>
     </div>
