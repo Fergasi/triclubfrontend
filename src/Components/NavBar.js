@@ -90,18 +90,25 @@ const NavBar = ({ setFromPageToPage }) => {
                   </NavDropdown.Item>
                 </NavDropdown>
               )}
-
-              {!userToken && (
-                <>
-                  <LinkContainer to='/login'>
-                    <Nav.Link>Login</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to='/sign-up'>
-                    <Nav.Link>Sign Up</Nav.Link>
-                  </LinkContainer>
-                </>
-              )}
             </div>
+
+            {!userToken && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  paddingRight: "10px",
+                }}
+              >
+                <LinkContainer to='/login'>
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='/sign-up'>
+                  <Nav.Link>Sign Up</Nav.Link>
+                </LinkContainer>
+              </div>
+            )}
 
             {userToken && (
               <NavDropdown

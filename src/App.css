@@ -211,7 +211,7 @@ div.card {
   flex-direction: column;
   width: 40vw;
   border-left: 1px solid rgba(121, 117, 117, 0.424);
-  padding-top: 75px;
+  /* padding-top: 75px; */
 }
 
 #editProgramFormCardLayout {
@@ -537,6 +537,15 @@ div.card {
 } */
 
 @media only screen and (max-width: 576px) {
+  #applicantListContainer {
+    padding-top: 90px;
+  }
+
+  #coachAppButtonsDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
   .nav-links {
     flex-direction: column;
     width: 100vw;

@@ -5,6 +5,7 @@ import { FcCheckmark } from "react-icons/fc";
 import { RiCloseFill } from "react-icons/ri";
 import { acceptDenyPendingCoaches } from "../Hooks/Users.js";
 import CoachAppOffcanvas from "../Components/CoachAppOffcanvas.js";
+import Spinner from "react-bootstrap/Spinner";
 
 function AlertDismissibleExample() {
   const [showAlert, setShowAlert] = useState(true);
@@ -28,7 +29,7 @@ const CoachApplications = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [pendingCoaches, setPendingCoaches] = useState([]);
+  const [pendingCoaches, setPendingCoaches] = useState(null);
   const [coachDecision, setCoachDecision] = useState(false);
   const [offcanvasContent, setOffcanvasContent] = useState({});
 
@@ -44,7 +45,7 @@ const CoachApplications = () => {
     <>
       <h2>Coach Applications</h2>
       <br />
-      {pendingCoaches.length > 0 && (
+      {Array.isArray(pendingCoaches) && pendingCoaches.length > 0 && (
         <ListGroup xs={1} md={1} id='applicantList'>
           {pendingCoaches.map((coach, idx) => (
             <ListGroup.Item key={idx} id='listItems'>
@@ -64,11 +65,14 @@ const CoachApplications = () => {
           ))}
         </ListGroup>
       )}{" "}
-      {pendingCoaches.length === 0 && (
-        <h5 className='smallMessage'>
-          There are currently no new or pending coach applications
-        </h5>
+      {Array.isArray(pendingCoaches) && pendingCoaches.length === 0 && (
+        <>
+          <h5 className='smallMessage'>
+            There are currently no new or pending coach applications
+          </h5>
+        </>
       )}
+      {pendingCoaches === null && <Spinner animation='border' />}
       {show && (
         <CoachAppOffcanvas
           AlertDismissibleExample={AlertDismissibleExample}
