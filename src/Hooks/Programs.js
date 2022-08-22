@@ -63,3 +63,15 @@ export const submitProgram = async (programData) => {
   const responseJSON = await response.json();
   return responseJSON;
 };
+
+export const editProgram = async (programData, uid) => {
+  const response = await fetch(`${urlEndpoint}/programs/edit-program`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ programData, uid }),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};

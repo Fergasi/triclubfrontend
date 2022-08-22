@@ -6,8 +6,8 @@ import uploadPhoto from "../assets/uploadPhoto.png";
 
 const defaultSrc = uploadPhoto;
 
-export const ImgCropperComp = ({ setPhoto }) => {
-  const [image, setImage] = useState(defaultSrc);
+export const ImgCropperComp = ({ setPhoto, editPhoto }) => {
+  const [image, setImage] = useState(editPhoto ? editPhoto : defaultSrc);
   const [cropData, setCropData] = useState("#");
   const [cropper, setCropper] = useState();
   const onChange = (e) => {
@@ -29,12 +29,8 @@ export const ImgCropperComp = ({ setPhoto }) => {
 
   const getCropData = () => {
     if (typeof cropper !== "undefined") {
-      setCropData(
-        cropper.getCroppedCanvas({ height: 350, width: 550 }).toDataURL()
-      );
-      setPhoto(
-        cropper.getCroppedCanvas({ height: 350, width: 550 }).toDataURL()
-      );
+      setCropData(cropper.getCroppedCanvas().toDataURL());
+      setPhoto(cropper.getCroppedCanvas().toDataURL());
     }
   };
   const fileInput = useRef(null);
@@ -81,6 +77,7 @@ export const ImgCropperComp = ({ setPhoto }) => {
         >
           Upload Program Photo
         </Button>
+        &nbsp;
         <Button variant='dark' onClick={getCropData}>
           Crop Photo
         </Button>
