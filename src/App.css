@@ -102,10 +102,46 @@ a.dropdown-item {
   color: white;
 }
 
-button.btn.btn-dark {
+/* button.btn.btn-dark {
   --bs-btn-hover-bg: #80a35b;
   --bs-btn-hover-border-color: #414446;
-  --bs-btn-bg: rgba(180, 180, 41, 0.287);
+  --bs-btn-bg: rgba(58, 104, 20, 0.723);
+} */
+
+/* CSS */
+button.btn.btn-dark {
+  background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+  border: 0;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+button.btn.btn-dark:not([disabled]):focus {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+button.btn.btn-dark:not([disabled]):hover {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+    -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+    0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
 #coachCard > button {
@@ -178,24 +214,54 @@ div.card {
   padding-top: 75px;
 }
 
+#editProgramFormCardLayout {
+  width: 100%;
+}
+
+#editProgramForm {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  padding-right: 2.5%;
+  padding-left: 2.5%;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  padding-top: 0px;
+  align-items: center;
+}
+
+#editForm {
+  width: 90%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #practiceTimeLayout {
   display: flex;
   flex-direction: row;
 }
 
 #cropperButtons {
+  display: flex;
+  flex-direction: row;
+
   padding-top: 8px;
+  justify-content: center;
 }
 
-/* #applicantList {
-} */
+#editProgramCardBody {
+  color: white;
+  text-align: center;
+}
 
 #offCanvas {
-  background-color: beige;
+  background-color: rgb(231, 231, 206);
   width: 40vw;
   display: flex;
   margin-top: 67px;
-  height: 95vh;
+  overflow-y: auto;
 }
 
 .offcanvas-backdrop.show {
@@ -259,7 +325,6 @@ div.card {
 #OffcanvasImage {
   padding-top: 20px;
   width: 200px;
-  border-radius: 50%;
 }
 
 .coachProfContainer {
@@ -339,6 +404,7 @@ div.card {
   justify-content: center;
   font-size: 100%;
   user-select: none;
+  font-weight: 600;
 }
 
 .dayButtonSelected {
@@ -350,8 +416,9 @@ div.card {
   border: rgb(54, 100, 69) 2px solid;
   justify-content: center;
   font-size: 100%;
-  background-color: #2e362eb6;
+  background-color: #365f36dc;
   user-select: none;
+  font-weight: 600;
 }
 
 .practiceDayMasterLayout {
@@ -501,6 +568,16 @@ div.card {
     margin: 0px;
   }
 
+  /* #programGrid > div > div {
+    height: 100%;
+  } */
+
+  /* .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  } */
+
   #root > div > header > form {
     padding-top: 15%;
     margin-top: 5%;
@@ -600,9 +677,9 @@ div.card {
 
   #offCanvas {
     display: flex;
-    margin-top: 17%;
+    /* margin-top: 17%; */
     width: 95vw;
-    height: 92vh;
+    /* height: 92vh; */
   }
 
   #programFormCardLayout {

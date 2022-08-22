@@ -122,7 +122,7 @@ const NavBar = ({ setFromPageToPage }) => {
                 <NavDropdown.Divider />
                 <NavDropdown.Item as='span'>
                   <Button
-                    variant='secondary'
+                    variant='dark'
                     onClick={async () => {
                       const logoutSuccess = await logoutUser();
                       if (logoutSuccess) {
