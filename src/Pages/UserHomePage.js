@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Button } from "react-bootstrap";
-// import programImg from "../assets/kids1.jpeg";
+
+import { useNavigate } from "react-router-dom";
+import programImg from "../assets/kids1.jpeg";
 import { getActivePrograms } from "../Hooks/Programs.js";
 import Spinner from "react-bootstrap/Spinner";
 
 const UserHomePage = () => {
+
+  const navigate = useNavigate();
   const [programs, setPrograms] = useState(null);
+
 
   useEffect(() => {
     const getDaPrograms = async () => {
@@ -47,7 +52,15 @@ const UserHomePage = () => {
                       End: {item.endDate}
                     </Card.Text>
                   </Card.Body>
-                  <Button variant='dark'>More Details</Button>
+                   <Button
+                variant="dark"
+                onClick={() => {
+                  localStorage.setItem("program", JSON.stringify(item));
+                  navigate("/program-details");
+                }}
+              >
+                More Details
+              </Button>
                 </Card>
               </Col>
             ))}

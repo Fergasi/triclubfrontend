@@ -4,6 +4,7 @@ import { stateAbbArr } from "../assets/stateAbbArr";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Hooks/Auth";
 import coachImg from "../assets/stockCoach.webp";
+import { validateCoachRegistration } from "../Utils/Validation";
 
 const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
   const { applyForCoach, userToken } = useAuth();
@@ -250,6 +251,12 @@ const CoachRegistrationPage = ({ setFromPageToPage, fromPageToPage }) => {
             variant="primary"
             type="submit"
             onClick={async () => {
+              const validateCoach = validateCoachRegistration(coachInfo);
+              console.log(validateCoach.isValid);
+              if (!validateCoach.isValid) {
+                setCoachMssg(validateCoach.mssg);
+                return;
+              }
               const isPendingCoach = await applyForCoach(coachInfo, userToken);
               if (!isPendingCoach.success) {
                 setCoachMssg(isPendingCoach.message);
