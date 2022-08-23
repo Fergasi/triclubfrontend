@@ -1,10 +1,10 @@
 import { useState, useEffect, createContext, useContext, useMemo } from "react";
 
 // Heroku
-// const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
+const urlEndpoint = process.env.REACT_APP_DATABASE_URL;
 
 //LOCAL
-const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
+// const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const AuthContext = createContext();
 

@@ -51,6 +51,12 @@
   display: table;
 }
 
+#formGridCheckbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 .smallMessage {
   font-size: medium;
 }
@@ -522,6 +528,32 @@ div.card {
   padding-bottom: 8%;
 }
 
+#coachPhotoReg {
+  width: 40%;
+}
+
+#programDetailsProgramName {
+  margin-top: 15%;
+}
+
+.oneLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dobCal {
+  display: flex;
+  justify-content: center;
+}
+
+#loginSignUpNavLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
 @media only screen and (max-width: 576px) {
   #applicantListContainer {
     padding-top: 90px;
@@ -646,6 +678,14 @@ div.card {
     padding-top: 12%;
     padding-bottom: 4%;
   }
+
+  #coachPhotoReg {
+    width: 80%;
+  }
+
+  #loginSignUpNavLinks {
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 829px) {
@@ -669,7 +709,7 @@ div.card {
   }
 
   #root > div > header > form {
-    padding-top: 15%;
+    padding-top: 5%;
     margin-top: 5%;
     padding-left: 5%;
     padding-right: 5%;
@@ -733,21 +773,10 @@ div.card {
     flex-direction: column;
     align-items: center;
   }
-}
 
-#programDetailsProgramName {
-  margin-top: 15%;
-}
-
-.oneLine {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.dobCal {
-  display: flex;
-  justify-content: center;
+  #coachPhotoReg {
+    width: 60%;
+  }
 }
 
 @media only screen and (min-width: 830px) {
@@ -758,11 +787,9 @@ div.card {
     padding-right: 15px;
   }
 
-  /* #programCard {
-    margin: 2.5%;
-    position: fixed;
-    margin-top: 40px;
-  } */
+  #coachApplicationForm {
+    padding-top: 12%;
+  }
 
   .nav-logout {
     width: 150px;

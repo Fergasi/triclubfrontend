@@ -58,12 +58,12 @@ const NavBar = ({ setFromPageToPage }) => {
                       <Nav.Link>Manage Programs</Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider />
                   <NavDropdown.Item as='span'>
                     <LinkContainer to='/admin/program-schedule'>
                       <Nav.Link>Schedule</Nav.Link>
                     </LinkContainer>
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> */}
                 </NavDropdown>
               )}
               {userToken && isCoachLoginCheck && (
@@ -82,25 +82,18 @@ const NavBar = ({ setFromPageToPage }) => {
                       <Nav.Link>Manage Programs</Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider />
                   <NavDropdown.Item as='span'>
                     <LinkContainer to='/coach/program-schedule'>
                       <Nav.Link>Schedule</Nav.Link>
                     </LinkContainer>
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> */}
                 </NavDropdown>
               )}
             </div>
 
             {!userToken && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-end",
-                  paddingRight: "10px",
-                }}
-              >
+              <div id='loginSignUpNavLinks'>
                 <LinkContainer to='/login'>
                   <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
