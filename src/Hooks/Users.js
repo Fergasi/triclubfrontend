@@ -33,3 +33,43 @@ export const acceptDenyPendingCoaches = async (uid, decision) => {
   const responseJSON = await response.json();
   return responseJSON;
 };
+
+export const purchaseProgram = async (token, userInfo, programId) => {
+  const url = `${urlEndpoint}/users/purchase-program`;
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      token: token,
+    },
+    body: JSON.stringify({ programId, userInfo }),
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
+export const getUserInfo = async (token) => {
+  const url = `${urlEndpoint}/users/get-user-info`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: token,
+    },
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
+
+export const getUserChildren = async (token) => {
+  const url = `${urlEndpoint}/users/get-user-children`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: token,
+    },
+  });
+  const responseJSON = await response.json();
+  return responseJSON;
+};
