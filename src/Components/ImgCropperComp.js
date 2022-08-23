@@ -29,8 +29,16 @@ export const ImgCropperComp = ({ setPhoto, editPhoto }) => {
 
   const getCropData = () => {
     if (typeof cropper !== "undefined") {
-      setCropData(cropper.getCroppedCanvas().toDataURL());
-      setPhoto(cropper.getCroppedCanvas().toDataURL());
+      setCropData(
+        cropper
+          .getCroppedCanvas({ maxHeight: "500", maxWidth: "700" })
+          .toDataURL()
+      );
+      setPhoto(
+        cropper
+          .getCroppedCanvas({ maxHeight: "500", maxWidth: "700" })
+          .toDataURL()
+      );
     }
   };
   const fileInput = useRef(null);
