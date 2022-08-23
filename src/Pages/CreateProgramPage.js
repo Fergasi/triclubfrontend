@@ -35,7 +35,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
     Tue: {
       show: false,
@@ -46,7 +46,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
     Wed: {
       show: false,
@@ -57,7 +57,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
     Thu: {
       show: false,
@@ -68,7 +68,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
     Fri: {
       show: false,
@@ -79,7 +79,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
     Sat: {
       show: false,
@@ -90,7 +90,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
     Sun: {
       show: false,
@@ -101,7 +101,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { Swim: false, Bike: false, Run: false },
+      sport: { swim: false, bike: false, run: false },
     },
   });
   const [state, setState] = useState([
@@ -636,7 +636,7 @@ const CreateProgramPage = () => {
           </button>
           <br />
           <br />
-          <div className="mediumMessage">
+          <div className='mediumMessage'>
             {programMssg} <br />
           </div>
         </div>

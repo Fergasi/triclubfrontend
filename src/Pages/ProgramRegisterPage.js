@@ -77,18 +77,16 @@ const ProgramRegisterPage = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div id='programRegisterContainer'>
       <Form>
-        <br />
-        <h2>{programName} Registration</h2>
-        <br />
-        <br />
-        <Row className="mb-3">
+        <h2 id='registrationTitle'>{programName} Registration</h2>
+
+        <Row className='mb-3'>
           <Form.Group as={Col}>
             <Form.Label>First Name</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter First Name"
+              type='text'
+              placeholder='Enter First Name'
               value={firstName}
               onChange={(e) => {
                 setFirstName(e.target.value);
@@ -98,8 +96,8 @@ const ProgramRegisterPage = () => {
           <Form.Group as={Col}>
             <Form.Label>Last Name</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter Last Name"
+              type='text'
+              placeholder='Enter Last Name'
               value={lastName}
               onChange={(e) => {
                 setLastName(e.target.value);
@@ -107,48 +105,48 @@ const ProgramRegisterPage = () => {
             />
           </Form.Group>
         </Row>
-        <Form.Group className="mb-3" controlId="formGridTelephone">
+        <Form.Group className='mb-3' controlId='formGridTelephone'>
           <Form.Label>Telephone Number</Form.Label>
           <Form.Control
-            placeholder="555 555 5555"
+            placeholder='555 555 5555'
             value={telephone}
             onChange={(e) => {
               setTelephone(e.target.value);
             }}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formGridAddress1">
+        <Form.Group className='mb-3' controlId='formGridAddress1'>
           <Form.Label>Address</Form.Label>
           <Form.Control
-            placeholder="1234 Main St"
+            placeholder='1234 Main St'
             value={addressOne}
             onChange={(e) => {
               setAddressOne(e.target.value);
             }}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formGridAddress2">
+        <Form.Group className='mb-3' controlId='formGridAddress2'>
           <Form.Label>Address 2</Form.Label>
           <Form.Control
-            placeholder="Apartment, studio, or floor"
+            placeholder='Apartment, studio, or floor'
             value={addressTwo}
             onChange={(e) => {
               setAddressTwo(e.target.value);
             }}
           />
         </Form.Group>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridCity">
+        <Row className='mb-3'>
+          <Form.Group as={Col} controlId='formGridCity'>
             <Form.Label>City</Form.Label>
             <Form.Control
-              placeholder="Enter City"
+              placeholder='Enter City'
               value={city}
               onChange={(e) => {
                 setCity(e.target.value);
               }}
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridState">
+          <Form.Group as={Col} controlId='formGridState'>
             <Form.Label>State</Form.Label>
             <Form.Select
               value={stateAbb}
@@ -156,7 +154,7 @@ const ProgramRegisterPage = () => {
                 setStateAbb(e.target.value);
               }}
             >
-              <option defaultValue="selected" disabled={true}>
+              <option defaultValue='selected' disabled={true}>
                 Choose...
               </option>
               {stateAbbArr.map((abb, index) => {
@@ -164,10 +162,10 @@ const ProgramRegisterPage = () => {
               })}
             </Form.Select>
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridZip">
+          <Form.Group as={Col} controlId='formGridZip'>
             <Form.Label>Zip</Form.Label>
             <Form.Control
-              placeholder="Enter Zip Code"
+              placeholder='Enter Zip Code'
               value={zipCode}
               onChange={(e) => {
                 setZipCode(e.target.value);
@@ -175,7 +173,10 @@ const ProgramRegisterPage = () => {
             />
           </Form.Group>
         </Row>
-        <Form.Group as={Col} controlId="formGridState">
+        <br />
+        <h5>Child Details: </h5>
+        <br />
+        <Form.Group as={Col} controlId='formGridState'>
           <Form.Label>Add Child</Form.Label>
           <Form.Select
             value={dropDown ? dropDown : "Choose..."}
@@ -185,7 +186,7 @@ const ProgramRegisterPage = () => {
               setDate(new Date(children[e.target.value].dob));
             }}
           >
-            <option defaultValue="selected" disabled={true}>
+            <option defaultValue='selected' disabled={true}>
               Choose...
             </option>
             {children.map((kid, index) => {
@@ -197,12 +198,13 @@ const ProgramRegisterPage = () => {
             })}
           </Form.Select>
         </Form.Group>
-        <Row className="mb-3">
+        <br />
+        <Row className='mb-3'>
           <Form.Group as={Col}>
-            <Form.Label>Child First Name</Form.Label>
+            <Form.Label>First Name</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter First Name"
+              type='text'
+              placeholder='Enter First Name'
               value={firstNameChild}
               onChange={(e) => {
                 setFirstNameChild(e.target.value);
@@ -211,10 +213,10 @@ const ProgramRegisterPage = () => {
             />
           </Form.Group>
           <Form.Group as={Col}>
-            <Form.Label>Child Last Name</Form.Label>
+            <Form.Label>Last Name</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter Last Name"
+              type='text'
+              placeholder='Enter Last Name'
               value={lastNameChild}
               onChange={(e) => {
                 setLastNameChild(e.target.value);
@@ -222,8 +224,9 @@ const ProgramRegisterPage = () => {
             />
           </Form.Group>
         </Row>
-        <div className="dobCal">
-          <Row>
+        <br />
+        <div className='dobCal'>
+          <Row id='dateContainer'>
             <Form.Label>Date of Birth</Form.Label>
             <Calendar onChange={setDate} value={date}></Calendar>
           </Row>
@@ -231,35 +234,45 @@ const ProgramRegisterPage = () => {
 
         <br />
       </Form>
-
-      <Button
-        variant="primary"
-        type="submit"
-        onClick={async () => {
-          console.log(userInfo);
-          console.log(userToken);
-          const programPurchased = await purchaseProgram(
-            userToken,
-            userInfo,
-            program.uid
-          );
-          if (!programPurchased.success) {
-            setMssg(programPurchased.message);
-          }
-          if (programPurchased.success) {
-            setMssg(programPurchased.message);
-            navigate("/");
-          }
+      <br />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        Purchase
-      </Button>
+        <Button
+          variant='dark'
+          type='submit'
+          style={{ width: "60%" }}
+          onClick={async () => {
+            console.log(userInfo);
+            console.log(userToken);
+            const programPurchased = await purchaseProgram(
+              userToken,
+              userInfo,
+              program.uid
+            );
+            if (!programPurchased.success) {
+              setMssg(programPurchased.message);
+            }
+            if (programPurchased.success) {
+              setMssg(programPurchased.message);
+              navigate("/");
+            }
+          }}
+        >
+          Purchase
+        </Button>
+      </div>
+
       <br />
       <br />
-      <div className="mediumMessage">
+      <div className='mediumMessage'>
         {mssg} <br />
       </div>
-    </>
+    </div>
   );
 };
 
