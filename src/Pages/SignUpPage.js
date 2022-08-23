@@ -44,7 +44,7 @@ const SignUpPage = ({ fromPageToPage }) => {
       </Form>
 
       <Button
-        variant='secondary'
+        variant='dark'
         type='submit'
         id='signup'
         onClick={async () => {

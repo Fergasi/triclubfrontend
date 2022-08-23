@@ -43,7 +43,7 @@ const LoginPage = ({ fromPageToPage }) => {
         </Form.Group>
       </Form>
       <Button
-        variant='secondary'
+        variant='dark'
         type='submit'
         id='login'
         onClick={async () => {

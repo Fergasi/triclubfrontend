@@ -29,15 +29,7 @@ const AdminLayout = () => {
     isAdminCheck();
   }, []); // This useEffect will trigger once when the user tries to visit /admin
 
-  return (
-    <div>
-      {isAdminLoginCheck ? (
-        <Outlet />
-      ) : (
-        <h3>You Must Be An Admin To View This Page. Sorry.</h3>
-      )}
-    </div>
-  );
+  return <div>{isAdminLoginCheck ? <Outlet /> : <></>}</div>;
 };
 
 //Checks whether a user is a Coach before allowing access to Coach routes
@@ -52,15 +44,7 @@ const CoachLayout = () => {
     isCoachCheck();
   }, []); // This useEffect will trigger once when the user tries to visit /admin
 
-  return (
-    <div>
-      {isCoachLoginCheck ? (
-        <Outlet />
-      ) : (
-        <h3>You Must Be An Coach To View This Page. Sorry.</h3>
-      )}
-    </div>
-  );
+  return <div>{isCoachLoginCheck ? <Outlet /> : <></>}</div>;
 };
 
 //Checks whether Reset Password Token is valid allowing access to Reset Password routes
