@@ -41,6 +41,7 @@ const ProgramDetails = ({ setFromPageToPage }) => {
           if (!userToken) {
             setFromPageToPage("/program-details");
             navigate("/sign-up");
+            return;
           }
           navigate("/program-register");
         }}
