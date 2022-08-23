@@ -26,14 +26,15 @@ const ProgramDetails = ({ setFromPageToPage }) => {
   setFromPageToPage("/");
 
   return (
-    <div>
-      <h1 id="programDetailsProgramName">{programName}</h1>
-      <img src={photo} alt=""></img>
+    <div id='programDetailsPageContainer'>
+      <h2 id='programDetailsProgramName'>{programName}</h2>
+      <br />
+      <img src={photo} alt='' style={{ width: "60%" }}></img>
       <br />
       <br />
       <button
-        type="button"
-        className="btn btn-dark"
+        type='button'
+        className='btn btn-dark'
         onClick={() => {
           console.log("click");
           console.log(userToken);
@@ -49,19 +50,19 @@ const ProgramDetails = ({ setFromPageToPage }) => {
       <br />
       <br />
       <div>
-        <span>Program Dates</span>
-        <h4>
+        <h4>Program Dates</h4>
+        <h6>
           {startDate} - {endDate}
-        </h4>
+        </h6>
       </div>
       <br />
       <div>
-        <span>Weekly Practice Schedule</span>
+        <h4>Weekly Practice Schedule</h4>
         {Object.keys(weeklyPracticeObj).map((key, i) => {
           return (
             <div key={`div-${key}`}>
               <h4>{key}</h4>
-              <h4 key={`dayTime-${key}`}>
+              <h6 key={`dayTime-${key}`}>
                 Practice Time:{" "}
                 {Object.values(weeklyPracticeObj)[i].startTimeHour}:
                 {Object.values(weeklyPracticeObj)[i].startTimeMinute}{" "}
@@ -69,25 +70,28 @@ const ProgramDetails = ({ setFromPageToPage }) => {
                 {Object.values(weeklyPracticeObj)[i].endTimeHour}:
                 {Object.values(weeklyPracticeObj)[i].endTimeMinute}{" "}
                 {Object.values(weeklyPracticeObj)[i].endTimeAmPm}
-              </h4>
+              </h6>
 
-              <div className="oneLine">
-                <h4>Sports:</h4>
+              <div className='oneLine'>
+                <h6>Sports: </h6>
                 {Object.values(weeklyPracticeObj[key].sport).map((bool, y) => {
                   return (
-                    <h4 key={`sports-${y}`}>
-                      {bool === true
-                        ? Object.keys(weeklyPracticeObj[key].sport)[y]
-                        : ""}{" "}
-                      &nbsp;
-                    </h4>
+                    <>
+                      {bool === true ? (
+                        <h6 className='sports'>
+                          {Object.keys(weeklyPracticeObj[key].sport)[y]}
+                        </h6>
+                      ) : (
+                        ""
+                      )}
+                    </>
                   );
                 })}
               </div>
 
-              <div className="oneLine">
-                <h4>Location:&nbsp;</h4>
-                <h4>{Object.values(weeklyPracticeObj[key].location)}</h4>
+              <div className='oneLine'>
+                <h6>Location:&nbsp;</h6>
+                <h6>{weeklyPracticeObj[key].location}</h6>
               </div>
 
               <br />
