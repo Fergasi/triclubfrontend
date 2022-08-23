@@ -12,6 +12,7 @@ import CreateProgramPage from "./Pages/CreateProgramPage";
 import ManageProgramsPage from "./Pages/ManageProgramsPage";
 import ProgramSchedulePage from "./Pages/ProgramSchedulePage";
 import CoachApplicationsPage from "./Pages/CoachApplicationsPage";
+import ProgramRegisterPage from "./Pages/ProgramRegisterPage";
 
 import { useAuth } from "./Hooks/Auth";
 import "./App.css";
@@ -113,7 +114,13 @@ function App() {
                 />
               }
             />
-            <Route path="program-details" element={<ProgramDetailsPage />} />
+            <Route path="program-register" element={<ProgramRegisterPage />} />
+            <Route
+              path="program-details"
+              element={
+                <ProgramDetailsPage setFromPageToPage={setFromPageToPage} />
+              }
+            />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route path="reset-password/*" element={<ResetPasswordLayout />}>
               <Route index element={<ResetPasswordPage />} />

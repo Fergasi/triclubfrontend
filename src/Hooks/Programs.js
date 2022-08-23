@@ -64,6 +64,7 @@ export const submitProgram = async (programData) => {
   return responseJSON;
 };
 
+
 export const editProgram = async (programData, uid) => {
   const response = await fetch(`${urlEndpoint}/programs/edit-program`, {
     method: "POST",
@@ -75,3 +76,17 @@ export const editProgram = async (programData, uid) => {
   const responseJSON = await response.json();
   return responseJSON;
 };
+
+// REVIST THIS LATER --
+// export const addAthleteToProgram = async (programId, token, kid) => {
+//   const response = await fetch(`${urlEndpoint}/programs/add-athlete`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//       token: token,
+//     },
+//     body: JSON.stringify({ programId, kid }),
+//   });
+//   const responseJSON = await response.json();
+//   return responseJSON;
+// };

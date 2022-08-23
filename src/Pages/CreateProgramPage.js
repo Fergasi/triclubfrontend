@@ -35,7 +35,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
     Tue: {
       show: false,
@@ -46,7 +46,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
     Wed: {
       show: false,
@@ -57,7 +57,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
     Thu: {
       show: false,
@@ -68,7 +68,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
     Fri: {
       show: false,
@@ -79,7 +79,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
     Sat: {
       show: false,
@@ -90,7 +90,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
     Sun: {
       show: false,
@@ -101,7 +101,7 @@ const CreateProgramPage = () => {
       endTimeMinute: "",
       endTimeAmPm: "AM",
       location: "",
-      sport: { swim: false, bike: false, run: false },
+      sport: { Swim: false, Bike: false, Run: false },
     },
   });
   const [state, setState] = useState([
